@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { icons } from "../../../master/icons";
 import { JSX } from "react";
+import { NavLink } from "react-router-dom";
 
 // Types for sub-routes (nested routes)
 interface RootRoute {
@@ -22,7 +23,6 @@ interface SideNavProps {
     routes?: Route[]; // Optional array of route objects
     isOpen: boolean;  // Determines if the sidebar is expanded
     isLocked: boolean; // Determines if the sidebar is permanently expanded
-    activePath?: string; // Current active path to highlight the selected route
 }
 
 /**
@@ -39,7 +39,7 @@ interface SideNavProps {
  * @returns {JSX.Element} Sidebar navigation component
  */
 
-const SideNavBody = ({ routes = [], isOpen, isLocked, activePath }: SideNavProps): JSX.Element => {
+const SideNavBody = ({ routes = [], isOpen, isLocked }: SideNavProps): JSX.Element => {
     return (
         <nav
             className="flex-1 flex flex-col text-primary gap-2"
@@ -48,17 +48,14 @@ const SideNavBody = ({ routes = [], isOpen, isLocked, activePath }: SideNavProps
         >
             {
                 routes.map((route, i) => {
-                    const isActive = route.path === activePath;
 
                     return (
-                        <div
-                            key={i}
+                        <NavLink
+                            to={route.path}
+                            key={'routes' + i}
                             className={classNames(
-                                "flex w-full h-10 cursor-pointer transition-all duration-200 rounded-md hover:bg-[var(--background-secondary)]/20 active:opacity-50 group",
-                                { "bg-[var(--background-secondary)]/40": isActive } // Highlight active route
-                            )}
+                            "flex w-full h-10 cursor-pointer transition-all duration-200 rounded-md hover:bg-[var(--background-secondary)]/20 active:opacity-50 group")}
                             role="menuitem"
-                            aria-current={isActive ? "page" : undefined} // ARIA for active page
                             aria-label={route.name}
                         >
                             {/* Icon container */}
@@ -90,7 +87,7 @@ const SideNavBody = ({ routes = [], isOpen, isLocked, activePath }: SideNavProps
                                     {route.name}
                                 </span>
                             </div>
-                        </div>
+                        </NavLink>
                     );
                 })
             }

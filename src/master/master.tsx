@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SideNav from "../components/sideNav/sideNav";
+import { Outlet } from "react-router-dom";
 
 type MasterProps = object;
 
@@ -22,7 +23,7 @@ const Master: React.FC<MasterProps> = () => {
 
                </div>
                <div className="flex-1 py-2 px-1 rounded-2xl">
-                
+                    <Outlet />
                </div>
             </div>
         </div>
