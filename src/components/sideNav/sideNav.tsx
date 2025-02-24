@@ -4,6 +4,7 @@ import logo from "../../assets/logo/favicon.svg"
 import SideNavHeader from "./fragments/sideNavHeader";
 import SideNavBody from "./fragments/sideNavBody";
 import routes from "../../master/routes.json"
+import SideNavBottom from "./fragments/sideNavButton";
 
 type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
     isOpen: boolean;
@@ -54,6 +55,11 @@ const SideNav : React.FC<SideNavProps> = ({
                 isOpen={isOpen}
             />
 
+            {/* Bottom */}
+            <SideNavBottom 
+                isLocked={isLocked}
+                isOpen={isOpen}
+            />
         </div>
     )
 }

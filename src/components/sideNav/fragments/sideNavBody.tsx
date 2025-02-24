@@ -42,7 +42,7 @@ interface SideNavProps {
 const SideNavBody = ({ routes = [], isOpen, isLocked }: SideNavProps): JSX.Element => {
     return (
         <nav
-            className="flex-1 flex flex-col text-primary gap-2"
+            className="flex-1 shrink-0 py-2 flex flex-col text-primary gap-2"
             role="navigation"
             aria-label="Sidebar Navigation"
         >

@@ -55,3 +55,13 @@ body::after{
     right: 0;
     font-size: x-small;
 }
+
+button{
+    cursor: pointer;
+}
+button:hover{
+    opacity: .8;
+}
+button:active{
+    opacity: .7;
+}
