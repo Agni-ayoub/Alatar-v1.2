@@ -1,0 +1,43 @@
+import classNames from "classnames";
+import React from "react";
+import logo from "../../assets/logo/favicon.svg"
+import SideNavHeader from "./fragments/sideNavHeader";
+
+type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
+    isOpen : boolean;
+    isLocked : boolean;
+    setIsOpen : React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SideNav : React.FC<SideNavProps> = ({
+    isOpen = false,
+    isLocked = false,
+    setIsOpen,
+    ...props
+})=>{
+
+    return(
+        <div 
+            onMouseEnter={()=> setIsOpen(true)}
+            onMouseLeave={()=> setIsOpen(false)}
+            className={classNames('h-[calc(100%-2rem)] transition-all duration-200 rounded-lg fixed top-4 left-4 bg-[var(--sideNav-background)] shadow-[2px_2px_20px_var(--sideNav-shadow)] z-30 py-2 px-2 overflow-hidden',
+                {
+                    'w-72' : isOpen || isLocked,
+                    'w-12' : !(isOpen || isLocked),
+                }
+            )}
+        {...props}>
+            <SideNavHeader 
+                isOpen={isOpen}
+                isLocked={isLocked} 
+                placeHolder="Alatar"
+                icon={<img src={logo} />} 
+                placeHolderColor="secondary"
+                placeHolderSize="logo"             
+            />
+            <hr className="my-2 text-secondary" />
+        </div>
+    )
+}
+
+export default SideNav;
