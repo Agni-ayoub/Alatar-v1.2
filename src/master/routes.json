@@ -1,7 +1,22 @@
 [
   {
-    "name": "dashboard",
-    "path": "/",
+    "name": "Dashboard",
+    "path": "/dashboard",
     "icon": "LuLayoutDashboard"
+  },
+  {
+    "name": "Companies",
+    "path": "/companies",
+    "icon": "LuBuilding2"
+  },
+  {
+    "name": "Plan",
+    "path": "/plans",
+    "icon": "PiCardsThree"
+  },
+  {
+    "name": "Billing",
+    "path": "/billing",
+    "icon": "PiNewspaperClipping"
   }
 ]

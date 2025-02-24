@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import SideNav from "../components/sideNav/sideNav";
-import routes from "../master/routes.json"
 
 type MasterProps = object;
 
@@ -15,11 +14,10 @@ const Master: React.FC<MasterProps> = () => {
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
                 isLocked={isLocked}
-                routes={routes}
             />
 
             {/* Outlet Container with header */}
-            <div className="bg-[var(--outletcontainer-background)] rounded-2xl ml-16 h-full w-full backdrop-blur-lg py-2 px-1 overflow-hidden flex gap-2 flex-col">
+            <div className="bg-[var(--outletcontainer-background)] rounded-2xl ml-[4rem] h-full w-full backdrop-blur-lg py-2 px-1 overflow-hidden flex gap-2 flex-col">
                <div className="bg-[var(--outletheader-background)] rounded-2xl w-full h-12">
 
                </div>
