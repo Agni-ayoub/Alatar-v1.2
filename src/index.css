@@ -48,3 +48,10 @@ body::before {
     opacity: .3;
     z-index: -1;
 }
+body::after{
+    content: "Copyright © 2025 Alatar All rights reserved.";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: x-small;
+}

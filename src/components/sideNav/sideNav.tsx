@@ -3,19 +3,35 @@ import React from "react";
 import logo from "../../assets/logo/favicon.svg"
 import SideNavHeader from "./fragments/sideNavHeader";
 
-type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
-    isOpen : boolean;
-    isLocked : boolean;
-    setIsOpen : React.Dispatch<React.SetStateAction<boolean>>;
+// Types for roots of the main route
+interface RootRoute {
+    name?: string;
+    path?: string;
+    icon?: string;
 }
 
+//Types for the main root
+interface Route {
+    name: string;
+    path: string;
+    icon: string;
+    roots?: RootRoute[];
+}
+
+type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
+    isOpen: boolean;
+    isLocked: boolean;
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    routes?: Route[];
+};
+  
 const SideNav : React.FC<SideNavProps> = ({
     isOpen = false,
     isLocked = false,
     setIsOpen,
     ...props
 })=>{
-
+    
     return(
         <div 
             onMouseEnter={()=> setIsOpen(true)}

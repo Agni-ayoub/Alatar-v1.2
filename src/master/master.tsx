@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SideNav from "../components/sideNav/sideNav";
+import routes from "../master/routes.json"
 
 type MasterProps = object;
 
@@ -14,6 +15,7 @@ const Master: React.FC<MasterProps> = () => {
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
                 isLocked={isLocked}
+                routes={routes}
             />
 
             {/* Outlet Container with header */}
