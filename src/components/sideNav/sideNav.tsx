@@ -5,13 +5,12 @@ import SideNavHeader from "./fragments/sideNavHeader";
 import SideNavBody from "./fragments/sideNavBody";
 import routes from "../../master/routes.json";
 import SideNavBottom from "./fragments/sideNavButton";
+import { JSX } from "react/jsx-runtime";
 
 type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
     isOpen: boolean;
     isLocked: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    placeHolderSize?: "smaller" | "small" | "fit" | "gros" | "logo";
-    placeHolderColor?: "primary" | "secondary" | "tertiary";
 };
 
 /**
@@ -26,8 +25,6 @@ type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
  * @prop {boolean} isOpen - Controls whether the sidebar is expanded.
  * @prop {boolean} isLocked - Determines if the sidebar is locked open.
  * @prop {React.Dispatch<React.SetStateAction<boolean>>} setIsOpen - Function to toggle sidebar state.
- * @prop {'smaller' | 'small' | 'fit' | 'gros' | 'logo'} [placeHolderSize] - Controls text size in the header.
- * @prop {'primary' | 'secondary' | 'tertiary'} [placeHolderColor] - Controls text color in the header.
  */
 
 const SideNav: React.FC<SideNavProps> = ({
@@ -35,7 +32,7 @@ const SideNav: React.FC<SideNavProps> = ({
     isLocked = false,
     setIsOpen,
     ...props
-}) => {
+}) : JSX.Element => {
     return (
         <div
             role="navigation" // Marks this as a navigation component
@@ -56,7 +53,7 @@ const SideNav: React.FC<SideNavProps> = ({
                 isOpen={isOpen}
                 isLocked={isLocked}
                 placeHolder="Alatar"
-                icon={<img className="w-9" src={logo} alt="Alatar Logo" />} // Added alt text for accessibility
+                icon={<img className="w-9" src={logo} alt="Alatar Logo" />}
                 placeHolderColor="secondary"
                 placeHolderSize="logo"
             />
