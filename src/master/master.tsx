@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideNav from "../components/sideNav/sideNav";
 import { Outlet } from "react-router-dom";
 import classNames from "classnames";
@@ -10,6 +10,19 @@ type MasterProps = object;
 const Master: React.FC<MasterProps> = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Shift") {
+                setIsLocked((prev) => !prev);
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
 
     return(
         <div className="h-screen min-h-screen flex p-4">
