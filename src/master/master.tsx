@@ -3,6 +3,7 @@ import SideNav from "../components/sideNav/sideNav";
 import { Outlet } from "react-router-dom";
 import classNames from "classnames";
 import SideNavButton from "../components/sideNav/fragments/sideNavButton";
+import Profile from "../components/profile/profile";
 
 type MasterProps = object;
 
@@ -27,12 +28,18 @@ const Master: React.FC<MasterProps> = () => {
                 }
             )}>
                 {/* Header */}
-                <div className="flex items-center bg-[var(--outletheader-background)] py-1 px-4 rounded-2xl w-full h-12">
+                <div className="flex justify-between items-center bg-[var(--outletheader-background)] py-1 px-4 rounded-2xl w-full h-12">
+
+                    {/* Button that locks the sideNav*/}
                     <SideNavButton 
                         isOpen={isOpen}
                         isLocked={isLocked}
                         setIsLocked={setIsLocked}
                     />
+                    
+                    {/* Profile (username, email, avatar) */}
+                    <Profile />
+
                 </div>
 
                 {/* Body */}
