@@ -44,13 +44,13 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
 
             {/* Tooltip Dropdown */}
             <div 
-                className="invisible absolute top-8 right-8 rounded-md rounded-tr-none bg-[var(--background-secondary)]/30 w-0 h-0 p-2 overflow-hidden peer-focus-within:delay-0 delay-150 peer-focus-within:visible peer-focus-within:w-[15rem] peer-focus-within:h-[6rem] transition-all duration-200"
+                className="invisible absolute top-8 right-8 rounded-md rounded-tr-none bg-[var(--background-secondary)]/30 w-0 h-0  overflow-hidden peer-focus-within:delay-0 delay-150 peer-focus-within:visible peer-focus-within:w-[15rem] peer-focus-within:h-[6rem] transition-all duration-200"
                 role="dialog" // Marks this as a dialog-like tooltip
                 aria-label="User profile details"
             >
                 {/* Content Inside Tooltip */}
                 <div 
-                    className="flex flex-col justify-between h-full duration-500 "
+                    className="flex p-2 flex-col justify-between h-full"
                     aria-live="polite" // Ensures screen readers announce content updates
                 >
                     {/* User Info Section */}
