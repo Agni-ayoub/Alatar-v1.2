@@ -53,8 +53,15 @@ const SideNavBody = ({ routes = [], isOpen, isLocked }: SideNavProps): JSX.Eleme
                         <NavLink
                             to={route.path}
                             key={'routes' + i}
-                            className={classNames(
-                            "flex w-full h-10 cursor-pointer transition-all duration-200 rounded-md hover:bg-[var(--background-secondary)]/20 active:bg-[var(--background-secondary)]/20 active:opacity-50 group")}
+                            className={({isActive}) => (
+                                classNames(
+                                    "flex w-full h-10 transition-all duration-200 rounded-md",
+                                    {
+                                        'bg-[var(--background-secondary)]/50 pointer-events-none pl-4' : isActive,
+                                        'hover:bg-[var(--background-secondary)]/20 active:bg-[var(--background-secondary)]/20 active:opacity-50 group cursor-pointe ' : !isActive,
+                                    }
+                                )
+                            )}
                             role="menuitem"
                             aria-label={route.name}
                         >
