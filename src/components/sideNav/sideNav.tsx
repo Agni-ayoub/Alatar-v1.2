@@ -4,9 +4,9 @@ import logo from "../../assets/logo/favicon.svg";
 import SideNavHeader from "./fragments/sideNavHeader";
 import SideNavBody from "./fragments/sideNavBody";
 import routes from "../../master/routes.json";
-import SideNavBottom from "./fragments/sideNavButtom";
+import SideNavBottom from "./fragments/sideNavBottom";
 import { JSX } from "react/jsx-runtime";
-import { CgMenuRight } from "react-icons/cg";
+import SideNavButton from "./fragments/sideNavButton";
 
 type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
     isOpen: boolean;
@@ -54,10 +54,9 @@ const SideNav: React.FC<SideNavProps> = ({
             )}
             {...props}
         >
+
             {/* Close Button */}
-            <button onClick={()=> setIsLocked(false)} className="absolute sm:hidden z-30 right-2 top-2">
-                {isLocked && <CgMenuRight className="text-2xl text-secondary" />}
-            </button>
+            <SideNavButton className="absolute text-secondary sm:hidden z-30 right-2 top-2" isLocked={isLocked} setIsLocked={setIsLocked} />
 
             {/* Sidebar Header */}
             <SideNavHeader

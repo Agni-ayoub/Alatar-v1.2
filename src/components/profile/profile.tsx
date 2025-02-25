@@ -44,7 +44,7 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
 
             {/* Tooltip Dropdown */}
             <div 
-                className="invisible absolute top-8 right-8 rounded-md rounded-tr-none bg-[var(--background-secondary)]/30 w-0 h-0 p-2 overflow-hidden peer-focus-within:visible peer-focus-within:w-[15rem] peer-focus-within:h-[6rem] transition-all duration-200"
+                className="invisible absolute top-8 right-8 rounded-md rounded-tr-none bg-[var(--background-secondary)]/30 w-0 h-0 p-2 overflow-hidden peer-focus-within:delay-0 delay-150 peer-focus-within:visible peer-focus-within:w-[15rem] peer-focus-within:h-[6rem] transition-all duration-200"
                 role="dialog" // Marks this as a dialog-like tooltip
                 aria-label="User profile details"
             >
@@ -68,7 +68,7 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
                         className="flex items-center gap-2 justify-center bg-[var(--background)] active:border text-sm text-secondary rounded-md"
                         aria-label="View profile details"
                     >
-                        Details <MdMoreHoriz aria-hidden="true" />
+                        More <MdMoreHoriz aria-hidden="true" />
                     </button>
                 </div>
             </div>

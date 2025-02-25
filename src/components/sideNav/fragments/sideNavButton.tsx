@@ -1,10 +1,11 @@
+import classNames from "classnames";
 import React, { JSX } from "react";
 import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 
 interface SideNavButtonProps {
-    isOpen: boolean; // Indicates whether the sidebar is open
     isLocked: boolean; // Indicates whether the sidebar is locked
     setIsLocked: React.Dispatch<React.SetStateAction<boolean>>; // Function to toggle sidebar lock state
+    className?: string; //styling class for the button (overrides everything);
 }
 
 /**
@@ -14,9 +15,9 @@ interface SideNavButtonProps {
  * between open and locked states and updates the parent component accordingly.
  *
  * @param {Object} SideNavButtonProps - The props for this component.
- * @param {boolean} props.isOpen - Indicates whether the sidebar is open.
  * @param {boolean} props.isLocked - Indicates whether the sidebar is locked.
- * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setIsLocked - Function to toggle the lock state
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setIsLocked - Function to toggle the lock state.
+ * @param {string} props.className - Button's className (OverRides everything !).
  * 
  * @returns {JSX.Element} - A button element to toggle sidebar lock state.
  * 
@@ -27,11 +28,10 @@ interface SideNavButtonProps {
  *
  * const Master = () => {
  *     const [isLocked, setIsLocked] = useState(false);
- *     const [isOpen, setIsOpen] = useState(false);
  *
  *     return (
  *         <div className={`transition-all ${isLocked ? "ml-[16rem]" : "ml-0"}`}>
- *             <SideNavButton isOpen={isOpen} isLocked={isLocked} setIsLocked={setIsLocked} />
+ *             <SideNavButton className="<new styles>" isLocked={isLocked} setIsLocked={setIsLocked} />
  *             - ... Other Components ... -
  *         </div>
  *     );
@@ -42,15 +42,15 @@ interface SideNavButtonProps {
  * @returns {JSX.Element} - A button element to toggle sidebar lock state.
  */
 
-const SideNavButton: React.FC<SideNavButtonProps> = ({ isOpen, isLocked, setIsLocked }: SideNavButtonProps) : JSX.Element => {
+const SideNavButton: React.FC<SideNavButtonProps> = ({ isLocked, setIsLocked, className }: SideNavButtonProps) : JSX.Element => {
     return (
         <button
             onClick={() => setIsLocked((prev: boolean) => !prev)}
-            className="rounded-full transition-transform w-fit h-fit p-2 text-2xl active:scale-90"
+            className={classNames("rounded-full transition-transform w-fit h-fit p-2 text-2xl active:scale-90", className)}
             aria-label={isLocked ? "Unlock sidebar" : "Lock sidebar"} // ARIA label for accessibility
             aria-pressed={isLocked} // Indicates the toggle state for screen readers
         >
-            {!(isOpen || isLocked) ? <CgMenuLeft /> : <CgMenuRight />}
+            {!isLocked ? <CgMenuLeft /> : <CgMenuRight />}
         </button>
     );
 };

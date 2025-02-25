@@ -1,59 +1,64 @@
 @import "tailwindcss";
 
-.light{
+.light-blue{
     --background : rgb(226, 225, 225);
     --background-secondary : rgb(104, 116, 232);
-
     --sideNav-background : rgb(255, 255, 255);
     --sideNav-shadow : rgba(104, 116, 232, .2);
-
     --default-button : rgba(104, 116, 232, .4);
-
     --outletheader-background : rgba(255, 255, 255, 0.781);
     --outletcontainer-background : rgba(255, 255, 255, .3);
-
     --text-primary : rgb(59, 59, 59);
     --text-secondary : rgb(104, 116, 232);
     --text-tertiary : rgba(105, 105, 105, 0.705);
-
     --logout-button : oklch(0.707 0.022 261.325);
     --logout-text : rgb(226, 225, 255);
 }
-.dark {
-    --background: rgb(32, 32, 32);
-    --background-secondary: rgb(104, 116, 232);
-  
-    --sideNav-background: rgb(44, 44, 44);
-    --sideNav-shadow: rgba(0, 0, 0, 0.5);
-  
-    --outletheader-background: rgba(44, 44, 44, 0.9);
-    --outletcontainer-background: rgba(44, 44, 44, 0.3);
-  
-    --text-primary: rgb(230, 230, 230);
-    --text-secondary: rgb(104, 116, 232);
-    --text-tertiary: rgba(150, 150, 150, 0.7);
-  
-    --logout-button: oklch(0.8 0.03 261.325);
+
+.light-purple {
+    --background : rgb(235, 222, 255);
+    --background-secondary : rgb(170, 120, 255);
+    --sideNav-background : rgb(220, 200, 255);
+    --sideNav-shadow : rgba(170, 120, 255, 0.3);
+    --default-button : rgba(170, 120, 255, 0.6);
+    --outletheader-background : rgba(210, 180, 255, 0.85);
+    --outletcontainer-background : rgba(220, 190, 255, 0.5);
+    --text-primary : rgb(80, 30, 120);
+    --text-secondary : rgb(170, 120, 255);
+    --text-tertiary : rgba(120, 80, 160, 0.7);
+    --logout-button : oklch(0.7 0.1 300);
+    --logout-text : rgb(245, 230, 255);
 }
 
-.purple {
-    --background: rgb(45, 0, 45);
-    --background-secondary: rgb(106, 13, 173);
-  
-    --sideNav-background: rgb(30, 0, 30);    
-    --sideNav-shadow: rgba(106, 13, 173, 0.2);  
-  
-    --outletheader-background: rgba(30, 0, 30, 0.8);  
-    --outletcontainer-background: rgba(30, 0, 30, 0.3);
-  
-    --text-primary: rgb(230, 230, 230);          
-    --text-secondary: rgb(186, 85, 211);     
-    --text-tertiary: rgba(210, 210, 210, 0.7);
-  
-    --logout-button: oklch(0.75 0.03 280);     
+.dark-blue {
+    --background: rgb(15, 20, 35);
+    --background-secondary: rgb(30, 50, 80);
+    --sideNav-background: rgb(25, 35, 55);
+    --sideNav-shadow: rgba(0, 102, 255, 0.1);
+    --default-button: rgba(0, 102, 255, 0.6);
+    --outletheader-background: rgba(20, 40, 70, 0.9);
+    --outletcontainer-background: rgba(25, 45, 75, 0.6);
+    --text-primary: rgb(200, 220, 255);
+    --text-secondary: rgb(0, 153, 255);
+    --text-tertiary: rgba(150, 170, 200, 0.7);
+    --logout-button: oklch(0.6 0.2 250);
+    --logout-text: rgb(220, 230, 255);
 }
-  
-  
+
+.dark-purple {
+    --background: rgb(20, 10, 35);
+    --background-secondary: rgb(45, 20, 70);
+    --sideNav-background: rgb(30, 15, 50);
+    --sideNav-shadow: rgba(150, 80, 255, 0.1);
+    --default-button: rgba(150, 80, 255, 0.6);
+    --outletheader-background: rgba(50, 25, 80, 0.9);
+    --outletcontainer-background: rgba(60, 30, 100, 0.6);
+    --text-primary: rgb(220, 200, 255);
+    --text-secondary: rgb(180, 120, 255);
+    --text-tertiary: rgba(170, 140, 210, 0.7);
+    --logout-button: oklch(0.6 0.2 300);
+    --logout-text: rgb(230, 210, 255);
+}
 
 @layer utilities {
     .text-primary {
@@ -75,7 +80,6 @@
         background-color: var(--logout-button);
     }
 }
-
 
 body{
     position: relative;
