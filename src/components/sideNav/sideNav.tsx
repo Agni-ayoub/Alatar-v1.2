@@ -6,11 +6,13 @@ import SideNavBody from "./fragments/sideNavBody";
 import routes from "../../master/routes.json";
 import SideNavBottom from "./fragments/sideNavButtom";
 import { JSX } from "react/jsx-runtime";
+import { CgMenuRight } from "react-icons/cg";
 
 type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
     isOpen: boolean;
     isLocked: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsLocked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 /**
@@ -25,12 +27,14 @@ type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
  * @prop {boolean} isOpen - Controls whether the sidebar is expanded.
  * @prop {boolean} isLocked - Determines if the sidebar is locked open.
  * @prop {React.Dispatch<React.SetStateAction<boolean>>} setIsOpen - Function to toggle sidebar state.
+ * @prop {React.Dispatch<React.SetStateAction<boolean>>} setIsLocked - Function to toggle locked sidebar state.
  */
 
 const SideNav: React.FC<SideNavProps> = ({
     isOpen = false,
     isLocked = false,
     setIsOpen,
+    setIsLocked,
     ...props
 }: SideNavProps) : JSX.Element => {
     return (
@@ -40,14 +44,21 @@ const SideNav: React.FC<SideNavProps> = ({
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={() => setIsOpen(false)}
             className={classNames(
-                "flex flex-col h-[calc(100%-2rem)] transition-all duration-200 rounded-lg fixed top-4 left-4 bg-[var(--sideNav-background)] shadow-[2px_2px_20px_var(--sideNav-shadow)] z-30 py-2 px-2 overflow-hidden select-none",
+                "sm:max-w-64 flex flex-col h-full sm:h-[calc(100%-2rem)] transition-all duration-200 rounded-lg fixed top-0 sm:top-4 left-0 sm:left-4 bg-[var(--sideNav-background)] shadow-[2px_2px_20px_var(--sideNav-shadow)] z-30 py-2 sm:px-2 overflow-hidden select-none",
                 {
                     "w-64": isOpen || isLocked, // Expanded width
                     "w-14": !(isOpen || isLocked), // Collapsed width
+                    "max-w-64 px-2": isLocked,
+                    "max-w-0": !isLocked,
                 }
             )}
             {...props}
         >
+            {/* Close Button */}
+            <button onClick={()=> setIsLocked(false)} className="absolute sm:hidden z-30 right-2 top-2">
+                {isLocked && <CgMenuRight className="text-2xl text-secondary" />}
+            </button>
+
             {/* Sidebar Header */}
             <SideNavHeader
                 isOpen={isOpen}

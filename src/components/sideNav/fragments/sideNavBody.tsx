@@ -54,7 +54,7 @@ const SideNavBody = ({ routes = [], isOpen, isLocked }: SideNavProps): JSX.Eleme
                             to={route.path}
                             key={'routes' + i}
                             className={classNames(
-                            "flex w-full h-10 cursor-pointer transition-all duration-200 rounded-md hover:bg-[var(--background-secondary)]/20 active:opacity-50 group")}
+                            "flex w-full h-10 cursor-pointer transition-all duration-200 rounded-md hover:bg-[var(--background-secondary)]/20 active:bg-[var(--background-secondary)]/20 active:opacity-50 group")}
                             role="menuitem"
                             aria-label={route.name}
                         >

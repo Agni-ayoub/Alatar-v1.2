@@ -29,26 +29,28 @@ interface ProfileProps {
 const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
     return (
         <div 
-            className="flex items-center justify-center w-8 h-8 rounded-md bg-[var(--background-secondary)]/10 relative group"
+            className="flex items-center justify-center w-8 h-8 rounded-md bg-[var(--background-secondary)]/10 relative"
             aria-haspopup="true" // Indicates a popup-like menu is associated with this element
             aria-expanded="false" // By default, the menu is not expanded
         >
             {/* User Icon */}
-            {
-                avatar?
-                    avatar:
-                    <CiUser className="text-2xl" aria-hidden="true" />
-            }  
+            <button className="peer">
+                {
+                    avatar?
+                        avatar:
+                        <CiUser className="text-2xl" aria-hidden="true" />
+                }  
+            </button>
 
             {/* Tooltip Dropdown */}
             <div 
-                className="invisible absolute top-8 right-8 rounded-md rounded-tr-none bg-[var(--background-secondary)]/30 w-0 h-0 p-2 overflow-hidden group-hover:visible group-hover:w-[15rem] group-hover:h-[6rem] transition-all duration-200 group-hover:delay-75 delay-300"
+                className="invisible absolute top-8 right-8 rounded-md rounded-tr-none bg-[var(--background-secondary)]/30 w-0 h-0 p-2 overflow-hidden peer-focus-within:visible peer-focus-within:w-[15rem] peer-focus-within:h-[6rem] transition-all duration-200"
                 role="dialog" // Marks this as a dialog-like tooltip
                 aria-label="User profile details"
             >
                 {/* Content Inside Tooltip */}
                 <div 
-                    className="flex flex-col justify-between h-full group-hover:opacity-100 duration-500 group-hover:delay-0 delay-100 opacity-0"
+                    className="flex flex-col justify-between h-full duration-500 "
                     aria-live="polite" // Ensures screen readers announce content updates
                 >
                     {/* User Info Section */}
@@ -63,7 +65,7 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
 
                     {/* Details Button */}
                     <button 
-                        className="flex items-center gap-2 justify-center bg-[var(--background)] text-sm text-secondary rounded-md"
+                        className="flex items-center gap-2 justify-center bg-[var(--background)] active:border text-sm text-secondary rounded-md"
                         aria-label="View profile details"
                     >
                         Details <MdMoreHoriz aria-hidden="true" />

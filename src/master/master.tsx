@@ -18,13 +18,14 @@ const Master: React.FC<MasterProps> = () => {
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
                 isLocked={isLocked}
+                setIsLocked={setIsLocked}
             />
 
             {/* Outlet Container with header */}
             <div className={classNames('bg-[var(--outletcontainer-background)] rounded-2xl h-full w-full backdrop-blur-lg py-2 px-1 overflow-hidden flex gap-2 flex-col transition-all duration-200',
                 {
-                    'ml-[4rem]' : !isLocked,
-                    'ml-[16.5rem]': isLocked
+                    'sm:ml-[4rem]' : !isLocked,
+                    'sm:ml-[16.5rem]': isLocked
                 }
             )}>
                 {/* Header */}
