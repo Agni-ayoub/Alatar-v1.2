@@ -5,7 +5,9 @@
     --background-secondary : rgb(104, 116, 232);
 
     --sideNav-background : rgb(255, 255, 255);
-    --sideNav-shadow : rgba(104, 116, 232, .3);
+    --sideNav-shadow : rgba(104, 116, 232, .2);
+
+    --default-button : rgba(104, 116, 232, .4);
 
     --outletheader-background : rgba(255, 255, 255, 0.781);
     --outletcontainer-background : rgba(255, 255, 255, .3);
@@ -103,6 +105,7 @@ body::after{
 
 button{
     cursor: pointer;
+    transition: opacity .3 ease-in-out;
 }
 button:hover{
     opacity: .8;

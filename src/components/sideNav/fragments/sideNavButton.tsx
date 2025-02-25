@@ -1,62 +1,58 @@
-import classNames from "classnames";
-import { JSX } from "react";
-import { CiLogout } from "react-icons/ci";
+import React, { JSX } from "react";
+import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 
-/**
- * SideNavBottom component represents the bottom section of the sidebar,
- * typically used for the logout button. It adapts to the sidebar's open
- * or closed state, showing or hiding text accordingly.
- *
- * @prop {boolean} isOpen - Controls whether the sidebar is expanded.
- * @prop {boolean} isLocked - Determines if the sidebar is locked open.
- */
-interface SideNavBottomProps {
-    isOpen: boolean;
-    isLocked: boolean;
+interface SideNavButtonProps {
+    isOpen: boolean; // Indicates whether the sidebar is open
+    isLocked: boolean; // Indicates whether the sidebar is locked
+    setIsLocked: React.Dispatch<React.SetStateAction<boolean>>; // Function to toggle sidebar lock state
 }
 
 /**
- * Renders the logout button inside the sidebar.
- * The button expands when the sidebar is open or locked and collapses when closed.
+ * SideNavButton Component
+ * 
+ * A button that controls the locking behavior of the sidebar. It toggles
+ * between open and locked states and updates the parent component accordingly.
  *
- * @param {SideNavBottomProps} props - Component properties.
- * @returns {JSX.Element} The rendered component.
+ * @param {Object} SideNavButtonProps - The props for this component.
+ * @param {boolean} props.isOpen - Indicates whether the sidebar is open.
+ * @param {boolean} props.isLocked - Indicates whether the sidebar is locked.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setIsLocked - Function to toggle the lock state
+ * 
+ * @returns {JSX.Element} - A button element to toggle sidebar lock state.
+ * 
+ * @example
+ * ```tsx
+ * import React, { useState } from "react";
+ * import SideNavButton from "./SideNavButton";
+ *
+ * const Master = () => {
+ *     const [isLocked, setIsLocked] = useState(false);
+ *     const [isOpen, setIsOpen] = useState(false);
+ *
+ *     return (
+ *         <div className={`transition-all ${isLocked ? "ml-[16rem]" : "ml-0"}`}>
+ *             <SideNavButton isOpen={isOpen} isLocked={isLocked} setIsLocked={setIsLocked} />
+ *             - ... Other Components ... -
+ *         </div>
+ *     );
+ * };
+ *
+ * export default Master;
+ * ```
+ * @returns {JSX.Element} - A button element to toggle sidebar lock state.
  */
-const SideNavBottom = ({ isOpen, isLocked }: SideNavBottomProps) : JSX.Element => {
-    return (
-        <div 
-            className="h-10 flex shrink-0 items-center"
-            role="navigation" // Declares this section as part of the navigation
-            aria-label="Sidebar bottom section" // Provides an accessible label for screen readers
-        >
-            <button
-                className="bg-logout-button overflow-hidden flex items-center rounded-md h-full w-full group text-logout"
-                aria-label="Logout" // Provides a meaningful label for the button
-            >
-                {/* Logout Icon */}
-                <span
-                    className="flex shrink-0 items-center justify-center w-10 h-full"
-                    aria-hidden="false" // Icon is always visible, so it should be accessible
-                >
-                    <CiLogout className="text-2xl" />
-                </span>
 
-                {/* Logout Text (Hidden when sidebar is closed) */}
-                <span
-                    className={classNames(
-                        "group-hover:pl-2 group-active:pl-3 whitespace-nowrap transition-all duration-300 font-semibold h-full flex items-center tracking-[.2rem]",
-                        {
-                            "invisible opacity-0 -translate-x-8": !(isOpen || isLocked), // Hide text if sidebar is collapsed
-                            "translate-x-2 visible opacity-100": isOpen || isLocked, // Show text if sidebar is open or locked
-                        }
-                    )}
-                    aria-hidden={!(isOpen || isLocked) ? "true" : "false"} // Hide from screen readers if collapsed
-                >
-                    Logout
-                </span>
-            </button>
-        </div>
+const SideNavButton: React.FC<SideNavButtonProps> = ({ isOpen, isLocked, setIsLocked }: SideNavButtonProps) : JSX.Element => {
+    return (
+        <button
+            onClick={() => setIsLocked((prev: boolean) => !prev)}
+            className="rounded-full transition-transform w-fit h-fit p-2 text-2xl active:scale-90"
+            aria-label={isLocked ? "Unlock sidebar" : "Lock sidebar"} // ARIA label for accessibility
+            aria-pressed={isLocked} // Indicates the toggle state for screen readers
+        >
+            {!(isOpen || isLocked) ? <CgMenuLeft /> : <CgMenuRight />}
+        </button>
     );
 };
 
-export default SideNavBottom;
+export default SideNavButton;

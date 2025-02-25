@@ -4,7 +4,7 @@ import logo from "../../assets/logo/favicon.svg";
 import SideNavHeader from "./fragments/sideNavHeader";
 import SideNavBody from "./fragments/sideNavBody";
 import routes from "../../master/routes.json";
-import SideNavBottom from "./fragments/sideNavButton";
+import SideNavBottom from "./fragments/sideNavButtom";
 import { JSX } from "react/jsx-runtime";
 
 type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -32,7 +32,7 @@ const SideNav: React.FC<SideNavProps> = ({
     isLocked = false,
     setIsOpen,
     ...props
-}) : JSX.Element => {
+}: SideNavProps) : JSX.Element => {
     return (
         <div
             role="navigation" // Marks this as a navigation component
