@@ -30,7 +30,7 @@ const SideNavBottom = ({ isOpen, isLocked }: SideNavBottomProps) : JSX.Element =
             aria-label="Sidebar bottom section" // Provides an accessible label for screen readers
         >
             <button
-                className="bg-gray-400 overflow-hidden flex items-center rounded-md h-full w-full text-white group"
+                className="bg-logout-button overflow-hidden flex items-center rounded-md h-full w-full group text-logout"
                 aria-label="Logout" // Provides a meaningful label for the button
             >
                 {/* Logout Icon */}
