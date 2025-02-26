@@ -109,17 +109,7 @@ body::after{
     bottom: 0;
     right: 0;
     font-size: x-small;
-}
-
-button{
-    cursor: pointer;
-    transition: opacity .3 ease-in-out;
-}
-button:hover{
-    opacity: .8;
-}
-button:active{
-    opacity: .7;
+    color: var(--text-tertiary);
 }
 
 @keyframes wobble {
@@ -132,3 +122,51 @@ button:active{
         translate: -.2rem;
     }
 }
+
+.button-loader {
+    width: 16px;
+    height: 16px;
+    position: relative;
+}
+.button-loader:before , .button-loader:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--text-secondary);
+    animation: push 1s infinite linear alternate;
+}
+.button-loader:after {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes push {
+    0% {
+        width: 2px;
+        height: 2px;
+    }
+    100% {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+  
+@keyframes animbutton-loader {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0; 
+    }
+}
+  

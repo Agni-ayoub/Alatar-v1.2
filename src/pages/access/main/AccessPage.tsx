@@ -1,5 +1,6 @@
 import { JSX } from "react";
 import logo from "../../../assets/logo/logo.svg"
+import Buttons from "../../../components/buttons/buttons";
 
 const AccessPage = () : JSX.Element => {
 
@@ -22,7 +23,7 @@ const AccessPage = () : JSX.Element => {
                             Admin
                         </span>
                     </span>
-                    <div className="flex flex-col justify-between p-4 items-center w-full h-full">
+                    <form className="flex flex-col justify-between p-4 items-center w-full h-full">
                         <div className="flex flex-col gap-4 w-full">
                             <label htmlFor="access-username" className="flex flex-col gap-3">
                                 <span>
@@ -37,14 +38,14 @@ const AccessPage = () : JSX.Element => {
                                 <input id="access-password" className="outline-0 border-[var(--background-secondary)] focus-within:border-[var(--text-secondary)]/70 placeholder:text-sm border-2 rounded-md h-10 animate-wobble w-full px-4" type="text" placeholder="Enter your password" />
                             </label>
                         </div>
-                        <button className="bg-[var(--background-secondary)] w-[75%] rounded-md h-8 transition-all duration-200">
-                            Login
-                        </button>
-                    </div>
+
+                        {/* Login Button */}
+                        <Buttons type="submit" icon="login" className="bg-[var(--background-secondary)] max-w-[18rem] h-10" />
+                    </form>
                 </div>
             </div>
         </div>
     );
 };
 
-export default AccessPage
+export default AccessPage;
