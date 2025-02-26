@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React, { JSX } from "react";
-import { icons } from "../../../master/icons";
+import { icons } from "../../../utils/icons";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { Route } from "../sideNavTypes";
+import { Route } from "../main/sideNavTypes";
 
 interface SideNavRouteProps {
     setShowRoom : React.Dispatch<React.SetStateAction<boolean>>;

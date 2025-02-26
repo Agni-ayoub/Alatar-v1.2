@@ -1,7 +1,7 @@
 import { JSX } from "react";
 import NavigationLinks from "./navigationLinks";
 import NavigationLinksWithRoots from "./navigationLinksWithRoots";
-import { Route } from "../sideNavTypes";
+import { Route } from "../main/sideNavTypes";
 
 
 // Props definition for the SideNavBody component

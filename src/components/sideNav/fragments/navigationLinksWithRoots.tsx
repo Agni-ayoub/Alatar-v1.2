@@ -1,7 +1,7 @@
 import { JSX, useEffect, useState } from "react";
 import SideNavRoots from "./sideNavRoots";
 import SideNavRoute from "./sideNavRoute";
-import { Route } from "../sideNavTypes";
+import { Route } from "../main/sideNavTypes";
 
 // Interface to define the expected props for NavigationLinksWithRoots component
 interface NavigationLinksWithRootsProps {

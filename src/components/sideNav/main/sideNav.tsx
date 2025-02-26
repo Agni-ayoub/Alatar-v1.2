@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import React from "react";
-import logo from "../../assets/logo/favicon.svg";
-import SideNavHeader from "./fragments/sideNavHeader";
-import SideNavBody from "./fragments/sideNavBody";
-import routes from "../../master/routes.json";
-import SideNavBottom from "./fragments/sideNavBottom";
+import logo from "../../../assets/logo/favicon.svg";
+import SideNavHeader from "../fragments/sideNavHeader";
+import SideNavBody from "../fragments/sideNavBody";
+import routes from "../../../master/routes.json";
+import SideNavBottom from "../fragments/sideNavBottom";
 import { JSX } from "react/jsx-runtime";
-import SideNavButton from "./fragments/sideNavButton";
+import SideNavButton from "../fragments/sideNavButton";
 
 type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
     isOpen: boolean;

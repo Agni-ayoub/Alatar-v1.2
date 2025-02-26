@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SideNav from "../components/sideNav/sideNav";
+import SideNav from "../components/sideNav/main/sideNav";
 import { Outlet } from "react-router-dom";
 import classNames from "classnames";
 import SideNavButton from "../components/sideNav/fragments/sideNavButton";

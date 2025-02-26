@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { JSX } from "react";
 import { NavLink } from "react-router-dom";
-import { icons } from "../../../master/icons";
-import { RootRoute } from "../sideNavTypes";
+import { icons } from "../../../utils/icons";
+import { RootRoute } from "../main/sideNavTypes";
 
 interface NavigationLinksProps {
     route: RootRoute; // The route object containing route details (e.g., name, path, icon, etc.)

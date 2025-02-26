@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import { icons } from "../../../master/icons";
+import { icons } from "../../../utils/icons";
 import { NavLink } from "react-router-dom";
 import { JSX } from "react";
-import { Route } from "../sideNavTypes";
+import { Route } from "../main/sideNavTypes";
 
 // Props interface for the `SideNavRoots` component
 interface SideNavRootsProps {
