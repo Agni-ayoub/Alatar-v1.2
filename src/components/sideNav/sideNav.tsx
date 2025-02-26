@@ -31,8 +31,8 @@ type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
  */
 
 const SideNav: React.FC<SideNavProps> = ({
-    isOpen = false,
-    isLocked = false,
+    isOpen,
+    isLocked,
     setIsOpen,
     setIsLocked,
     ...props

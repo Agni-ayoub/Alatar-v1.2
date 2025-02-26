@@ -8,8 +8,8 @@ import Profile from "../components/profile/profile";
 type MasterProps = object;
 
 const Master: React.FC<MasterProps> = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [isLocked, setIsLocked] = useState(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isLocked, setIsLocked] = useState<boolean>(false);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -46,7 +46,6 @@ const Master: React.FC<MasterProps> = () => {
 
                     {/* Button that locks the sideNav*/}
                     <SideNavButton 
-                        isOpen={isOpen}
                         isLocked={isLocked}
                         setIsLocked={setIsLocked}
                     />
