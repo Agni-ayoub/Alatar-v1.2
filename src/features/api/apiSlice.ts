@@ -6,6 +6,7 @@ const baseQuery = fetchBaseQuery({
     baseUrl: endPoints?.baseUrl,
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
+        
         if (token) {
             headers.set("Authorization", `Bearer ${token}`);
         }
@@ -24,7 +25,16 @@ export const ApiSlice = createApi({
                 body: credentials,
             }),
         }),
+        logOut: builder.mutation({
+            query: () => ({
+                url: endPoints.logout,
+                method: 'POST',
+            }),
+        }),
+        getCurrentUser: builder.query({
+            query: () => endPoints.Me,
+        }),
     }),
 });
 
-export const { useLogInMutation } = ApiSlice;
+export const { useLogInMutation, useLogOutMutation, useGetCurrentUserQuery } = ApiSlice;
