@@ -8,6 +8,7 @@ import Plans from "./pages/plans/plans";
 import Billing from "./pages/billing/billing";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import AccessPage from "./pages/access/main/AccessPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         element: <Billing />,
       },
     ],
+  },
+  {
+    path : '/access',
+    element: <AccessPage />
   },
 ]);
 

@@ -29,7 +29,7 @@ interface ProfileProps {
 const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
     return (
         <div 
-            className="flex items-center justify-center w-8 h-8 rounded-md bg-[var(--background-secondary)]/10 relative"
+            className="flex items-center justify-center w-8 h-8 rounded-md bg-[var(--text-secondary)]/30 relative"
             aria-haspopup="true" // Indicates a popup-like menu is associated with this element
             aria-expanded="false" // By default, the menu is not expanded
         >
@@ -44,7 +44,7 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
 
             {/* Tooltip Dropdown */}
             <div 
-                className="invisible absolute top-8 right-8 rounded-md rounded-tr-none bg-[var(--background-secondary)]/30 w-0 h-0  overflow-hidden peer-focus-within:delay-0 delay-150 peer-focus-within:visible peer-focus-within:w-[15rem] peer-focus-within:h-[6rem] transition-all duration-200"
+                className="invisible absolute top-8 right-8 rounded-md rounded-tr-none bg-[var(--background-secondary)]/50 border border-[var(--text-secondary)] w-0 h-0  overflow-hidden peer-focus-within:delay-0 delay-150 peer-focus-within:visible peer-focus-within:w-[15rem] peer-focus-within:h-[6rem] transition-all duration-200"
                 role="dialog" // Marks this as a dialog-like tooltip
                 aria-label="User profile details"
             >

@@ -43,7 +43,7 @@ const SideNavRoots = ({ showRoom, route }: SideNavRootsProps): JSX.Element => {
                             "text-sm px-1 py-2 w-full h-fit tracking-widest group transition-all duration-200",
                             {
                                 'pl-7': showRoom, // Indent when expanded
-                                'pl-12 pointer-events-none': isActive && showRoom, // More indentation when active
+                                'pl-10 pointer-events-none': isActive, // More indentation when active
                                 'text-secondary': isActive, // Active route text color
                             }
                         )}
@@ -52,10 +52,13 @@ const SideNavRoots = ({ showRoom, route }: SideNavRootsProps): JSX.Element => {
                         <div className="flex items-center">
                             {/* Icon container */}
                             <span
-                                className="flex text-lg items-center justify-center shrink-0 w-10 min-w-10 h-full"
+                                className="flex text-[1rem] items-center justify-center shrink-0 w-10 min-w-10 h-full"
                                 aria-hidden="true" // Decorative icon, not read by screen readers
                             >
-                                {icons[root.icon] || root.icon || null} {/* Render dynamic icon */}
+                                {/* Render dynamic icon */}
+                                {
+                                    icons[root.icon] || root.icon || null
+                                } 
                             </span>
                             
                             {/* Sub-route text */}
