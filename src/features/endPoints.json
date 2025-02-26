@@ -1,0 +1,11 @@
+{
+    "baseUrl" : "https://api.alatar.site/api/v1/superuser/",
+    "login":" auth/login",
+    "logout": "auth/logout",
+    "Me": "auth/me",
+    "company": "company",
+    "user" : "user",
+    "vehicle": "vehicle",
+    "plan" : "plan",
+    "billing" : "/payment-history"
+}
