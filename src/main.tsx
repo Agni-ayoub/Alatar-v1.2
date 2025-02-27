@@ -9,6 +9,7 @@ import Billing from "./pages/billing/billing";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import AccessPage from "./pages/access/main/AccessPage";
+import { Bounce, ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -46,5 +47,19 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <RouterProvider router={router} />
+    <ToastContainer 
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={true}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      transition={Bounce}
+      limit={4}
+      toastClassName={"!bg-[var(--text-secondary)]/20 backDrop-burr-xl !text-[var(--text-primary)] !border-[var(--text-secondary)] backdrop-blur-md !text-xs !min-h-0 !h-12"}
+      />
   </Provider>
 );

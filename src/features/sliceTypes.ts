@@ -3,7 +3,7 @@
  */
 export type LoginRequest = {
     /** The username of the user */
-    username: string;
+    email: string;
     /** The password of the user */
     password: string;
 };

@@ -1,10 +1,12 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../../app/store";
 import endPoints from "../endPoints.json";
 import { LoginApiResponse, LoginRequest } from "../sliceTypes";
+import { notificationSet } from "../slices/notificationSlice";
+import errorMessages from "./errorMessages.json";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: endPoints?.baseUrl,
+    baseUrl: endPoints.baseUrl,
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
 
@@ -15,9 +17,26 @@ const baseQuery = fetchBaseQuery({
     }
 });
 
+const baseQueryWithInterceptor : BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
+
+    const response = await baseQuery(args, api, extraOptions);
+    
+    if (response?.error) {
+        const errorCode = (response.error.data as { code?: keyof typeof errorMessages })?.code;
+
+        if (errorCode && errorMessages[errorCode]) {
+            api.dispatch(notificationSet({ type: "error", message: errorMessages[errorCode] }));
+        } else {
+            api.dispatch(notificationSet({ type: "error", message: 'An unknown error occurred.' }));
+        }
+    }
+
+    return response;
+};
+
 export const ApiSlice = createApi({
     reducerPath: "api",
-    baseQuery,
+    baseQuery : baseQueryWithInterceptor,
     endpoints: (builder) => ({
         logIn: builder.mutation<LoginApiResponse, LoginRequest>({
             query: (credentials) => ({
@@ -33,12 +52,12 @@ export const ApiSlice = createApi({
                 method: 'POST',
             }),
         }),
-        getCurrentUser: builder.query({
+        getUser: builder.query({
             query: () => endPoints.Me,
         }),
     }),
 });
 
-export const { useLogInMutation, useLogOutMutation, useGetCurrentUserQuery } = ApiSlice;
+export const { useLogInMutation, useLogOutMutation, useGetUserQuery } = ApiSlice;
 
 export default ApiSlice.reducer;
