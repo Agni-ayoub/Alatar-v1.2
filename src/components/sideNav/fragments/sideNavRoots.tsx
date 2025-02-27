@@ -25,7 +25,7 @@ const SideNavRoots = ({ showRoom, route }: SideNavRootsProps): JSX.Element => {
     return (
         <div 
             className={classNames(
-                "overflow-hidden flex flex-col w-full transition-all duration-500", 
+                "overflow-hidden flex flex-col w-full transition-all duration-300", 
                 {
                     'max-h-0': !showRoom, // Collapse when `showRoom` is false
                     'max-h-96': showRoom, // Expand when `showRoom` is true

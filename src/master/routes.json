@@ -1,7 +1,7 @@
 [
   {
     "name": "Dashboard",
-    "path": "dashboard",
+    "path": "/dashboard",
     "icon": "dashboard"
   },
   {
@@ -12,7 +12,7 @@
   {
     "name": "Plan",
     "path": "/plans",
-    "icon": "plan"
+    "icon": "plans"
   },
   {
     "name": "Billing",

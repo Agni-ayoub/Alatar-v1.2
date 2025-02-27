@@ -1,6 +1,6 @@
 import { CiUser } from "react-icons/ci";
-import { MdMoreHoriz } from "react-icons/md";
 import { JSX } from "react/jsx-runtime";
+import Buttons from "../buttons/buttons";
 
 /**
  * Props for the Profile component.
@@ -31,7 +31,7 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
         <div 
             className="flex items-center justify-center w-8 h-8 rounded-md bg-[var(--text-secondary)]/30 relative"
             aria-haspopup="true" // Indicates a popup-like menu is associated with this element
-            aria-expanded="false" // By default, the menu is not expanded
+            aria-expanded="false" // By default, the show room is not expanded
         >
             {/* User Icon */}
             <button className="peer">
@@ -64,12 +64,13 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
                     </div>
 
                     {/* Details Button */}
-                    <button 
-                        className="flex items-center gap-2 justify-center bg-[var(--background)] active:border text-sm text-secondary rounded-md"
+                    <Buttons 
+                        className="bg-[var(--background)] active:border text-secondary rounded-md"
+                        placeHolderClassName="text-sm"
+                        icon="more"
+                        placeHolder="More"
                         aria-label="View profile details"
-                    >
-                        More <MdMoreHoriz aria-hidden="true" />
-                    </button>
+                    />
                 </div>
             </div>
         </div>

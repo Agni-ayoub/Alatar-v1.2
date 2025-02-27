@@ -44,7 +44,7 @@ const SideNav: React.FC<SideNavProps> = ({
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={() => setIsOpen(false)}
             className={classNames(
-                "sm:max-w-64 flex flex-col h-full sm:h-[calc(100%-2rem)] transition-all duration-200 rounded-lg fixed top-0 sm:top-4 left-0 sm:left-4 bg-[var(--sideNav-background)] shadow-[2px_2px_20px_var(--sideNav-shadow)] z-30 py-2 sm:px-2 overflow-hidden select-none",
+                "sm:max-w-64 flex flex-col h-full sm:h-[calc(100%-2rem)] transition-all duration-200 rounded-lg fixed top-0 sm:top-4 left-0 sm:left-4 bg-[var(--sideNav-background)] shadow-[2px_2px_20px_var(--sideNav-shadow)] z-30 py-5 sm:py-2 sm:px-2 overflow-hidden select-none",
                 {
                     "w-64": isOpen || isLocked, // Expanded width
                     "w-14": !(isOpen || isLocked), // Collapsed width
@@ -56,7 +56,7 @@ const SideNav: React.FC<SideNavProps> = ({
         >
 
             {/* Close Button */}
-            <SideNavButton className="absolute text-secondary sm:hidden z-30 right-2 top-2" isLocked={isLocked} setIsLocked={setIsLocked} />
+            <SideNavButton className="absolute text-secondary sm:hidden z-30 right-2 top-5" isLocked={isLocked} setIsLocked={setIsLocked} />
 
             {/* Sidebar Header */}
             <SideNavHeader

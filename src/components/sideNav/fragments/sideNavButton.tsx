@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { JSX } from "react";
-import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
+import Buttons from "../../buttons/buttons";
 
 interface SideNavButtonProps {
     isLocked: boolean; // Indicates whether the sidebar is locked
@@ -44,14 +44,15 @@ interface SideNavButtonProps {
 
 const SideNavButton: React.FC<SideNavButtonProps> = ({ isLocked, setIsLocked, className }: SideNavButtonProps) : JSX.Element => {
     return (
-        <button
+        <Buttons 
             onClick={() => setIsLocked((prev: boolean) => !prev)}
-            className={classNames("rounded-full transition-transform w-fit h-fit p-2 text-2xl active:scale-90", className)}
+            className={classNames("rounded-full transition-transform w-fit h-fit p-2 text-2xl active:scale-90 bg-transparent", className)}
             aria-label={isLocked ? "Unlock sidebar" : "Lock sidebar"} // ARIA label for accessibility
             aria-pressed={isLocked} // Indicates the toggle state for screen readers
-        >
-            {!isLocked ? <CgMenuLeft /> : <CgMenuRight />}
-        </button>
+            icon={!isLocked ? "sideNavClosed" : "sideNavOpen"}
+            placeHolderClassName="hidden"
+            withTransform={false}
+        />
     );
 };
 

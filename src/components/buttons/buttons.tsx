@@ -10,6 +10,7 @@ type ButtonsProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     placeHolderClassName?: string; 
     iconClassName?: string; 
     icon?: string; 
+    withTransform?: boolean;
 };
 
 /**
@@ -23,6 +24,7 @@ type ButtonsProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
  * @prop {string} [placeHolder="Buttons"] - The text or element displayed inside the button.
  * @prop {string} [placeHolderClassName] - Additional classes for the placeholder text.
  * @prop {string} [iconClassName="text-2xl"] - Additional classes for the icon.
+ * @prop {boolean} [withTransform="true"] - Adds translate-x effect.
  * @prop {React.ButtonHTMLAttributes<HTMLButtonElement>} props - Standard button attributes.
  * 
  * @returns {JSX.Element} The button component.
@@ -51,13 +53,14 @@ const Buttons = ({
     isLoading = false, 
     placeHolder = "Buttons", 
     className, 
+    withTransform = true,
     ...props 
 } : ButtonsProps) : JSX.Element => {
 
     return (
         <button
             className={twMerge(classNames(
-                'flex px-2 py-1 rounded-md hover:opacity-80 active:opacity-50 cursor-pointer items-center justify-center w-full group active:pointer-events-none bg-slate-600',
+                'flex px-2 py-1 rounded-md hover:opacity-80 active:opacity-50 cursor-pointer items-center justify-center w-full group bg-slate-600',
                 { 'pointer-events-none': isLoading },
                 className
             ))}
@@ -68,7 +71,11 @@ const Buttons = ({
             {isLoading ? (
                 <span className="button-loader" aria-live="polite" />
             ) : (
-                <div className="flex items-center gap-1 group-hover:translate-x-2 transition-transform duration-200">
+                <div className={classNames('flex items-center gap-1 transition-transform duration-200',
+                    {
+                        'group-hover:translate-x-2' : withTransform
+                    }
+                )}>
                     {icon && <span className={twMerge("text-2xl", iconClassName)}>{icons[icon]}</span>}
                     <span className={twMerge("text-base", placeHolderClassName)}>
                         {placeHolder}
