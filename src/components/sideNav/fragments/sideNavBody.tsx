@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import NavigationLinks from "./navigationLinks";
-import NavigationLinksWithRoots from "./navigationLinksWithRoots";
+import NavigationLinksWithSubRoutes from "./navigationLinksWithSubRoutes";
 import { Route } from "../main/sideNavTypes";
 
 
@@ -35,14 +35,14 @@ const SideNavBody = ({ routes = [], isOpen, isLocked }: SideNavProps): JSX.Eleme
                 routes.map((route, key) => {
 
                     return (
-                        !route.roots?
+                        !route.subRoute?
                             <NavigationLinks
                                 key={key}
                                 route={route}
                                 isLocked={isLocked}
                                 isOpen={isOpen}
                             />:
-                            <NavigationLinksWithRoots 
+                            <NavigationLinksWithSubRoutes 
                                 key={key}
                                 route={route}
                                 isLocked={isLocked}

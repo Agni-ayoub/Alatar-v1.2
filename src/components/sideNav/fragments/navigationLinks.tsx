@@ -2,10 +2,10 @@ import classNames from "classnames";
 import { JSX } from "react";
 import { NavLink } from "react-router-dom";
 import { icons } from "../../../utils/icons";
-import { RootRoute } from "../main/sideNavTypes";
+import { SubRoute } from "../main/sideNavTypes";
 
 interface NavigationLinksProps {
-    route: RootRoute; // The route object containing route details (e.g., name, path, icon, etc.)
+    route: SubRoute; // The route object containing route details (e.g., name, path, icon, etc.)
     isOpen: boolean; // Indicates if the sidebar is open
     isLocked: boolean; // Indicates if the sideBar is locked
 }
@@ -17,7 +17,7 @@ interface NavigationLinksProps {
  * It dynamically adjusts the appearance based on the open/locked state and highlights the active route.
  * 
  * @param {NavigationLinksProps} props - The props for the component.
- * @param {RootRoute} props.route - The route object containing route details.
+ * @param {SubRoute} props.route - The route object containing route details.
  * @param {boolean} props.isOpen - Whether the sideNav is open.
  * @param {boolean} props.isLocked - Whether the sideNav is locked.
  * 

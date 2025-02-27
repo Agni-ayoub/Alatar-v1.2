@@ -1,7 +1,7 @@
 /**
  * Represents a nested (sub) route under a main route.
  */
-export interface RootRoute {
+export interface SubRoute {
     /**
      * The display name of the sub-route.
      */
@@ -42,6 +42,6 @@ export interface Route {
      * Each sub-route is an object with:
      * - {name: string, path: string, icon: string}
      */
-    roots?: RootRoute[];
+    subRoute?: SubRoute[];
 }
 

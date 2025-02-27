@@ -44,6 +44,10 @@ type ButtonsProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
  * @example
  * // Custom styles:
  * <Buttons className="bg-blue-500 text-white" placeHolder="Custom Button" />
+ * 
+ * @example
+ * // Without the transleate-x effect:
+ * <Buttons withTransform={false} />
  */
 
 const Buttons = ({ 

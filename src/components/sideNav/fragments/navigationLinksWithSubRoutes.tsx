@@ -1,37 +1,37 @@
 import { JSX, useEffect, useState } from "react";
-import SideNavRoots from "./sideNavRoots";
+import SideNavSubRoutes from "./sideNavSubRoutes";
 import SideNavRoute from "./sideNavRoute";
 import { Route } from "../main/sideNavTypes";
 
-// Interface to define the expected props for NavigationLinksWithRoots component
-interface NavigationLinksWithRootsProps {
+// Interface to define the expected props for NavigationLinksWithSubRoutes component
+interface NavigationLinksWithSubRoutesProps {
     route: Route; // The route object containing route details
     isOpen: boolean; // Indicates if the navigation is open
     isLocked: boolean; // Indicates if the route is locked and cannot be interacted with
 }
 
 /**
- * NavigationLinksWithRoots Component
+ * NavigationLinksWithSubRoutes Component
  *-----------------------------------
- * This component renders the navigation links along with roots for a specific route. 
- * It controls the display of roots based on the route's state (locked/open).
+ * This component renders the navigation links along with SubRoutes for a specific route. 
+ * It controls the display of SubRoutes based on the route's state (locked/open).
  * 
  * @prop {Object} props - The props for the component.
  * @prop {Route} route - The route object containing route details (e.g., name, path, etc.).
  * @prop {boolean} isOpen - Indicates if the navigation is open.
  * @prop {boolean} isLocked - Indicates if the sideNav is locked.
  * 
- * @returns {JSX.Element} - Returns the JSX for the navigation section with links and roots.
+ * @returns {JSX.Element} - Returns the JSX for the navigation section with links and SubRoutes.
  */
 
-const NavigationLinksWithRoots = ({ route, isOpen, isLocked }: NavigationLinksWithRootsProps): JSX.Element => {
-    // State to control the visibility of the room/roots (in this case, the root nodes of the navigation).
+const NavigationLinksWithSubRoutes = ({ route, isOpen, isLocked }: NavigationLinksWithSubRoutesProps): JSX.Element => {
+    // State to control the visibility of the room/SubRoutes
     const [showRoom, setShowRoom] = useState<boolean>(false);
 
     // Effect to control the visibility of the room based on open/locked state
     useEffect(() => {
         if (isLocked || isOpen) return; 
-        setShowRoom(false); // Hide roots if not locked or open
+        setShowRoom(false); // Hide SubRoutes if not locked or open
     }, [isLocked, isOpen]);
 
     return (
@@ -43,19 +43,19 @@ const NavigationLinksWithRoots = ({ route, isOpen, isLocked }: NavigationLinksWi
             {/* SideNavRoute Component renders the individual route link */}
             <SideNavRoute 
                 route={route} // Passing route data to SideNavRoute
-                showRoom={showRoom} // Whether or not to show the roots
+                showRoom={showRoom} // Whether or not to show the SubRoutes
                 isOpen={isOpen} // Navigation open state
                 isLocked={isLocked} // Whether the route is locked or not
                 setShowRoom={setShowRoom} // Function to update the state of showRoom
             />
             
-            {/* SideNavRoots Component renders the roots of the navigation */}
-            <SideNavRoots 
-                route={route} // Passing the route data to SideNavRoots
-                showRoom={showRoom} // Controls the visibility of roots
+            {/* SideNavSubRoutes Component renders the SubRoutes of the navigation */}
+            <SideNavSubRoutes 
+                route={route} // Passing the route data to SideNavSubRoutes
+                showRoom={showRoom} // Controls the visibility of SubRoutes
             />
         </div>
     )
 }
 
-export default NavigationLinksWithRoots;
+export default NavigationLinksWithSubRoutes;

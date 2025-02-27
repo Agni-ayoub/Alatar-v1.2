@@ -4,14 +4,14 @@ import { NavLink } from "react-router-dom";
 import { JSX } from "react";
 import { Route } from "../main/sideNavTypes";
 
-// Props interface for the `SideNavRoots` component
-interface SideNavRootsProps {
+// Props interface for the `SideNavsubRoutes` component
+interface SideNavsubRoutesProps {
     showRoom: boolean; // Controls whether sub-routes should be expanded or collapsed
     route: Route; // The route containing sub-routes
 }
 
 /**
- * `SideNavRoots` Component
+ * `SideNavsubRoutes` Component
  * ------------------------
  * This component renders a list of sub-routes (nested routes) under a main sidebar route.
  * It expands or collapses based on the `showRoom` prop.
@@ -21,7 +21,7 @@ interface SideNavRootsProps {
  * @returns {JSX.Element} A collapsible navigation section for nested routes.
  */
 
-const SideNavRoots = ({ showRoom, route }: SideNavRootsProps): JSX.Element => {
+const SideNavsubRoutes = ({ showRoom, route }: SideNavsubRoutesProps): JSX.Element => {
     return (
         <div 
             className={classNames(
@@ -34,10 +34,10 @@ const SideNavRoots = ({ showRoom, route }: SideNavRootsProps): JSX.Element => {
             aria-hidden={!showRoom} // Hide from screen readers when collapsed
         >
             {
-                route.roots?.map((root, index) => (
+                route.subRoute?.map((subRoute, index) => (
                     <NavLink 
                         key={index} 
-                        to={root.path}
+                        to={subRoute.path}
                         style={{ transitionDelay: `${index * 100}ms` }} // Staggered animation delay
                         className={({ isActive }) => classNames(
                             "text-sm px-1 py-2 w-full h-fit tracking-widest group transition-all duration-200",
@@ -57,7 +57,7 @@ const SideNavRoots = ({ showRoom, route }: SideNavRootsProps): JSX.Element => {
                             >
                                 {/* Render dynamic icon */}
                                 {
-                                    icons[root.icon] || root.icon || null
+                                    icons[subRoute.icon] || subRoute.icon || null
                                 } 
                             </span>
                             
@@ -66,7 +66,7 @@ const SideNavRoots = ({ showRoom, route }: SideNavRootsProps): JSX.Element => {
                                 className="group-hover:pl-2 group-active:pl-3 whitespace-nowrap transition-all duration-300 h-full flex items-center text-xs tracking-[.2rem]"
                                 aria-hidden={!showRoom} // Hide text when collapsed
                             >
-                                {root.name}
+                                {subRoute.name}
                             </span>
                         </div>
                     </NavLink>
@@ -76,4 +76,4 @@ const SideNavRoots = ({ showRoom, route }: SideNavRootsProps): JSX.Element => {
     );
 };
 
-export default SideNavRoots;
+export default SideNavsubRoutes;
