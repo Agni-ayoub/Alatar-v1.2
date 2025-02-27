@@ -4,6 +4,7 @@ import { PiCardsThree, PiNewspaperClipping } from "react-icons/pi";
 import { CiLogin } from "react-icons/ci";
 import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 import { MdMoreHoriz } from "react-icons/md";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 // Imports and provides icons needed.
 export const icons: Record<string, JSX.Element> = {
@@ -14,5 +15,7 @@ export const icons: Record<string, JSX.Element> = {
     login: <CiLogin/>,
     sideNavClosed: <CgMenuLeft/>,
     sideNavOpen: <CgMenuRight/>,
-    more : <MdMoreHoriz />
+    more : <MdMoreHoriz />,
+    eye : <FiEye/>,
+    eyeOff : <FiEyeOff/>,
 }

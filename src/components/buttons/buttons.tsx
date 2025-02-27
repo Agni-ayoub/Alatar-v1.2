@@ -64,12 +64,13 @@ const Buttons = ({
     return (
         <button
             className={twMerge(classNames(
-                'flex px-2 py-1 rounded-md hover:opacity-80 active:opacity-50 cursor-pointer items-center justify-center w-full group bg-slate-600',
-                { 'pointer-events-none': isLoading },
-                className
+                'flex px-2 py-1 rounded-md hover:opacity-80 active:opacity-50 cursor-pointer items-center transition-colors justify-center w-full group disabled:pointer-events-none disabled:bg-[var(--text-tertiary)]/20 bg-slate-500',
+                className,
             ))}
             aria-busy={isLoading} 
             aria-label={placeHolder} 
+            type={props.type || 'button'}
+            disabled={isLoading || props.disabled}
             {...props}
         >
             {isLoading ? (
