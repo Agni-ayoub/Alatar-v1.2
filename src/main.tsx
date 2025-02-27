@@ -10,37 +10,38 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import AccessPage from "./pages/access/main/AccessPage";
 import { Bounce, ToastContainer } from "react-toastify";
+import ProtectedRoute from "./utils/protectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Master />,
+    element: <ProtectedRoute><Master /></ProtectedRoute>,
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
       },
       {
         path: "dashboard",
-        element: <Dashboard />,
+        element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
       },
       {
         path: "companies",
-        element: <Companies />,
+        element: <ProtectedRoute><Companies /></ProtectedRoute>,
       },
       {
         path: "plans",
-        element: <Plans />,
+        element: <ProtectedRoute><Plans /></ProtectedRoute>,
       },
       {
         path: "billing",
-        element: <Billing />,
+        element: <ProtectedRoute><Billing /></ProtectedRoute>,
       },
     ],
   },
   {
-    path : '/access',
-    element: <AccessPage />
+    path: "/access",
+    element: <AccessPage />,
   },
 ]);
 
