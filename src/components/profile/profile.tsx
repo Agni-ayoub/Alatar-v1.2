@@ -34,7 +34,8 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
             aria-expanded="false" // By default, the show room is not expanded
         >
             {/* User Icon */}
-            <button className="peer">
+            <button className="peer rounded-lg overflow-hidden cursor-pointer hover:opacity-80 active:opacity-50 transition-opacity duration-300 active:border focus-within:border focus-within:border-[var(--text-secondary)]"
+                aria-label="User profile">
                 {
                     avatar?
                         avatar:
@@ -56,7 +57,7 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
                     {/* User Info Section */}
                     <div className="flex bg-[var(--background)] p-1 flex-col rounded-md">
                         <span className="text-sm" aria-label={`Username: ${username || "username"}`}>
-                            {username || "username"}
+                            {(username ?? "username").charAt(0).toUpperCase() + (username ?? "username").slice(1)}
                         </span>
                         <span className="text-xs overflow-hidden text-ellipsis text-tertiary" aria-label={`Email: ${email || "example@example.com"}`}>
                             {email || "example@example.com"}

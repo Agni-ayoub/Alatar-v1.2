@@ -4,11 +4,13 @@ import { User } from "../sliceTypes";
 interface AuthState {
     token: string | null;
     user: User | null;
+    byChoice?: boolean;
 }
 
 const initialState: AuthState = {
     token: localStorage.getItem("token") || null,
     user: null,
+    byChoice: false,
 };
 
 export const authSlice = createSlice({
@@ -26,11 +28,14 @@ export const authSlice = createSlice({
             localStorage.removeItem("token");
             state.user = null;
         },
-        setUser: (state, action: PayloadAction<User>) => {
+        userSet: (state, action: PayloadAction<User>) => {
             state.user = action.payload;
+        },
+        byChoiseSet: (state, action: PayloadAction<boolean>) => {
+            state.byChoice = action.payload;
         },
     }
 });
 
-export const { tokenSet, tokenClear, setUser } = authSlice.actions;
+export const { tokenSet, tokenClear, userSet, byChoiseSet } = authSlice.actions;
 export default authSlice.reducer;

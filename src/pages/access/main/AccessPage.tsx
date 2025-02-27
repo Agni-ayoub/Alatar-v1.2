@@ -7,7 +7,7 @@ import Inputs from "../../../components/inputs/inputs";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setUser, tokenClear, tokenSet } from "../../../features/api/auth";
+import { userSet, tokenClear, tokenSet } from "../../../features/api/auth";
 import { User } from "../../../features/sliceTypes";
 import { useNavigate } from "react-router-dom";
 
@@ -44,7 +44,7 @@ const AccessPage = () : JSX.Element => {
 
     useEffect(() => {
         if(data?.status === "success"){
-            dispatch(setUser(data.user));
+            dispatch(userSet(data.user));
             navigate("/dashboard", {replace: true});
         };
     }, [dispatch, data, navigate]);

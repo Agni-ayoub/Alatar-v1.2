@@ -68,6 +68,7 @@ const Buttons = ({
                 className,
             ))}
             aria-busy={isLoading} 
+            aria-disabled={isLoading}
             aria-label={placeHolder} 
             type={props.type || 'button'}
             disabled={isLoading || props.disabled}

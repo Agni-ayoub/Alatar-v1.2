@@ -4,12 +4,20 @@ import { Outlet } from "react-router-dom";
 import classNames from "classnames";
 import SideNavButton from "../components/sideNav/fragments/sideNavButton";
 import Profile from "../components/profile/profile";
+import { useSelector } from "react-redux";
+import { User } from "../features/sliceTypes";
 
 type MasterProps = object;
+type RootState = {
+    auth: {
+        user: User;
+    }
+}
 
 const Master: React.FC<MasterProps> = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isLocked, setIsLocked] = useState<boolean>(false);
+    const user : User = useSelector((state: RootState) => state.auth.user);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -51,7 +59,11 @@ const Master: React.FC<MasterProps> = () => {
                     />
                     
                     {/* Profile (username, email, avatar) */}
-                    <Profile />
+                    <Profile 
+                        username={user?.username}
+                        email={user?.email}
+                        avatar={<img src={user?.avatar} />}
+                    />
 
                 </div>
 
