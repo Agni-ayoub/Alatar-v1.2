@@ -38,7 +38,7 @@ const AccessPage = () : JSX.Element => {
     const [password, setPassword] = useState("password");
     const token = useSelector((state: { auth: { token: string | null, user: User | null } }) => state.auth.token);
     const [logIn, { isLoading }] = useLogInMutation();
-    const { data } = useGetUserQuery(token, {skip: !token});
+    const { data } = useGetUserQuery( token , {skip: !token});
 
     const dispatch: Dispatch = useDispatch();
 

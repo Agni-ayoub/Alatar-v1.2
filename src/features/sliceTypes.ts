@@ -89,4 +89,29 @@ type ErrorResponse = {
  */
 export type LoginApiResponse = LoginResponse | ErrorResponse;
 
+/**
+ * Type representing an authentication token, which can be a string or null.
+ */
+export type token = string | null;
 
+/**
+ * Response type for fetching user details.
+ * Contains the status of the request and the user details.
+ */
+export type getUserResponse = {
+    /** Status of the request (e.g., 'success', 'error') */
+    status: string;
+    /** The user details */
+    user: User;
+};
+
+/**
+ * Response type for logging out a user.
+ * Contains the status of the logout request and a message.
+ */
+export type LogoutResponse = {
+    /** Status of the logout request ('success' or 'error') */
+    status: "success" | "error";
+    /** Message describing the result of the logout request */
+    message: string;
+};

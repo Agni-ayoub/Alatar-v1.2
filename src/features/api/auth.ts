@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../sliceTypes";
+import { token, User } from "../sliceTypes";
 
 interface AuthState {
-    token: string | null;
+    token: token;
     user: User | null;
     byChoice?: boolean;
 }

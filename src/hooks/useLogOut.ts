@@ -11,7 +11,7 @@ const useLogOut = () => {
 
     const handleLogOut = async () => {
         try {
-            const response = await logOut({}).unwrap();
+            const response = await logOut().unwrap();
 
             if (response.status === 'success') {
                 dispatch(byChoiseSet(true));
