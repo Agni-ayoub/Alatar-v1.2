@@ -1,6 +1,24 @@
 import React from 'react';
 
-// AnimatedBackground component renders an SVG with animated waves
+/**
+ * AnimatedBackground
+ * ------------------
+ * AnimatedBackground component renders an animated SVG background with wave patterns.
+ * The SVG is hidden on small screens and only visible on larger screens.
+ * 
+ * @returns {JSX.Element} The JSX code for the animated background.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <AnimatedBackground />
+ * )
+ * 
+ * @remarks
+ * - The SVG uses a parallax effect by reusing the wave path multiple times.
+ * - The `aria-hidden` attribute is used to hide the SVG from screen readers.
+ * - The component is hidden on small screens using the `hidden sm:block` classes.
+ */
 const AnimatedBackground: React.FC = () => {
     return (
         // Container for the waves, hidden on small screens
