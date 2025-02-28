@@ -7,6 +7,7 @@ import Profile from "../components/profile/profile";
 import { useSelector } from "react-redux";
 import { User } from "../features/sliceTypes";
 import usePreloadedImage from "../hooks/usePreloadedImage";
+import AnimatedBackground from "../components/animated/animatedBackground";
 
 type MasterProps = object;
 type RootState = {
@@ -35,7 +36,11 @@ const Master: React.FC<MasterProps> = () => {
     }, []);
 
     return(
-        <div className="h-screen min-h-screen flex p-4">
+        <div className="h-screen min-h-screen overflow-hidden flex p-4">
+
+            {/* Background (animated: waves) */}
+            <AnimatedBackground />
+
             {/* SideNav */}
             <SideNav 
                 isOpen={isOpen}
@@ -45,7 +50,7 @@ const Master: React.FC<MasterProps> = () => {
             />
 
             {/* Outlet Container with header */}
-            <div className={classNames('bg-[var(--outletcontainer-background)] rounded-2xl h-full w-full backdrop-blur-lg py-2 px-1 overflow-hidden flex gap-2 flex-col transition-all duration-200',
+            <div className={classNames('bg-[var(--outletcontainer-background)] rounded-2xl h-full w-full backdrop-blur-md py-2 px-1 overflow-hidden flex gap-2 flex-col transition-all duration-200',
                 {
                     'sm:ml-[4rem]' : !isLocked,
                     'sm:ml-[16.5rem]': isLocked
