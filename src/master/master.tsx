@@ -6,6 +6,7 @@ import SideNavButton from "../components/sideNav/fragments/sideNavButton";
 import Profile from "../components/profile/profile";
 import { useSelector } from "react-redux";
 import { User } from "../features/sliceTypes";
+import usePreloadedImage from "../hooks/usePreloadedImage";
 
 type MasterProps = object;
 type RootState = {
@@ -18,6 +19,7 @@ const Master: React.FC<MasterProps> = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isLocked, setIsLocked] = useState<boolean>(false);
     const user : User = useSelector((state: RootState) => state.auth.user);
+    const { imageElement } = usePreloadedImage({ src: user?.avatar, alt: "User's Avatar" });
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -62,7 +64,7 @@ const Master: React.FC<MasterProps> = () => {
                     <Profile 
                         username={user?.username}
                         email={user?.email}
-                        avatar={<img src={user?.avatar} />}
+                        avatar={imageElement}
                     />
 
                 </div>

@@ -34,7 +34,7 @@ const Profile = ({ username, email, avatar }: ProfileProps): JSX.Element => {
             aria-expanded="false" // By default, the show room is not expanded
         >
             {/* User Icon */}
-            <button className="peer rounded-lg overflow-hidden cursor-pointer hover:opacity-80 active:opacity-50 transition-opacity duration-300 active:border focus-within:border focus-within:border-[var(--text-secondary)]"
+            <button className="peer flex items-center justify-center rounded-lg overflow-hidden cursor-pointer hover:opacity-80 active:opacity-50 transition-opacity duration-300 active:border focus-within:border focus-within:border-[var(--text-secondary)]"
                 aria-label="User profile">
                 {
                     avatar?
