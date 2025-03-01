@@ -73,12 +73,13 @@ const Master: React.FC<MasterProps> = () => {
                             email={user?.email}
                             avatar={imageElement}
                         />
+                        {/* Theme mode switcher ("dark" | "light") */}
                         <ThemeSwitcher />
                     </div>
                 </div>
 
                 {/* Body */}
-                <div className="flex-1 overflow-auto py-2 px-1 rounded-2xl">
+                <div className="reltive h-full py-2 px-1 rounded-2xl">
                     <Outlet />
                 </div>
 
