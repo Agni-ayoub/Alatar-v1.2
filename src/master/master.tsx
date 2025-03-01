@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { User } from "../features/sliceTypes";
 import usePreloadedImage from "../hooks/usePreloadedImage";
 import AnimatedBackground from "../components/animated/animatedBackground";
+import ThemeSwitcher from "../components/inputs/themeSwitcher";
 
 type MasterProps = object;
 type RootState = {
@@ -65,13 +66,15 @@ const Master: React.FC<MasterProps> = () => {
                         setIsLocked={setIsLocked}
                     />
                     
-                    {/* Profile (username, email, avatar) */}
-                    <Profile 
-                        username={user?.username}
-                        email={user?.email}
-                        avatar={imageElement}
-                    />
-
+                    <div className="flex-row-reverse flex items-center gap-2">
+                        {/* Profile (username, email, avatar) */}
+                        <Profile 
+                            username={user?.username}
+                            email={user?.email}
+                            avatar={imageElement}
+                        />
+                        <ThemeSwitcher />
+                    </div>
                 </div>
 
                 {/* Body */}

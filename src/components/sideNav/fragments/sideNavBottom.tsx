@@ -34,7 +34,7 @@ const SideNavBottom = ({ isOpen, isLocked }: SideNavBottomProps) : JSX.Element =
         >
             <button
                 disabled={isLoading} // Disables the button when the user is logging out
-                onClick={() => handleLogOut()} // Calls the logout function when the button is clicked
+                onClick={() => handleLogOut(true)} // Calls the logout function when the button is clicked
                 className={classNames("bg-logout-button overflow-hidden flex items-center rounded-md h-full w-full group text-logout hover:opacity-80 active:opacity-50 cursor-pointer disabled:pointer-events-none disabled:bg-[var(--text-tertiary)]/20 transition-opacity duration-300",
                     {
                         'justify-center' : isLoading
