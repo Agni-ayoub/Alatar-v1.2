@@ -29,7 +29,7 @@ const usePreloadedImage = ({ src, alt } : PreloadedImageProps) : {loaded : boole
     const [loaded, setLoaded] = useState<boolean>(false);
 
     useEffect(() => {
-        const img = new Image();
+        const img : HTMLImageElement = new Image();
         img.src = src;
         img.onload = () => setLoaded(true);
     }, [src]);
