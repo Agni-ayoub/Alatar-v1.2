@@ -58,7 +58,7 @@ const Master: React.FC<MasterProps> = () => {
                 }
             )}>
                 {/* Header */}
-                <div className="flex justify-between items-center bg-[var(--outletheader-background)] py-1 px-4 rounded-2xl w-full h-12">
+                <div className="flex justify-between items-center bg-[var(--sideNav-background)] py-1 px-4 rounded-2xl w-full h-12">
 
                     {/* Button that locks the sideNav*/}
                     <SideNavButton 
@@ -79,7 +79,7 @@ const Master: React.FC<MasterProps> = () => {
                 </div>
 
                 {/* Body */}
-                <div className="reltive h-full py-2 px-1 rounded-2xl overflow-scroll">
+                <div className="reltive h-full px-2 rounded-2xl overflow-scroll">
                     <Outlet />
                 </div>
 

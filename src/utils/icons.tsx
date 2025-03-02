@@ -6,6 +6,8 @@ import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 import { MdMoreHoriz } from "react-icons/md";
 import { FiEye, FiEyeOff, FiUsers } from "react-icons/fi";
 import { IoTrendingDownOutline, IoTrendingUpOutline } from "react-icons/io5";
+import { IoCallOutline } from "react-icons/io5";
+import { MdAlternateEmail } from "react-icons/md";
 
 // Imports and provides icons needed.
 export const icons: Record<string, JSX.Element> = {
@@ -24,4 +26,7 @@ export const icons: Record<string, JSX.Element> = {
     vehicles2 : <PiCarSimple />,
     positive : <IoTrendingUpOutline />,
     negative : <IoTrendingDownOutline />,
+    phone : <IoCallOutline />,
+    email : <MdAlternateEmail />,
+    
 }

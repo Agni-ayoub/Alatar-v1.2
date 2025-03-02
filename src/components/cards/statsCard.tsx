@@ -7,7 +7,7 @@ type Progress = {
     type: 'positive' | 'negative';
 }
 
-interface CardDataProps {
+interface statsCardProps {
     icon: string;
     label?: string;
     number?: number;
@@ -15,21 +15,21 @@ interface CardDataProps {
 }
 
 /**
- * CardData Component
+ * statsCard Component
  * ------------------
- * CardData component to display card information with an icon, label, number, and progress.
+ * statsCard component to display card information with an icon, label, number, and progress.
  * 
- * @param {CardDataProps} props - The properties for the CardData component.
+ * @param {statsCardProps} props - The properties for the statsCard component.
  * @param {string} props.icon - The icon to display.
  * @param {string} [props.label="Label"] - The label to display.
  * @param {number} [props.number=5486] - The number to display.
  * @param {Progress} [props.progress={number: 12.54, type: "positive"}] - The progress information.
- * @returns {ReactElement} The rendered CardData component.
+ * @returns {ReactElement} The rendered statsCard component.
  */
 
-const CardData: React.FC<CardDataProps> = ({ icon, label = "Label", number = 5486, progress = { number: 12.54, type: "positive" } }: CardDataProps): ReactElement => {
+const statsCard: React.FC<statsCardProps> = ({ icon, label = "Label", number = 5486, progress = { number: 12.54, type: "positive" } }: statsCardProps): ReactElement => {
     return (
-        <div className="flex max-w-[25rem] flex-col justify-around p-4 bg-[var(--sideNav-background)] border border-[var(--text-secondary)] py-6 w-11/12 h-11/12 rounded-xl">
+        <div className="flex shadow-[0_2px_8px_var(--text-secondary)] max-w-[25rem] flex-col justify-around p-4 bg-[var(--sideNav-background)] border border-[var(--text-secondary)] py-6 w-full h-full rounded-xl">
             {/* Icon and label section */}
             <div className='flex items-center gap-4'>
                 <span className='border flex items-center justify-center shrink-0 rounded-md bg-[var(--background)]/70 w-12 h-12 text-2xl'>
@@ -59,4 +59,4 @@ const CardData: React.FC<CardDataProps> = ({ icon, label = "Label", number = 548
     );
 };
 
-export default CardData;
+export default statsCard;
