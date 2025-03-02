@@ -29,28 +29,28 @@ interface CardDataProps {
 
 const CardData: React.FC<CardDataProps> = ({ icon, label = "Label", number = 5486, progress = { number: 12.54, type: "positive" } }: CardDataProps): ReactElement => {
     return (
-        <div className="flex max-w-[30rem] flex-col justify-around p-4 bg-[var(--text-secondary)]/20 shadow-[0_0_12px_var(--text-secondary)] py-6 w-11/12 h-11/12 rounded-xl">
+        <div className="flex max-w-[25rem] flex-col justify-around p-4 bg-[var(--text-secondary)]/10 border border-[var(--text-secondary)] py-6 w-11/12 h-11/12 rounded-xl">
             {/* Icon and label section */}
             <div className='flex items-center gap-4'>
                 <span className='border flex items-center justify-center shrink-0 rounded-md bg-[var(--background)]/70 w-12 h-12 text-2xl'>
                     {icons[icon]}
                 </span>
-                <span className='text-2xl font-bold tracking-widest'>
+                <span className='text-lg text-ellipsis overflow-hidden font-bold tracking-widest'>
                     {label}
                 </span>
             </div>
             {/* Number and progress section */}
-            <div className='flex px-4 rounded-2xl py-1 bg-[var(--background)]/90 items-center justify-between'>
-                <span className='text-2xl font-semibold tracking-wider'>
+            <div className='flex px-4 rounded-xl py-1 bg-[var(--background)]/90 items-center justify-between'>
+                <span className='text-lg text-ellipsis overflow-hidden font-semibold tracking-wider'>
                     {number}
                 </span>
                 <div className={classNames('rounded-lg flex items-center justify-center min-w-14 font-semibold px-3 py-0.5',
                     {
                         'bg-red-400/20 text-red-500': progress?.type === "negative",
-                        'bg-green-800 text-green-200': progress?.type === "positive",
+                        'bg-green-800/20 text-green-800': progress?.type === "positive",
                     }
                 )}>
-                    <span className='text-sm whitespace-nowrap'>
+                    <span className='text-xs whitespace-nowrap'>
                         {progress?.number} %
                     </span>
                 </div>

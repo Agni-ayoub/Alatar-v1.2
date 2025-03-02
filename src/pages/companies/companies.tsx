@@ -1,8 +1,9 @@
+import AlatarLoader from "../../components/animated/alatarLoader";
 
 const Companies = ()=>{
 
     return(
-        null
+        <AlatarLoader />
     );
 };
 
