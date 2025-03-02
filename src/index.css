@@ -427,3 +427,6 @@ body::after{
         opacity: 0;
     }
 }
+.Toastify__close-button{
+    color: var(--text-primary);
+}
