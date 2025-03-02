@@ -30,7 +30,7 @@ interface DataCardProps {
 const DataCard: React.FC<DataCardProps> = ({ avatar, title = "Card Title", id = "id12345678910", phone = "+212 65 72 73 51", email = "emailexample@example.com", activity = "inactive" }) : JSX.Element => {
 
     return(
-        <div className="flex min-w-max shadow-[0_2px_8px_var(--text-secondary)] items-center gap-4 flex-col bg-[var(--sideNav-background)] border border-[var(--text-secondary)] rounded-xl h-[12rem] p-4">
+        <div className="flex min-w-max shadow-[0_2px_8px_var(--text-secondary)] items-center gap-4 flex-col bg-[var(--sideNav-background)] border border-[var(--text-secondary)] rounded-md h-[12rem] p-4">
             {/* Avatar and status indicator */}
             <div className="flex w-full h-fit gap-2 items-center">
                 <span className={classNames("relative border border-[var(--text-secondary)] w-10 h-10 rounded-md",

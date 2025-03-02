@@ -58,7 +58,7 @@ const Master: React.FC<MasterProps> = () => {
                 }
             )}>
                 {/* Header */}
-                <div className="flex justify-between items-center bg-[var(--sideNav-background)] py-1 px-4 rounded-2xl w-full h-12">
+                <div className="flex justify-between items-center bg-[var(--sideNav-background)] z-50 py-1 px-4 rounded-2xl w-full h-12">
 
                     {/* Button that locks the sideNav*/}
                     <SideNavButton 

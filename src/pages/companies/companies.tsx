@@ -12,24 +12,6 @@ const Companies = ()=>{
             </div>
             <div className="grid sm:grid-cols-2 gap-2 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4">
                 <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
-                <DataCard />
             </div>
         </div>
     );
