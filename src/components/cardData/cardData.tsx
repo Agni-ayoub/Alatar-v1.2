@@ -29,7 +29,7 @@ interface CardDataProps {
 
 const CardData: React.FC<CardDataProps> = ({ icon, label = "Label", number = 5486, progress = { number: 12.54, type: "positive" } }: CardDataProps): ReactElement => {
     return (
-        <div className="flex max-w-[25rem] flex-col justify-around p-4 bg-[var(--text-secondary)]/10 border border-[var(--text-secondary)] py-6 w-11/12 h-11/12 rounded-xl">
+        <div className="flex max-w-[25rem] flex-col justify-around p-4 bg-[var(--sideNav-background)] border border-[var(--text-secondary)] py-6 w-11/12 h-11/12 rounded-xl">
             {/* Icon and label section */}
             <div className='flex items-center gap-4'>
                 <span className='border flex items-center justify-center shrink-0 rounded-md bg-[var(--background)]/70 w-12 h-12 text-2xl'>

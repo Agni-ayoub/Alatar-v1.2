@@ -5,6 +5,7 @@ import { CiLogin } from "react-icons/ci";
 import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 import { MdMoreHoriz } from "react-icons/md";
 import { FiEye, FiEyeOff, FiUsers } from "react-icons/fi";
+import { IoTrendingDownOutline, IoTrendingUpOutline } from "react-icons/io5";
 
 // Imports and provides icons needed.
 export const icons: Record<string, JSX.Element> = {
@@ -21,4 +22,6 @@ export const icons: Record<string, JSX.Element> = {
     users : <FiUsers />,
     companies2 : <PiBuildingsDuotone />,
     vehicles2 : <PiCarSimple />,
+    positive : <IoTrendingUpOutline />,
+    negative : <IoTrendingDownOutline />,
 }
