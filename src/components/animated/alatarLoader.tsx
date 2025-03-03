@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import "./animated.css";
 
 /**
  * AlatarLoader
@@ -15,22 +16,17 @@ import React, { ReactElement } from 'react';
  */
 const AlatarLoader: React.FC = () : ReactElement => {
     return (
-        <>
-            <div className="triangles">
-                <div className="tri angles"/>
-                <div className="tri angles"/>
-                <div className="tri"/>
-                <div className="tri angles"/>
-                <div className="tri angles"/>
-                <div className="tri"/>
-                <div className="tri angles"/>
-                <div className="tri"/>
-                <div className="tri angles"/>
-            </div>
-            <div className="loader">
-                <div className="spinner"/>
-            </div>
-        </>
+        <div className="triangles animate-pulse">
+            <div className="tri angles"/>
+            <div className="tri angles"/>
+            <div className="tri"/>
+            <div className="tri angles"/>
+            <div className="tri angles"/>
+            <div className="tri"/>
+            <div className="tri angles"/>
+            <div className="tri"/>
+            <div className="tri angles"/>
+        </div>
     );
 };
 

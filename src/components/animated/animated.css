@@ -1,0 +1,74 @@
+.triangles {
+    transform: translate(-50%, -50%);
+    height: 40px;
+    width: 45px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.tri {
+    position: absolute;
+    animation: pulse_51 750ms ease-in infinite;
+    border-top: 13px solid var(--text-secondary);
+    border-left: 7.5px solid transparent;
+    border-right: 7.5px solid transparent;
+    border-bottom: 0px;
+}
+
+.tri.angles {
+    border-top: 0px;
+    border-bottom: 13px solid var(--text-secondary);
+    border-left: 7.5px solid transparent;
+    border-right: 7.5px solid transparent;
+}
+
+.tri:nth-child(1) {
+    left: 15px;
+}
+
+.tri:nth-child(2) {
+    left: 7.5px;
+    top: 13px;
+    animation-delay: -125ms;
+}
+
+.tri:nth-child(3) {
+    left: 15px;
+    top: 13px;
+}
+
+.tri:nth-child(4) {
+    left: 22.5px;
+    top: 13px;
+    animation-delay: -625ms;
+}
+
+.tri:nth-child(5) {
+    top: 27px;
+    animation-delay: -250ms;
+}
+
+.tri:nth-child(6) {
+    top: 27px;
+    left: 7.5px;
+    animation-delay: -250ms;
+}
+
+.tri:nth-child(7) {
+    top: 27px;
+    left: 15px;
+    animation-delay: -375ms;
+}
+
+.tri:nth-child(8) {
+    top: 27px;
+    left: 22.5px;
+    animation-delay: -500ms;
+}
+
+.tri:nth-child(9) {
+    top: 27px;
+    left: 30px;
+    animation-delay: -500ms;
+}
