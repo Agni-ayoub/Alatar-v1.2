@@ -1,7 +1,7 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../../app/store";
 import endPoints from "../endPoints.json";
-import { LoginApiResponse, LoginRequest, LogoutResponse, token, getUserResponse } from "../sliceTypes";
+import { LoginApiResponse, LoginRequest } from "../sliceTypes";
 import { notificationSet } from "../slices/notificationSlice";
 import errorMessages from "./errorMessages.json";
 
@@ -36,7 +36,7 @@ const baseQueryWithInterceptor : BaseQueryFn<string | FetchArgs, unknown, FetchB
 
 export const ApiSlice = createApi({
     reducerPath: "api",
-    baseQuery: baseQueryWithInterceptor,
+    baseQuery : baseQueryWithInterceptor,
     endpoints: (builder) => ({
         logIn: builder.mutation<LoginApiResponse, LoginRequest>({
             query: (credentials) => ({
@@ -46,14 +46,13 @@ export const ApiSlice = createApi({
             }),
         }),
         
-        logOut: builder.mutation<LogoutResponse, void>({
+        logOut: builder.mutation({
             query: () => ({
                 url: endPoints.logout,
                 method: 'POST',
             }),
         }),
-
-        getUser: builder.query<getUserResponse, token>({
+        getUser: builder.query({
             query: () => endPoints.Me,
         }),
     }),

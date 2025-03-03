@@ -17,6 +17,7 @@
     --positive : rgba(0, 255, 0, 0.548);
     --negative : rgba(255, 0, 0, 0.575);
     --shadow : rgba(104, 116, 232, .4);
+    --tooltip-background : rgb(192, 197, 247);
 }
 
 .light-purple {
@@ -52,6 +53,7 @@
     --positive : rgba(47, 209, 47, 0.589);
     --negative : rgba(221, 39, 39, 0.596);
     --shadow : rgba(104, 116, 232, .4);
+    --tooltip-background : rgba(104, 116, 232);
 }
 
 .dark-purple {

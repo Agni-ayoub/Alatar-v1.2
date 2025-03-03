@@ -1,5 +1,5 @@
 import Inputs from "../../components/inputs/inputs";
-import DataCard from "../../components/cards/dataCard";
+import DataCard from "../../components/cards/dataCard/main/dataCard";
 import { useGetCompaniesQuery } from "../../features/api/getMethodSlice";
 import { useEffect, useState } from "react";
 import { Company } from "../../features/sliceTypes";
