@@ -29,7 +29,7 @@ interface statsCardProps {
 
 const statsCard: React.FC<statsCardProps> = ({ icon, label = "Label", number = 5486, progress = { number: 12.54, type: "positive" } }: statsCardProps): ReactElement => {
     return (
-        <div className="flex shadow-[0_2px_8px_var(--text-secondary)] max-w-[25rem] flex-col justify-around p-4 bg-[var(--sideNav-background)] border border-[var(--text-secondary)] py-6 w-full h-full rounded-xl">
+        <div className="flex shadow-[0_2px_8px_var(--text-secondary)] max-w-[25rem] flex-col justify-around p-4 bg-[var(--sideNav-background)]/50 border border-[var(--text-secondary)] py-6 w-full h-full rounded-xl">
             {/* Icon and label section */}
             <div className='flex items-center gap-4'>
                 <span className='border flex items-center justify-center shrink-0 rounded-md bg-[var(--background)]/70 w-12 h-12 text-2xl'>

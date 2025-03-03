@@ -38,7 +38,7 @@ const DataCardHeader: React.FC<DataCardProps> = ({ avatar, activity, id, title }
                 data-tooltip-content={"Company : " + title}
                 data-tooltip-place="top"
                 id="data-card-title" className="tracking-widest text-lg truncate overflow-hidden font-semibold whitespace-nowrap">
-                {title} 
+                    {title} 
                 </li>
                 <li 
                 data-tooltip-id={`data-card-tooltip-${id}`}
