@@ -7,15 +7,15 @@ const DataCardActionButtons: React.FC<Actions> = ({ editAction, deleteAction, mo
         <>
             {
                 moreAction && 
-                    <Buttons className="bg-[var(--text-secondary)]/80" placeHolder='More' aria-label="More options" />
+                    <Buttons className="bg-[var(--text-secondary)]/60" placeHolder='More' aria-label="More options" />
             }
             {
                 editAction && 
-                    <Buttons className="bg-[var(--positive)]/80" placeHolder='Edit' aria-label="Edit" />
+                    <Buttons className="bg-[var(--positive)]/60" placeHolder='Edit' aria-label="Edit" />
             }
             {
                 deleteAction && 
-                <Buttons className="bg-[var(--negative)]/80" placeHolder='Delete' aria-label="Delete" />
+                <Buttons className="bg-[var(--negative)]/60" placeHolder='Delete' aria-label="Delete" />
             }
         </>
     );

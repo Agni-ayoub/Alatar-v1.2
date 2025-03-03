@@ -16,17 +16,19 @@ const Companies = ()=>{
     },[data]);
 
     return(
-        <div className="overflow-scroll flex flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full h-full p-5">
+        <div className="flex flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full h-full px-5 py-2">
             <div className="w-full py-2">
                 <div className="w-full">
                     <Inputs.search />
                 </div>
             </div>
-            <div className="grid sm:grid-cols-2 gap-2 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4">
-                {
+            {
                 isLoading?
-                    <AlatarLoader /> :
-                    Companies.map((company, idx) => {
+                <div className="relative w-full h-full">
+                    <AlatarLoader />
+                </div>:
+                <div className="grid sm:grid-cols-2 gap-2 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4">
+                    {Companies.map((company, idx) => {
                         return(
                             <DataCard 
                                 key={idx}
@@ -38,9 +40,9 @@ const Companies = ()=>{
                                 activity={company?.status}
                             />
                         )
-                    })
-                }
-            </div>
+                    })}
+                </div>
+            }
         </div>
     );
 };
