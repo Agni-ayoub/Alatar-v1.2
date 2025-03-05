@@ -94,8 +94,8 @@ const AccessPage = () : JSX.Element => {
                     <form onSubmit={handleLogin} className="flex flex-col min-h-[15rem] justify-around px-4 items-center w-full h-full" aria-labelledby="access-form-title">
                         {/* Form Inputs */}
                         <div className="flex flex-col gap-4 w-full">
-                            <Inputs required type="text" label="Email" id="access-email" placeholder="Enter your email" aria-required="true" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <Inputs required label="Password" id="access-password" placeholder="Enter your password" type="password" aria-required="true" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Inputs className="h-10" required type="text" label="Email" id="access-email" placeholder="Enter your email" aria-required="true" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Inputs className="h-10" required label="Password" id="access-password" placeholder="Enter your password" type="password" aria-required="true" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         {/* Login Button */}
                         <Buttons isLoading={isLoading} type="submit" icon="login" className="bg-[var(--background-secondary)] max-w-[18rem] h-10" aria-label="Login" disabled={isLoading} />

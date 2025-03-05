@@ -19,18 +19,18 @@ const Companies = ()=>{
     },[data]);
 
     return(
-        <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-5 py-2">
+        <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">
             {/* Modals */}
             <div>
                 <EditModalComponent>
-
+                    
                 </EditModalComponent>
                 <DeleteModalComponent>
 
                 </DeleteModalComponent>
             </div>
 
-            <div className="w-full py-2">
+            <div className="w-full px-2 py-2">
                 <div className="w-full">
                     <Inputs.search />
                 </div>
@@ -40,7 +40,7 @@ const Companies = ()=>{
                 <div className="relative w-full h-full">
                     <AlatarLoader />
                 </div>:
-                <div className="grid sm:grid-cols-2 gap-2 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 overflow-auto mb-18">
+                <div className="grid px-2 sm:grid-cols-2 gap-2 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 overflow-auto mb-18">
                     {Companies.map((company, idx) => {
                         return(
                             <DataCard 
