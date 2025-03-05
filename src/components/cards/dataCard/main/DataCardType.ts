@@ -11,11 +11,6 @@ export type Actions = {
  * --------------------------------------------------------------
  */
 export interface DataCardProps {
-    /**
-     * The avatar of the company.
-     * @type {Company["avatar"]}
-     * @optional
-     */
     avatar?: Company["avatar"];
 
     /**

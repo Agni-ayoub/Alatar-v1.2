@@ -79,7 +79,7 @@ const Master: React.FC<MasterProps> = () => {
                 </div>
 
                 {/* Body */}
-                <div className="reltive h-full rounded-2xl overflow-auto">
+                <div className="reltive min-h-full rounded-2xl">
                     <Outlet />
                 </div>
 

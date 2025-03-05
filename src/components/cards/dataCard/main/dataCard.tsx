@@ -14,7 +14,7 @@ const DataCard: React.FC<DataCardProps> = ({
     activity = "INACTIVE",
     actions = { moreAction: true, editAction: true, deleteAction: true },
 }): JSX.Element => {
-    
+
     return (
         <div className="flex items-center gap-4 flex-col bg-[var(--sideNav-background)] border border-[var(--text-secondary)] rounded-md h-[12rem] p-4" role="region" aria-labelledby="data-card-title">
 
