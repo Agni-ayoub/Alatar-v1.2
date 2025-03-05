@@ -98,7 +98,7 @@
     }
 
     .modal-show {
-        animation: modal-show 60ms ease-in-out;
+        animation: modal-show 150ms ease-in-out;
     }        
 }
 
@@ -375,7 +375,6 @@ body::after{
     }
 }
 
-/* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -396,13 +395,11 @@ body::after{
     background-color: var(--text-primary);
 }
 
-/* Firefox */
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--text-secondary) var(--background-secondary);
+    scrollbar-color: var(--text-secondary) transparent;
 }
 
-/* Edge and IE */
 * {
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }

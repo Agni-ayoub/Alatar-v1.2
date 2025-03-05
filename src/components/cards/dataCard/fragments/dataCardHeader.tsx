@@ -52,9 +52,10 @@ const DataCardHeader: React.FC<DataCardProps> = ({ avatar, activity, id, title }
             <Tooltip 
                 opacity={8}
                 id={`data-card-tooltip-${id}`} 
-                style={{ backgroundColor: "var(--tooltip-background)", color: "var(--text-primary)", "zIndex" : 10}}
+                style={{ backgroundColor: "var(--tooltip-background)", color: "var(--text-primary)", "zIndex" : 10, padding: "0.6rem",paddingTop: "0.2rem", paddingBottom: "0.2rem"}}
                 delayHide={200}
                 place="right"
+                className='p-0'
             />
         </>
     );
