@@ -3,6 +3,10 @@ import Buttons from '../../../buttons/buttons';
 import { Actions } from '../main/DataCardType';
 import { useSearchParams } from 'react-router-dom';
 
+interface ActionsExtanded extends Actions {
+    id : string;
+};
+
 /**
  * A component that renders action buttons for a data card, allowing users to perform edit, delete, or more actions.
  *
@@ -11,9 +15,10 @@ import { useSearchParams } from 'react-router-dom';
  * @param {boolean} [props.editAction] - Whether the edit action is enabled.
  * @param {boolean} [props.deleteAction] - Whether the delete action is enabled.
  * @param {boolean} [props.moreAction] - Whether the more action is enabled.
+ * @param {string} [props.id] - Card id.
  * @returns {JSX.Element} The rendered action buttons.
  */
-const DataCardActionButtons: React.FC<Actions> = ({ editAction, deleteAction, moreAction }) => {
+const DataCardActionButtons: React.FC<ActionsExtanded> = ({ editAction, deleteAction, moreAction, id }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -26,6 +31,7 @@ const DataCardActionButtons: React.FC<Actions> = ({ editAction, deleteAction, mo
         setSearchParams((prev) => {
             const newParams = new URLSearchParams(prev);
             newParams.set('action', type);
+            newParams.set('id', id)
             return newParams;
         });
     };

@@ -9,6 +9,7 @@ type ID = string;
 interface ModalProps {
     children?: ReactNode;
     wrapperClassName?: string;
+    className?: string;
 }
 
 /**
@@ -74,18 +75,24 @@ const useModal = (type: Type) => {
     }, [closeModal, searchParams]);
     
     /**
+     * ModalComponent
+     * ---------------
+     * 
      * Modal component that renders its children inside a styled modal container.
+     * @prop {children} - Children to render inside the modal.
+     * @prop {wrapperClassName} - ClassName for the modal container.
+     * @prop {className} - ClassName for the modal.
      * The modal is removed from the DOM when `isOpen` is false.
      */
-    const ModalComponent = useMemo(() => ({ children, wrapperClassName }: ModalProps) => {
+    const ModalComponent = useMemo(() => ({ children, wrapperClassName, className }: ModalProps) => {
         if (!isOpen) return null;
 
         return createPortal(
-            <div className={classNames("z-[99999] select-none inset-0 m-auto fixed w-full h-full modal-show", wrapperClassName)}>
-                <div onClick={() => closeModal(searchParams.get('id') || "")} className="w-full h-full backdrop-blur-lg" />
+            <div className={classNames("z-[8888] select-none inset-0 m-auto fixed w-full h-full modal-show", wrapperClassName)}>
+                <div onClick={() => closeModal(searchParams.get('id') || "")} className="w-full h-full backdrop-blur-sm" />
                 <div className={classNames(
-                    "bg-[var(--background)] rounded-xl p-4 fixed inset-0 m-auto h-[32rem] w-[28rem] border border-[var(--text-secondary)]",
-                    wrapperClassName
+                    "bg-[var(--background)] rounded-xl p-4 fixed inset-0 m-auto sm:h-[32rem] w-9/12 h-[30rem] sm:w-[28rem] border border-[var(--text-secondary)] lg:w-[40rem] shadow-[0_8px_18px_var(--background-secondary)]",
+                    className
                 )}>
                     {children}
                 </div>

@@ -6,6 +6,7 @@ import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 import { MdMoreHoriz } from "react-icons/md";
 import { FiEye, FiEyeOff, FiUsers } from "react-icons/fi";
 import { IoTrendingDownOutline, IoTrendingUpOutline } from "react-icons/io5";
+import { IoMdUndo } from "react-icons/io";
 import { IoCallOutline } from "react-icons/io5";
 import { MdAlternateEmail } from "react-icons/md";
 
@@ -28,5 +29,5 @@ export const icons: Record<string, JSX.Element> = {
     negative : <IoTrendingDownOutline />,
     phone : <IoCallOutline />,
     email : <MdAlternateEmail />,
-    
+    undo : <IoMdUndo />,
 }

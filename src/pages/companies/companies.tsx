@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Company } from "../../features/sliceTypes";
 import AlatarLoader from "../../components/animated/alatarLoader";
 import useModal from "../../hooks/useModal";
+import Form from "../../components/form/main/form";
 
 const Companies = ()=>{
     const [Companies, setCompanies] = useState<Company[]>([]);
@@ -22,8 +23,8 @@ const Companies = ()=>{
         <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">
             {/* Modals */}
             <div>
-                <EditModalComponent>
-                    
+                <EditModalComponent >
+                    <Form formAction="Edit" />
                 </EditModalComponent>
                 <DeleteModalComponent>
 

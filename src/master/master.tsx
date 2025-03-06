@@ -38,6 +38,11 @@ const Master: React.FC<MasterProps> = () => {
 
     return(
         <div className="h-screen min-h-screen overflow-hidden flex p-4">
+            <div onClick={() => setIsLocked(!isLocked)} className={classNames(
+                {
+                    'backdrop-blur-sm w-full h-full fixed z-20 inset-0 m-auto sm:hidden' : isLocked
+                }
+            )} />
 
             {/* Background (animated: waves) */}
             <AnimatedBackground />

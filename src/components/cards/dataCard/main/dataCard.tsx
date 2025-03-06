@@ -43,6 +43,7 @@ const DataCard: React.FC<DataCardProps> = ({
                     editAction={actions.editAction}
                     moreAction={actions.moreAction}
                     deleteAction={actions.deleteAction}
+                    id={id}
                 />
             </div>
 

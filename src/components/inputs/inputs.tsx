@@ -3,12 +3,17 @@ import { JSX, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { icons } from "../../utils/icons";
 import { IoSearchOutline } from "react-icons/io5";
+import { Tooltip } from "react-tooltip";
 
 type InputsProps = React.InputHTMLAttributes<HTMLInputElement> & {   
     label?: string;
     type?: string;
     className?: string;
-    withoutLabel?: boolean
+    withoutLabel?: boolean;
+    withWobble?: boolean;
+    wrapperClassName?: string;
+    isError?: boolean;
+    ErrorMessage?: string;
 };
 
 /**
@@ -21,6 +26,10 @@ type InputsProps = React.InputHTMLAttributes<HTMLInputElement> & {
  * @prop {string} [type] - Input type.
  * @prop {React.InputHTMLAttributes<HTMLInputElement>} props - Standard input attributes.
  * @prop {boolean} [withoutLabel = false] - Remove the label.
+ * @prop {boolean} [withWobble = true] - Adds the wobble effect.
+ * @prop {string} [wrapperclassName = string] - Wrapper/Container classname.
+ * @prop {isError} [isError = false] - Error state for the input.
+ * @prop {string} [isError] - Error Message for the input to display.
  * 
  * @returns {JSX.Element} The input component with a label.
  */
@@ -30,6 +39,10 @@ const Inputs = ({
     label = "Label",
     type = "text",
     withoutLabel = false,
+    withWobble = true,
+    wrapperClassName,
+    isError = false,
+    ErrorMessage,
     ...props 
 } : InputsProps) : JSX.Element => {
     const [currentType, setCurrentType] = useState<string>(type);
@@ -39,26 +52,40 @@ const Inputs = ({
     };
 
     return (
-        <label htmlFor={props.id} className="flex flex-col gap-3">
+        <label htmlFor={props.id} className={twMerge(classNames("flex flex-col gap-3",
+            wrapperClassName
+        ))}>
             {
                 !withoutLabel && 
                 /* Label for input accessibility */
                 <span aria-label={label} className="text-sm font-medium">
-                    {label}{props.required && <span className="text-red-300">*</span>}
+                    {label}{props.required && 
+                    <span data-tooltip-id="inputs-tooltip" data-tooltip-content="Required"
+                    data-tooltip-place="top" className="text-red-300 pl-1">*</span>}
                 </span>
             }
-            <div className="relative">
+            <div className={classNames("relative focus-within-animate-wobble",
+                {
+                    'animate-wobble' : withWobble
+                },
+            )}>
                 {/* Input field with styles and accessibility */}
                 <input
                     type={currentType}
                     className={twMerge(classNames(
                         "border-[var(--background-secondary)] text-sm border-2 outline-0 rounded-md focus-within:border-[var(--text-secondary)]/70 w-full px-4 disabled:bg-[var(--text-tertiary)]/40 disabled:line-through disabled:text-[var(--text-tertiary)] disabled:placeholder:line-through",
-                            {'pr-6' : type === "password"},
+                            {
+                                'pr-6' : type === "password",
+                                'animate-error' : isError,
+                            },
                         className
                     ))}
                     aria-label={label} 
                     {...props}
                 />
+                <span className="text-xs transition-all font-semibold text-[var(--negative)]">
+                    {isError && ErrorMessage}
+                </span>
                 {
                     type === "password" && 
                         <span onClick={() => switchEyes()} className="absolute right-0 top-0 flex items-center justify-center bg-transparent w-8 h-full text-xs hover:text-[var(--text-secondary)] active:text-[var(--text-tertiary)] cursor-pointer">
@@ -80,6 +107,15 @@ const Inputs = ({
                     </span> 
                 }
             </div>
+            {/* Tooltip */}
+            <Tooltip 
+                opacity={8}
+                id="inputs-tooltip" 
+                style={{ backgroundColor: "var(--tooltip-background)", color: "var(--text-primary)", "zIndex" : 10, padding: "0.6rem",paddingTop: "0.2rem", paddingBottom: "0.2rem"}}
+                delayHide={200}
+                place="right"
+                className='p-0'
+            />
         </label>
     );
 };
