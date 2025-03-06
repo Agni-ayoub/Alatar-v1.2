@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ReactNode, useCallback, useMemo } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { useSearchParams } from 'react-router-dom';
 
@@ -58,6 +58,21 @@ const useModal = (type: Type) => {
         });
     }, [setSearchParams, type]);
 
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                const id = searchParams.get('id') || ""; 
+                closeModal(id);
+            }
+        };
+
+        window.addEventListener("keydown", handleEscape);
+    
+        return () => {
+            window.removeEventListener("keydown", handleEscape);
+        };
+    }, [closeModal, searchParams]);
+    
     /**
      * Modal component that renders its children inside a styled modal container.
      * The modal is removed from the DOM when `isOpen` is false.
