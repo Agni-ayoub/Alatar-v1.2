@@ -1,4 +1,5 @@
-import { Dispatch } from "react";
+import React, { Dispatch } from "react";
+import { EditCompanyFormData } from "../../../features/sliceTypes";
 
 /**
  * Defines properties for an individual input field.
@@ -40,6 +41,8 @@ export interface FormProps {
   formAction?: string;
   /** Determines if the form action title should be displayed */
   withFormAction?: boolean;
+  /** Determines if undo Button should be disbled */
+  isUndoButton?: boolean;
   /** Additional class names for styling the form action title */
   formActionClassName?: string;
   /** Additional class names for styling the input container */
@@ -51,9 +54,11 @@ export interface FormProps {
   /** The data object that the form is working with */
   data?: object;
   /** Function to update the `data` state */
-  setData?: Dispatch<React.SetStateAction<object>>;
+  setData?: Dispatch<React.SetStateAction<EditCompanyFormData>>;
   /** Original data object before modifications */
-  originalData?: object;
+  originalData?: EditCompanyFormData;
   /** Function triggered when the form is submitted */
-  handleSubmit?: () => void;
+  handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  /** Function triggered when the form is reseted */
+  handleUndo?: () => void;
 }

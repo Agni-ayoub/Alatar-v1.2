@@ -3,7 +3,7 @@ import "./index.css";
 import Master from "./master/master";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./pages/dashboard/dashboard";
-import Companies from "./pages/companies/companies";
+import Companies from "./pages/companies/main/companies";
 import Plans from "./pages/plans/plans";
 import Billing from "./pages/billing/billing";
 import { Provider } from "react-redux";

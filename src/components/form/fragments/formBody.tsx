@@ -18,12 +18,16 @@ import { inputExample } from "../main/inputsExample";
  * @param {FormProps} props - The props for the form body.
  * @param {string} [props.inputsContainerClassName] - Additional classes for styling the input container.
  * @param {Array} [props.inputsData=inputExample] - Array of input field configurations.
+ * @param {boolean} [props.isUndoButton=false] - When data changes it disbles the undo button (undo Button is disbled also when the parent is fetching).
+ * @param {() => void} [props.isUndoButton=false] - Function wich handles the undo action.
  * @returns {JSX.Element} The rendered FormBody component.
  */
 
 const FormBody: React.FC<FormProps> = ({
   inputsContainerClassName,
   inputsData = inputExample,
+  isUndoButton,
+  handleUndo,
 }) => {
   return (
     <div className="overflow-scroll">
@@ -48,9 +52,11 @@ const FormBody: React.FC<FormProps> = ({
       </div>
 
       {/* Action buttons section */}
-      <div className="flex justify-end gap-2 w-full py-2 px-4">
+      <div className="flex justify-end gap-2 w-full py-4 px-4">
         {/* Undo button - allows the user to revert changes */}
         <Buttons
+          onClick={() => handleUndo?.()}
+          disabled={isUndoButton}
           type="button"
           icon="undo"
           placeHolderClassName="hidden"
@@ -62,6 +68,7 @@ const FormBody: React.FC<FormProps> = ({
 
         {/* Submit button - saves form changes */}
         <Buttons
+          disabled={isUndoButton}
           type="submit"
           placeHolder="Save"
           className="w-max px-6 bg-[var(--text-secondary)]/60"

@@ -91,7 +91,7 @@ const useModal = (type: Type) => {
             <div className={classNames("z-[8888] select-none inset-0 m-auto fixed w-full h-full modal-show", wrapperClassName)}>
                 <div onClick={() => closeModal(searchParams.get('id') || "")} className="w-full h-full backdrop-blur-sm" />
                 <div className={classNames(
-                    "bg-[var(--background)] rounded-xl p-4 fixed inset-0 m-auto sm:h-[32rem] w-9/12 h-[30rem] sm:w-[28rem] border border-[var(--text-secondary)] lg:w-[40rem] shadow-[0_8px_18px_var(--background-secondary)]",
+                    "bg-[var(--background)] rounded-xl p-4 fixed inset-0 m-auto sm:h-[32rem] w-10/12 h-[30rem] sm:w-[28rem] border border-[var(--text-secondary)] lg:w-[40rem] shadow-[0_8px_18px_var(--background-secondary)]",
                     className
                 )}>
                     {children}

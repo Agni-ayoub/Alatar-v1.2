@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import endPoints from "../endPoints.json"
 import { RootState } from '../../app/store';
-import { CompaniesResponse } from '../sliceTypes';
+import { CompaniesResponse, GetCompanyByIdResponce } from '../sliceTypes';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: endPoints.baseUrl,
@@ -24,9 +24,15 @@ const getMethodSlice = createApi({
                 url: endPoints.company,
             }),
         }),
+        getCompanyById : builder.query<GetCompanyByIdResponce, string>({
+            query: (id) => ({
+                url: `${endPoints.company}/${id}`,
+                method: 'GET',
+            }),
+        })
     }),
 });
 
-export const { useGetCompaniesQuery } = getMethodSlice;
+export const { useGetCompaniesQuery, useGetCompanyByIdQuery } = getMethodSlice;
 export const getMethodSliceReducer = getMethodSlice.reducer;
 export default getMethodSlice;

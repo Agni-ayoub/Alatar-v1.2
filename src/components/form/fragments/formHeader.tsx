@@ -27,14 +27,14 @@ const FormHeader: React.FC<FormProps> = ({
     <span
       className={twMerge(
         classNames(
-          "text-xl w-full py-2 font-semibold tracking-widest",
+          "text-xl text-secondary w-full py-2 border-b border-[var(--text-secondary)] px-2 rounded-md font-semibold tracking-[.3rem]",
           formActionClassName
         )
       )}
       role="heading" 
       aria-level={2}
     >
-      {formAction}
+      {formAction}.
     </span>
   ) : null; // Returns null if `withFormAction` is false (prevents rendering an empty span)
 };

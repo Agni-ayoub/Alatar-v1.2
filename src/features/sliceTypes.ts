@@ -90,3 +90,31 @@ export type LogoutResponse = {
     status: "success" | "error";
     message: string;
 };
+
+type EditedCompanyResponce = {
+    name?: string;
+    phone?: string;
+    email?: string;
+    address?: string;
+    website?: string;
+    long?: string;
+    lat?: string;
+    status?: "ACTIVE" | "INACTIVE";
+};
+
+export type EditCompanyResponce = {
+    status : 'success' | 'error';
+    company : EditedCompanyResponce;
+};
+
+export type GetCompanyByIdResponce = {
+    status : 'success' | 'error';
+    company: EditedCompanyResponce;
+}
+
+export type EditCompanyFormData = EditedCompanyResponce;
+
+export type EditDataRequest = {
+    id: string;
+    formData: EditCompanyFormData;
+}

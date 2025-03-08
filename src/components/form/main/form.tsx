@@ -35,6 +35,7 @@ import React from "react";
  * @param {Array} [props.inputsData] - List of input field configurations.
  * @returns {JSX.Element} The rendered form component.
  */
+
 const Form: React.FC<FormProps> = ({
     formAction = "Action",
     withFormAction = true,
@@ -44,19 +45,27 @@ const Form: React.FC<FormProps> = ({
     originalData,
     handleSubmit,
     setData,
+    isUndoButton,
     inputsData,
-}) : React.JSX.Element => {
+}: FormProps) : React.JSX.Element => {
+    const basicOriginalData = {
+        name: "",
+        phone: "",
+        email: "",
+        website: "",
+    }
+
     /**
      * Handles the undo functionality by restoring original data.
      * Displays a success toast notification.
      */
     const handleUndo = () => {
-        setData?.(originalData || {});
+        setData?.(originalData || basicOriginalData);
         toast.success("Edits undone successfully.");
     };
 
-    // Listen for Ctrl+Z to trigger undo action.
-    useUndoShortcut(handleUndo);
+    // Listen for Ctrl+Z to trigger undo action when isUndoButton is true wich indicates that <UndoButton disabled = {true} />.
+    useUndoShortcut(handleUndo, isUndoButton);
 
     return (
         <form 
@@ -80,6 +89,8 @@ const Form: React.FC<FormProps> = ({
             <FormBody 
                 inputsContainerClassName={inputsContainerClassName}
                 inputsData={inputsData}
+                isUndoButton={isUndoButton}
+                handleUndo={handleUndo}
             />
         </form>
     );
