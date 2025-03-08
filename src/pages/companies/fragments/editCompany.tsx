@@ -138,7 +138,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }) => {
     };
 
     return (
-        <ModalComponent>
+        <ModalComponent className="w-[22rem] h-[32rem] sm:w-[28rem]">
             {isFetching ? (
                 <div className="flex items-center h-full w-full">
                     <AlatarLoader /> {/* Show a loader while fetching data */}
