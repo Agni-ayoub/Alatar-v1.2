@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Company } from "../../../features/sliceTypes";
 import AlatarLoader from "../../../components/animated/alatarLoader";
 import EditCompany from "../fragments/editCompany";
+import DeleteModal from "../../../components/deleteModal/deleteModal";
 
 const Companies : React.FC = ()=>{
     const { data, isFetching, refetch } = useGetCompaniesQuery();
@@ -21,6 +22,7 @@ const Companies : React.FC = ()=>{
             {/* Modals */}
             <div>
                 <EditCompany refetch={refetch} />
+                <DeleteModal type="Company" />
             </div>
             {/* Body */}
             <div className="w-full px-2 py-2">

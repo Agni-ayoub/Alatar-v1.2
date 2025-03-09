@@ -58,7 +58,7 @@ const Inputs = ({
             {
                 !withoutLabel && 
                 /* Label for input accessibility */
-                <span aria-label={label} className="text-sm font-medium">
+                <span aria-label={label} className="font-semibold">
                     {label}{props.required && 
                     <span data-tooltip-id="inputs-tooltip" data-tooltip-content="Required"
                     data-tooltip-place="top" className="text-red-300 pl-1">*</span>}

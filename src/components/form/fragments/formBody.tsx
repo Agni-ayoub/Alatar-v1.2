@@ -30,7 +30,7 @@ const FormBody: React.FC<FormProps> = ({
   handleUndo,
 }) => {
   return (
-    <div className="overflow-scroll">
+    <div className="overflow-scroll w-full">
       {/* Container for input fields, allowing flexible and responsive layout */}
       <div
         className={twMerge(
@@ -42,11 +42,11 @@ const FormBody: React.FC<FormProps> = ({
           <Inputs
             key={idx}
             withWobble={false}
-            {...input.inputProps}
             className="h-10 w-full border-1"
             wrapperClassName="min-w-[17.5rem] flex-1"
             ErrorMessage="Error example @formError .example"
             aria-label={input.inputProps?.placeholder || "Input field"}
+            {...input.inputProps}
           />
         ))}
       </div>
