@@ -1,55 +1,84 @@
-import React, { useEffect, useState } from "react";
-import useModal from "../../../hooks/useModal";
-import Form from "../../../components/form/main/form";
-import { FormProps } from "../../../components/form/main/formTypes";
-import { useEditCompanyMutation } from "../../../features/api/editMethodSlice";
+import React, { JSX, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { EditCompanyFormData } from "../../../features/sliceTypes";
 import { toast } from "react-toastify";
-import { useGetCompanyByIdQuery } from "../../../features/api/getMethodSlice";
-import AlatarLoader from "../../../components/animated/alatarLoader";
-import useModifiedFormData from "../../../hooks/useChangedData";
 
-// Types for the EditCompany component
+import useModal from "../../../hooks/useModal";
+import useModifiedFormData from "../../../hooks/useChangedData";
+import Form from "../../../components/form/main/form";
+import AlatarLoader from "../../../components/animated/alatarLoader";
+
+import { useEditCompanyMutation } from "../../../features/api/editMethodSlice";
+import { useGetCompanyByIdQuery } from "../../../features/api/getMethodSlice";
+import { EditCompanyFormData } from "../../../features/sliceTypes";
+import { FormProps } from "../../../components/form/main/formTypes";
+import { companySchema } from "../../../utils/zodSechams";
+
+/**
+ * Props for the EditCompany component.
+ * @typedef {Object} EditCompanyTypes
+ * @property {() => void} refetch - Function to refresh company data after an edit.
+ */
 interface EditCompanyTypes {
-    refetch: () => void;  // Function to refresh the company data after an edit.
+    refetch: () => void;
 }
 
-const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }) => {
-    // State to store form data and original data from the backend
-    const [formData, setFormData] = useState<EditCompanyFormData>({
+/**
+ * EditCompany Component
+ *
+ * Allows users to edit a company's details.
+ *
+ * Fetches the current company data and updates it using a modal form.
+ * @component
+ * @param {EditCompanyTypes} props - Component props.
+ * @returns {JSX.Element}
+ */
+const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes): JSX.Element => {
+    // Initial form state
+    const formDataInitialState = useMemo<EditCompanyFormData>(() => ({
         name: "",
         phone: "",
         email: "",
+        address: "",
         website: "",
-    });
-    const [originalData, setOriginalData] = useState<EditCompanyFormData>({
-        name: "",
-        phone: "",
-        email: "",
-        website: "",
-    });
+        long: "",
+        lat: "",
+        status: "",
+    }), []);
 
-    // API call hooks for editing and getting company data
-    const [editMutation] = useEditCompanyMutation();
+    // State for form data, errors, and original data
+    const [formData, setFormData] = useState<EditCompanyFormData>(formDataInitialState);
+    const [originalData, setOriginalData] = useState<EditCompanyFormData>(formDataInitialState);
+    const [formErrors, setFormErrors] = useState<Partial<EditCompanyFormData>>({});
+
+    // Get company ID from URL parameters
     const [searchParams] = useSearchParams();
-    const currentCompanyId = searchParams.get("id") || "";  // Get the company id from the URL parameters
-    const { ModalComponent, closeModal } = useModal("edit");
-    const { data, isFetching } = useGetCompanyByIdQuery(currentCompanyId, {
-        skip: !currentCompanyId, // Skip the query if no company id is available
-        refetchOnMountOrArgChange: true, // Refetch when the component mounts or the company id changes
-    });
+    const currentCompanyId = searchParams.get("id") || "";
 
-    // Custom hook to track modified data
+    // Hooks for modal management
+    const { ModalComponent, closeModal, isOpen } = useModal("edit");
+
+    // API queries for fetching and editing company data
+    const { data, isFetching } = useGetCompanyByIdQuery(currentCompanyId, {
+        skip: !currentCompanyId,
+        refetchOnMountOrArgChange: true,
+    });
+    const [editMutation] = useEditCompanyMutation();
+
+    // Custom hook to track modified fields
     const modifiedData = useModifiedFormData(formData, originalData);
 
-    // Handle form input changes by updating form data
+    /**
+     * Handles form input changes.
+     * Updates state and clears previous errors.
+     * @param {React.ChangeEvent<HTMLInputElement>} e - Input change event.
+     */
     const handleFormInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value, name } = e.target;
-        setFormData((prev: EditCompanyFormData) => ({ ...prev, [name]: value }));
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormErrors((prev) => ({ ...prev, [name]: "" }));
     };
 
-    // Configuration for the form inputs
+    // Form field configurations
     const formInputs: FormProps["inputsData"] = [
         {
             inputProps: {
@@ -57,9 +86,9 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }) => {
                 name: "name",
                 placeholder: "Enter company name",
                 type: "text",
-                required: true,
                 value: formData.name,
                 onChange: handleFormInputChange,
+                ErrorMessage: formErrors.name,
             },
         },
         {
@@ -68,9 +97,9 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }) => {
                 name: "phone",
                 placeholder: "Enter phone number",
                 type: "tel",
-                required: true,
-                value: formData.phone,
+                value: formData.phone || "",
                 onChange: handleFormInputChange,
+                ErrorMessage: formErrors.phone,
             },
         },
         {
@@ -82,6 +111,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }) => {
                 required: true,
                 value: formData.email,
                 onChange: handleFormInputChange,
+                ErrorMessage: formErrors.email,
             },
         },
         {
@@ -90,58 +120,66 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }) => {
                 name: "website",
                 placeholder: "Enter website URL",
                 type: "url",
-                required: false,
                 value: formData.website,
                 onChange: handleFormInputChange,
+                ErrorMessage: formErrors.website,
             },
         },
     ];
 
-    // Effect hook to set the initial data when the component is mounted or when the data changes
+    // Set form data when fetching completes
     useEffect(() => {
         if (data?.status === "success") {
-            setOriginalData(data.company);  // Set the original data (unchanged)
-            setFormData(data.company);  // Set the form data with current values
+            setOriginalData(data.company);
+            setFormData(data.company);
         }
     }, [data, currentCompanyId]);
 
-    // Condition to check if the undo button should be enabled
-    const isUndoButton = !modifiedData?.isModified || isFetching; // Disable undo if no changes or fetching
+    // Check if undo button should be enabled
+    const isUndoButton = !modifiedData?.isModified || isFetching;
 
-    // Form submission handler to update the company data
+    /**
+     * Handles form submission.
+     * Validates input using Zod and updates the company if changes exist.
+     * @param {React.FormEvent<HTMLFormElement>} e - Form submission event.
+     */
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // If no changes were made, prevent submission
-        if (!modifiedData?.isModified) return;
-
-        // Check for valid company id
-        if (!currentCompanyId) {
-            console.error("Current company id is 'undefined'! Error in <EditCompany />.");
+        const result = companySchema.safeParse(formData);
+        if (!result.success) {
+            const errors: Record<string, string> = {};
+            result.error.errors.forEach(({ path, message }) => {
+                errors[path[0]] = message;
+            });
+            setFormErrors(errors);
             return;
         }
 
-        try {
-            // Execute the mutation to edit the company
-            const response = await editMutation({ id: currentCompanyId, formData: modifiedData?.modifiedValues }).unwrap();
+        if (!modifiedData?.isModified || !currentCompanyId) return;
 
-            // If the mutation was successful, show success toast and close the modal
+        try {
+            const response = await editMutation({ id: currentCompanyId, formData: modifiedData.modifiedValues }).unwrap();
             if (response.status === "success") {
                 toast.success("Company has been updated successfully.");
-                closeModal(currentCompanyId);  // Close the modal after submission
-                refetch();  // Refresh the company data in the parent component
+                closeModal();
+                refetch();
             }
         } catch (error) {
-            // Handle any error that occurs during the mutation
-            console.error("Something went wrong while trying to edit the company", error);
+            console.error("Error editing company", error);
         }
     };
+
+    // Reset form errors when modal closes
+    useEffect(() => {
+        if (!isOpen) setFormErrors({});
+    }, [isOpen]);
 
     return (
         <ModalComponent className="w-[22rem] h-[32rem] sm:w-[28rem]">
             {isFetching ? (
                 <div className="flex items-center h-full w-full">
-                    <AlatarLoader /> {/* Show a loader while fetching data */}
+                    <AlatarLoader />
                 </div>
             ) : (
                 <Form

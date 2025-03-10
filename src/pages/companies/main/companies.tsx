@@ -16,7 +16,7 @@ const Companies : React.FC = ()=>{
             setCompanies(data.companies);
         }
     },[data]);
-    
+
     return(
         <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">
             {/* Modals */}

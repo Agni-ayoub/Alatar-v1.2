@@ -13,7 +13,7 @@ const DeleteModal : React.FC<DeleteModalProps> = ({type}) => {
     const id = searchParams.get("id");
    
     return(
-        <ModalComponent className="w-10/12 flex flex-col sm:w-[32rem] h-[15rem]">
+        <ModalComponent className="w-10/12 flex flex-col sm:w-[28rem] h-[15rem]">
             <div className="bg-[var(--negative)] px-2 py-1 rounded-md">
                 <span className="sm:text-xl font-semibold tracking-widest">
                     Confirm Deletion of {type}

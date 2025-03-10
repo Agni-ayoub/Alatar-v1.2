@@ -99,7 +99,7 @@ type EditedCompanyResponce = {
     website?: string;
     long?: string;
     lat?: string;
-    status?: "ACTIVE" | "INACTIVE";
+    status?: "ACTIVE" | "INACTIVE" | "";
 };
 
 export type EditCompanyResponce = {

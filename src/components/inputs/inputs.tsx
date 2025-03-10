@@ -28,8 +28,7 @@ type InputsProps = React.InputHTMLAttributes<HTMLInputElement> & {
  * @prop {boolean} [withoutLabel = false] - Remove the label.
  * @prop {boolean} [withWobble = true] - Adds the wobble effect.
  * @prop {string} [wrapperclassName = string] - Wrapper/Container classname.
- * @prop {isError} [isError = false] - Error state for the input.
- * @prop {string} [isError] - Error Message for the input to display.
+ * @prop {string} [ErrorMessage = string] - error message to diplay.
  * 
  * @returns {JSX.Element} The input component with a label.
  */
@@ -41,7 +40,6 @@ const Inputs = ({
     withoutLabel = false,
     withWobble = true,
     wrapperClassName,
-    isError = false,
     ErrorMessage,
     ...props 
 } : InputsProps) : JSX.Element => {
@@ -76,7 +74,7 @@ const Inputs = ({
                         "border-[var(--background-secondary)] text-sm border-2 outline-0 rounded-md focus-within:border-[var(--text-secondary)]/70 w-full px-4 disabled:bg-[var(--text-tertiary)]/40 disabled:line-through disabled:text-[var(--text-tertiary)] disabled:placeholder:line-through",
                             {
                                 'pr-6' : type === "password",
-                                'animate-error' : isError,
+                                'animate-error focus-within:border-[var(--negative)]' : ErrorMessage,
                             },
                         className
                     ))}
@@ -84,7 +82,7 @@ const Inputs = ({
                     {...props}
                 />
                 <span className="text-xs transition-all font-semibold text-[var(--negative)]">
-                    {isError && ErrorMessage}
+                    {ErrorMessage && ErrorMessage}
                 </span>
                 {
                     type === "password" && 
