@@ -89,6 +89,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
                 value: formData.name,
                 onChange: handleFormInputChange,
                 ErrorMessage: formErrors.name,
+                required : true
             },
         },
         {
@@ -108,7 +109,6 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
                 name: "email",
                 placeholder: "Enter email address",
                 type: "email",
-                required: true,
                 value: formData.email,
                 onChange: handleFormInputChange,
                 ErrorMessage: formErrors.email,

@@ -22,7 +22,7 @@ const Companies : React.FC = ()=>{
             {/* Modals */}
             <div>
                 <EditCompany refetch={refetch} />
-                <DeleteModal type="Company" />
+                <DeleteModal refetch={refetch} type="Company" />
             </div>
             {/* Body */}
             <div className="w-full px-2 py-2">

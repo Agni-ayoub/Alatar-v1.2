@@ -118,3 +118,11 @@ export type EditDataRequest = {
     id: string;
     formData: EditCompanyFormData;
 }
+
+export type DeleteMethodResponce = {
+    status : 'success' | 'error';
+}
+export type DeleteMethodRequest = {
+    id : string;
+    type : 'company' | 'user' | 'vehicle';
+}
