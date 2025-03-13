@@ -34,7 +34,7 @@ const usePreloadedImage = ({ src, alt } : PreloadedImageProps) : {loaded : boole
         img.onload = () => setLoaded(true);
     }, [src]);
 
-    const imageElement = loaded ? <img className="rounded-[inherit]" src={src} alt={alt} /> : <span className="button-loader" />;
+    const imageElement = loaded ? <img className="rounded-[inherit] h-full w-full object-fill" src={src} alt={alt} /> : <span className="button-loader" />;
 
     return { loaded, imageElement };
 };

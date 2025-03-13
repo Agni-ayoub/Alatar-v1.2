@@ -29,8 +29,12 @@ type InputData = {
   withWobble?: boolean;
   /** Additional class names for styling the input wrapper */
   wrapperClassName?: string;
+  /** Additional class names for styling the input container */
+  containerClassName?: string;
   /** Props passed directly to the input element */
   inputProps?: InputProps;
+  /** Src for the file image if already exist */
+  fileImageSrc?: string;
 };
 
 /**
@@ -61,4 +65,8 @@ export interface FormProps {
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   /** Function triggered when the form is reseted */
   handleUndo?: () => void;
+  /** Loading state */
+  isLoading?: boolean;
+  /** State to reset the base64 file.*/
+  setBase64?: Dispatch<React.SetStateAction<string | null>>;
 }

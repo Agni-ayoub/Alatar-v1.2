@@ -1,24 +1,7 @@
 /**
- * Represents the permissions for various entities within the system.
- * Each property is an array of `PermissionTypes` indicating the permissions
- * associated with that entity.
- * 
- * @property {PermissionTypes[]} company - Permissions related to companies.
- * @property {PermissionTypes[]} vehicle - Permissions related to vehicles.
- * @property {PermissionTypes[]} user - Permissions related to users.
- * @property {PermissionTypes[]} plan - Permissions related to plans.
- * @property {PermissionTypes[]} paymentHistory - Permissions related to payment history.
- * @property {PermissionTypes[]} period - Permissions related to periods.
- * @property {PermissionTypes[]} alert - Permissions related to alerts.
- * @property {PermissionTypes[]} driver - Permissions related to drivers.
+ * Represents the permissions available for different entities in the system.
+ * Each entity has an array of `PermissionTypes` defining the allowed actions.
  */
-
-
-export type LoginRequest = {
-    email: string;
-    password: string;
-};
-
 type PermissionTypes = "VIEW" | "CREATE" | "UPDATE" | "DELETE";
 
 type Permissions = {
@@ -32,6 +15,17 @@ type Permissions = {
     driver: PermissionTypes[];
 };
 
+/**
+ * Represents the request payload for user login.
+ */
+export type LoginRequest = {
+    email: string;
+    password: string;
+};
+
+/**
+ * Represents a user in the system.
+ */
 export type User = {
     id: string;
     email: string;
@@ -44,6 +38,9 @@ export type User = {
     avatar: string;
 };
 
+/**
+ * Represents a company entity.
+ */
 export type Company = {
     id: string;
     name: string;
@@ -51,47 +48,74 @@ export type Company = {
     email: string;
     status: string;
     avatar: string;
-}
+};
 
+/**
+ * Represents pagination details.
+ */
 interface Paginator {
     total: number;
     lastPage: number;
     currentPage: number;
 }
 
+/**
+ * API response structure for fetching a list of companies.
+ */
 export interface CompaniesResponse {
-    status: 'success' | 'error';
+    status: "success" | "error";
     companies: Company[];
     paginator: Paginator;
 }
 
+/**
+ * Represents a successful login response.
+ */
 type LoginResponse = {
     status: "success";
     token: string;
     user: User;
 };
 
+/**
+ * Represents an error response from an API.
+ */
 type ErrorResponse = {
     status: "error";
     message: string;
     code: string;
 };
 
+/**
+ * Represents the possible responses from the login API.
+ */
 export type LoginApiResponse = LoginResponse | ErrorResponse;
 
+/**
+ * Represents an authentication token.
+ */
 export type token = string | null;
 
+/**
+ * Represents the response when fetching the current user.
+ */
 export type getUserResponse = {
     status: string;
     user: User;
 };
 
+/**
+ * Represents the response from a logout request.
+ */
 export type LogoutResponse = {
     status: "success" | "error";
     message: string;
 };
 
-type EditedCompanyResponce = {
+/**
+ * Represents the structure of an edited company entity.
+ */
+type EditedCompanyResponse = {
     name?: string;
     phone?: string;
     email?: string;
@@ -100,29 +124,49 @@ type EditedCompanyResponce = {
     long?: string;
     lat?: string;
     status?: "ACTIVE" | "INACTIVE" | "";
+    avatar?: string;
 };
 
-export type EditCompanyResponce = {
-    status : 'success' | 'error';
-    company : EditedCompanyResponce;
+/**
+ * Represents the API response when editing a company.
+ */
+export type EditCompanyResponse = {
+    status: "success" | "error";
+    company: EditedCompanyResponse;
 };
 
-export type GetCompanyByIdResponce = {
-    status : 'success' | 'error';
-    company: EditedCompanyResponce;
-}
+/**
+ * Represents the API response when retrieving a company by its ID.
+ */
+export type GetCompanyByIdResponse = {
+    status: "success" | "error";
+    company: EditedCompanyResponse;
+};
 
-export type EditCompanyFormData = EditedCompanyResponce;
+/**
+ * Represents the form data structure for editing a company.
+ */
+export type EditCompanyFormData = EditedCompanyResponse;
 
+/**
+ * Represents the request payload for updating company data.
+ */
 export type EditDataRequest = {
     id: string;
     formData: EditCompanyFormData;
-}
+};
 
-export type DeleteMethodResponce = {
-    status : 'success' | 'error';
-}
+/**
+ * Represents the API response for a delete request.
+ */
+export type DeleteMethodResponse = {
+    status: "success" | "error";
+};
+
+/**
+ * Represents the request payload for a delete operation.
+ */
 export type DeleteMethodRequest = {
-    id : string;
-    type : 'company' | 'user' | 'vehicle';
-}
+    id: string;
+    type: "company" | "user" | "vehicle";
+};

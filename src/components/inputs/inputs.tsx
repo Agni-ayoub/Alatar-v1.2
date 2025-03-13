@@ -14,6 +14,8 @@ type InputsProps = React.InputHTMLAttributes<HTMLInputElement> & {
     wrapperClassName?: string;
     isError?: boolean;
     ErrorMessage?: string;
+    containerClassName?: string;
+    fileImageSrc? : string;
 };
 
 /**
@@ -40,7 +42,9 @@ const Inputs = ({
     withoutLabel = false,
     withWobble = true,
     wrapperClassName,
+    containerClassName,
     ErrorMessage,
+    fileImageSrc,
     ...props 
 } : InputsProps) : JSX.Element => {
     const [currentType, setCurrentType] = useState<string>(type);
@@ -65,8 +69,13 @@ const Inputs = ({
             <div className={classNames("relative focus-within-animate-wobble",
                 {
                     'animate-wobble' : withWobble
-                },
+                }, containerClassName
             )}>
+                {
+                    type === 'file' && 
+                        <img className="object-contain h-[85%] w-fit -z-1 absolute inset-0 m-auto rounded-md" src={fileImageSrc || undefined} />
+                }
+
                 {/* Input field with styles and accessibility */}
                 <input
                     type={currentType}

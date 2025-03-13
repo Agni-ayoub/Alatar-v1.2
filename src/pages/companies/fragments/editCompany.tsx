@@ -1,17 +1,16 @@
 import React, { JSX, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
 import useModal from "../../../hooks/useModal";
 import useModifiedFormData from "../../../hooks/useChangedData";
 import Form from "../../../components/form/main/form";
 import AlatarLoader from "../../../components/animated/alatarLoader";
-
 import { useEditCompanyMutation } from "../../../features/api/editMethodSlice";
 import { useGetCompanyByIdQuery } from "../../../features/api/getMethodSlice";
 import { EditCompanyFormData } from "../../../features/sliceTypes";
 import { FormProps } from "../../../components/form/main/formTypes";
 import { companySchema } from "../../../utils/zodSechams";
+import { convertToBase64 } from "../../../utils/converToBase64";
 
 /**
  * Props for the EditCompany component.
@@ -26,12 +25,12 @@ interface EditCompanyTypes {
  * EditCompany Component
  *
  * Allows users to edit a company's details.
- *
- * Fetches the current company data and updates it using a modal form.
- * @component
- * @param {EditCompanyTypes} props - Component props.
- * @returns {JSX.Element}
- */
+*
+* Fetches the current company data and updates it using a modal form.
+* @component
+* @param {EditCompanyTypes} props - Component props.
+* @returns {JSX.Element}
+*/
 const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes): JSX.Element => {
     // Initial form state
     const formDataInitialState = useMemo<EditCompanyFormData>(() => ({
@@ -43,16 +42,20 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
         long: "",
         lat: "",
         status: "",
+        avatar : "",
     }), []);
 
     // State for form data, errors, and original data
     const [formData, setFormData] = useState<EditCompanyFormData>(formDataInitialState);
     const [originalData, setOriginalData] = useState<EditCompanyFormData>(formDataInitialState);
     const [formErrors, setFormErrors] = useState<Partial<EditCompanyFormData>>({});
-
+    
     // Get company ID from URL parameters
     const [searchParams] = useSearchParams();
     const currentCompanyId = searchParams.get("id") || "";
+    
+    // State for file data (base64)
+    const [file, setFile] = useState<string | null>(null);
 
     // Hooks for modal management
     const { ModalComponent, closeModal, isOpen } = useModal("edit");
@@ -62,7 +65,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
         skip: !currentCompanyId,
         refetchOnMountOrArgChange: true,
     });
-    const [editMutation] = useEditCompanyMutation();
+    const [editMutation, {isLoading}] = useEditCompanyMutation();
 
     // Custom hook to track modified fields
     const modifiedData = useModifiedFormData(formData, originalData);
@@ -78,8 +81,29 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
         setFormErrors((prev) => ({ ...prev, [name]: "" }));
     };
 
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files?.[0];
+
+        if (selectedFile) {
+            convertToBase64(selectedFile, setFile, setFormData);
+        }
+    };
+
     // Form field configurations
     const formInputs: FormProps["inputsData"] = [
+        {
+            inputProps: {
+                label: "Company Avatar",
+                name: "avatar",
+                type: "file",
+                ErrorMessage: formErrors.name,
+                accept : "image/*",
+                className: "hidden",
+                onChange : handleFileChange
+            },
+            containerClassName : "border border-[var(--background-secondary)] h-[14rem] rounded-md after:bg-[var(--text-primary)]/10 p-2 hover:after:opacity-100 after:opacity-0 after:transition-opacity after:content-['Select_Avatar'] after:backdrop-blur after:top-0 after:left-0 after:w-full after:h-full after:flex after:items-center after:justify-center after:text-white cursor-pointer after:font-semibold after:text-xl after:tracking-widest",
+            fileImageSrc: file || formData.avatar
+        },
         {
             inputProps: {
                 label: "Company Name",
@@ -134,9 +158,17 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
             setFormData(data.company);
         }
     }, [data, currentCompanyId]);
+    
+    // Reset form errors when modal closes
+    useEffect(() => {
+        if (!isOpen){
+            setFormErrors({});
+            setFile("");
+        }
+    }, [isOpen]);
 
     // Check if undo button should be enabled
-    const isUndoButton = !modifiedData?.isModified || isFetching;
+    const isUndoButton = !modifiedData?.isModified || isFetching || isLoading;
 
     /**
      * Handles form submission.
@@ -170,13 +202,8 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
         }
     };
 
-    // Reset form errors when modal closes
-    useEffect(() => {
-        if (!isOpen) setFormErrors({});
-    }, [isOpen]);
-
     return (
-        <ModalComponent className="w-[22rem] h-[32rem] sm:w-[28rem]">
+        <ModalComponent className="w-[22rem] h-[38rem] sm:w-[32rem]">
             {isFetching ? (
                 <div className="flex items-center h-full w-full">
                     <AlatarLoader />
@@ -189,6 +216,8 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
                     inputsData={formInputs}
                     handleSubmit={handleSubmit}
                     isUndoButton={isUndoButton}
+                    isLoading={isLoading}
+                    setBase64={setFile}
                 />
             )}
         </ModalComponent>

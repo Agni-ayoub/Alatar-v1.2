@@ -13,11 +13,12 @@ import { inputExample } from "../main/inputsExample";
  * @component
  * @example
  * ```tsx
- * <FormBody inputsData={customInputs} inputsContainerClassName="custom-class" />
+ * <FormBody inputsData={customInputs} inputsContainerClassName="custom-class" isLoading={isFetching} />
  * ```
  * @param {FormProps} props - The props for the form body.
  * @param {string} [props.inputsContainerClassName] - Additional classes for styling the input container.
  * @param {Array} [props.inputsData=inputExample] - Array of input field configurations.
+ * @param {boolean} [props.isLoading] - Loading state.
  * @param {boolean} [props.isUndoButton=false] - When data changes it disbles the undo button (undo Button is disbled also when the parent is fetching).
  * @param {() => void} [props.isUndoButton=false] - Function wich handles the undo action.
  * @returns {JSX.Element} The rendered FormBody component.
@@ -27,6 +28,7 @@ const FormBody: React.FC<FormProps> = ({
   inputsContainerClassName,
   inputsData = inputExample,
   isUndoButton,
+  isLoading,
   handleUndo,
 }) => {
   return (
@@ -43,7 +45,9 @@ const FormBody: React.FC<FormProps> = ({
             key={idx}
             withWobble={false}
             className="h-10 w-full border-1"
-            wrapperClassName="min-w-[17.5rem] flex-1"
+            wrapperClassName={classNames("min-w-[17.5rem] flex-1", input.wrapperClassName)}
+            fileImageSrc={input.fileImageSrc}
+            containerClassName={input.containerClassName}
             ErrorMessage="Error example @formError .example"
             aria-label={input.inputProps?.placeholder || "Input field"}
             {...input.inputProps}
@@ -71,7 +75,8 @@ const FormBody: React.FC<FormProps> = ({
           disabled={isUndoButton}
           type="submit"
           placeHolder="Save"
-          className="w-max px-6 bg-[var(--text-secondary)]/60"
+          className="w-24 h-8 px-6 bg-[var(--text-secondary)]/60"
+          isLoading={isLoading}
           aria-label="Save changes"
         />
       </div>

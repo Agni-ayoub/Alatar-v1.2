@@ -31,8 +31,10 @@ import React from "react";
  * @param {string} [props.formClassName] - Additional classes for styling the form.
  * @param {object} [props.originalData] - The original data before any modifications.
  * @param {Function} [props.handleSubmit] - Function to execute on form submission.
+ * @param {boolean} [props.isLoading] - Loading state.
  * @param {Function} [props.setData] - Function to update the form's data.
  * @param {Array} [props.inputsData] - List of input field configurations.
+ * @param {Function} [props.setBase64] - State to reset the base64 file.
  * @returns {JSX.Element} The rendered form component.
  */
 
@@ -45,8 +47,10 @@ const Form: React.FC<FormProps> = ({
     originalData,
     handleSubmit,
     setData,
+    setBase64,
     isUndoButton,
     inputsData,
+    isLoading,
 }: FormProps) : React.JSX.Element => {
     const basicOriginalData = {
         name: "",
@@ -61,6 +65,7 @@ const Form: React.FC<FormProps> = ({
      */
     const handleUndo = () => {
         setData?.(originalData || basicOriginalData);
+        setBase64?.(null);
         toast.success("Edits undone successfully.");
     };
 
@@ -91,6 +96,7 @@ const Form: React.FC<FormProps> = ({
                 inputsData={inputsData}
                 isUndoButton={isUndoButton}
                 handleUndo={handleUndo}
+                isLoading={isLoading}
             />
         </form>
     );
