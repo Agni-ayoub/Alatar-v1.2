@@ -3,7 +3,7 @@ import useModal from "../../hooks/useModal";
 import { useSearchParams } from "react-router-dom";
 import Inputs from "../inputs/inputs";
 import Buttons from "../buttons/buttons";
-import { useDeleteCompanyMutation } from "../../features/api/deleteMethod";
+import { useDeleteMuMutation } from "../../features/api/deleteMethod";
 import { toast } from "react-toastify";
 
 /**
@@ -24,7 +24,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ type, refetch } : DeleteModal
     const { ModalComponent, closeModal, isOpen } = useModal('delete');
     const id = searchParams.get("id"); // Retrieves the entity ID from the URL
     const isValidationGranted = !(id === validation);
-    const [action, {isLoading}] = useDeleteCompanyMutation();
+    const [action, {isLoading}] = useDeleteMuMutation();
 
     /**
      * Handles validation input change

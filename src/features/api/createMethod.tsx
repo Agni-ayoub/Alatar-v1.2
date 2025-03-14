@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import endPoints from "../endPoints.json"
 import { RootState } from '../../app/store';
-import { DeleteMethodRequest, DeleteMethodResponse } from '../sliceTypes';
+import { CreateMethodRequest, CreateMethodResponce } from '../sliceTypes';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: endPoints.baseUrl,
@@ -15,19 +15,20 @@ const baseQuery = fetchBaseQuery({
     }
 });
 
-const deleteMethodSlice = createApi({
-    reducerPath: 'deleteMethod',
+const createMethodSlice = createApi({
+    reducerPath: 'createMethod',
     baseQuery,
     endpoints: (builder) => ({
-        deleteMu: builder.mutation<DeleteMethodResponse, DeleteMethodRequest>({
-            query: ({id, type})=> ({
-                url: `${endPoints[type]}/${id}`,
-                method: "DELETE",
+        createMu: builder.mutation<CreateMethodResponce, CreateMethodRequest>({
+            query: ({ type, formData })=> ({
+                url: `${endPoints[type]}`,
+                method: "POST",
+                body: formData
             }),
         }),
     }),
 });
 
-export const { useDeleteMuMutation } = deleteMethodSlice;
-export const deleteMethodSliceReducer = deleteMethodSlice.reducer;
-export default deleteMethodSlice;
+export const { useCreateMuMutation } = createMethodSlice;
+export const createMethodSliceReducer = createMethodSlice.reducer;
+export default createMethodSlice;

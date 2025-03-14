@@ -96,7 +96,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
                 label: "Company Avatar",
                 name: "avatar",
                 type: "file",
-                ErrorMessage: formErrors.name,
+                ErrorMessage: formErrors.avatar,
                 accept : "image/*",
                 className: "hidden",
                 onChange : handleFileChange
@@ -110,7 +110,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
                 name: "name",
                 placeholder: "Enter company name",
                 type: "text",
-                value: formData.name,
+                value: formData.name || "",
                 onChange: handleFormInputChange,
                 ErrorMessage: formErrors.name,
                 required : true
@@ -133,7 +133,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
                 name: "email",
                 placeholder: "Enter email address",
                 type: "email",
-                value: formData.email,
+                value: formData.email || "",
                 onChange: handleFormInputChange,
                 ErrorMessage: formErrors.email,
             },
@@ -144,7 +144,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
                 name: "website",
                 placeholder: "Enter website URL",
                 type: "url",
-                value: formData.website,
+                value: formData.website || "",
                 onChange: handleFormInputChange,
                 ErrorMessage: formErrors.website,
             },
@@ -159,7 +159,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
         }
     }, [data, currentCompanyId]);
     
-    // Reset form errors when modal closes
+    // Reset form errors & base64 file when modal closes
     useEffect(() => {
         if (!isOpen){
             setFormErrors({});

@@ -5,6 +5,7 @@ import notificationReducer from "../features/slices/notificationSlice";
 import getMethodSlice, { getMethodSliceReducer } from "../features/api/getMethodSlice";
 import editMethodSlice, { editMethodSliceReducer } from "../features/api/editMethodSlice";
 import deleteMethodSlice, { deleteMethodSliceReducer } from "../features/api/deleteMethod";
+import createMethodSlice, { createMethodSliceReducer } from "../features/api/createMethod";
 
 export const store = configureStore({
   reducer: {
@@ -14,8 +15,9 @@ export const store = configureStore({
     getMethod : getMethodSliceReducer,
     editMethod : editMethodSliceReducer,
     deleteMethod : deleteMethodSliceReducer,
+    createMethod : createMethodSliceReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(ApiSlice.middleware, getMethodSlice.middleware, editMethodSlice.middleware, deleteMethodSlice.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(ApiSlice.middleware, getMethodSlice.middleware, editMethodSlice.middleware, deleteMethodSlice.middleware, createMethodSlice.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

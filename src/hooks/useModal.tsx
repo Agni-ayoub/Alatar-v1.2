@@ -3,7 +3,7 @@ import { ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { useSearchParams } from 'react-router-dom';
 
-type Type = 'edit' | 'delete' | 'more';
+type Type = 'edit' | 'delete' | 'more' | 'create';
 type ID = string;
 
 interface ModalProps {

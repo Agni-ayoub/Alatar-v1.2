@@ -170,3 +170,19 @@ export type DeleteMethodRequest = {
     id: string;
     type: "company" | "user" | "vehicle";
 };
+
+/**
+ * Represents the API response for a create request.
+ */
+export type CreateMethodResponce = {
+    status : "success" | "error";
+    company?: object
+}
+
+/**
+ * Represents the API response for a create request.
+ */
+export type CreateMethodRequest = {
+    type : "company" | "user" | "vehicle";
+    formData: object ;
+}

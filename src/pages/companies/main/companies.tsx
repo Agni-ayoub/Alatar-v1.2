@@ -6,8 +6,13 @@ import { Company } from "../../../features/sliceTypes";
 import AlatarLoader from "../../../components/animated/alatarLoader";
 import EditCompany from "../fragments/editCompany";
 import DeleteModal from "../../../components/deleteModal/deleteModal";
+import CreateButton from "../../../components/buttons/createButton";
+import FilterButton from "../../../components/buttons/filterButton";
+import AddCompanyModal from "../fragments/addCompany";
+import { useSearchParams } from "react-router-dom";
 
 const Companies : React.FC = ()=>{
+    const [searchParams, setSearchParams] = useSearchParams();
     const { data, isFetching, refetch } = useGetCompaniesQuery();
     const [Companies, setCompanies] = useState<Company[]>([]);
 
@@ -17,17 +22,31 @@ const Companies : React.FC = ()=>{
         }
     },[data]);
 
+    const handleAddCompany = () => {
+        if(searchParams.get('action')) return;
+        setSearchParams((prev) => {
+            const newParams = new URLSearchParams(prev);
+            newParams.set('action', 'create');
+            return newParams;
+        });
+    };
+
     return(
         <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">
             {/* Modals */}
             <div>
                 <EditCompany refetch={refetch} />
                 <DeleteModal refetch={refetch} type="Company" />
+                <AddCompanyModal refetch={refetch} />
             </div>
             {/* Body */}
-            <div className="w-full px-2 py-2">
+            <div className="flex items-center gap-4 w-full px-2 py-2">
                 <div className="w-full">
                     <Inputs.search />
+                </div>
+                <div className="flex gap-2">
+                    <FilterButton />
+                    <CreateButton onClick={() => handleAddCompany()} />
                 </div>
             </div>
             {
