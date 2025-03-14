@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import endPoints from "../endPoints.json"
 import { RootState } from '../../app/store';
-import { CompaniesResponse, GetCompanyByIdResponce } from '../sliceTypes';
+import { CompaniesResponse, GetCompanyByIdResponse } from '../sliceTypes';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: endPoints.baseUrl,
@@ -19,12 +19,13 @@ const getMethodSlice = createApi({
     reducerPath: 'getMethod',
     baseQuery,
     endpoints: (builder) => ({
-        getCompanies: builder.query<CompaniesResponse, void>({
-            query: () => ({
+        getCompanies: builder.query<CompaniesResponse, number>({
+            query: ( page ) => ({
                 url: endPoints.company,
+                params : { page }
             }),
         }),
-        getCompanyById : builder.query<GetCompanyByIdResponce, string>({
+        getCompanyById : builder.query<GetCompanyByIdResponse, string>({
             query: (id) => ({
                 url: `${endPoints.company}/${id}`,
                 method: 'GET',

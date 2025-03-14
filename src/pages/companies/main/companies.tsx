@@ -2,7 +2,7 @@ import Inputs from "../../../components/inputs/inputs";
 import DataCard from "../../../components/cards/dataCard/main/dataCard";
 import { useGetCompaniesQuery } from "../../../features/api/getMethodSlice";
 import React, { useEffect, useState } from "react";
-import { Company } from "../../../features/sliceTypes";
+import { Company, Paginator } from "../../../features/sliceTypes";
 import AlatarLoader from "../../../components/animated/alatarLoader";
 import EditCompany from "../fragments/editCompany";
 import DeleteModal from "../../../components/deleteModal/deleteModal";
@@ -10,15 +10,22 @@ import CreateButton from "../../../components/buttons/createButton";
 import FilterButton from "../../../components/buttons/filterButton";
 import AddCompanyModal from "../fragments/addCompany";
 import { useSearchParams } from "react-router-dom";
+import Pagination from "../../../components/pagination/main/pagination";
 
 const Companies : React.FC = ()=>{
     const [searchParams, setSearchParams] = useSearchParams();
-    const { data, isFetching, refetch } = useGetCompaniesQuery();
+    const [paginator, setPaginator] = useState<Paginator>({
+        currentPage : 1,
+        lastPage : 1,
+        total : 1
+    });
+    const { data, isFetching, refetch } = useGetCompaniesQuery(paginator.currentPage);
     const [Companies, setCompanies] = useState<Company[]>([]);
 
     useEffect(()=>{
         if(data?.status === 'success'){
             setCompanies(data.companies);
+            setPaginator(data.paginator);
         }
     },[data]);
 
@@ -30,6 +37,8 @@ const Companies : React.FC = ()=>{
             return newParams;
         });
     };
+
+    const onPageChange = (newPage : number) => setPaginator((prev : Paginator) => ({...prev, currentPage : newPage}));
 
     return(
         <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">
@@ -44,10 +53,16 @@ const Companies : React.FC = ()=>{
                 <div className="w-full">
                     <Inputs.search />
                 </div>
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
                     <FilterButton />
                     <CreateButton onClick={() => handleAddCompany()} />
                 </div>
+            </div>
+            <div className="px-2">
+                <Pagination 
+                    paginator={paginator}
+                    onPageChange={onPageChange} 
+                />
             </div>
             {
                 isFetching?

@@ -53,7 +53,7 @@ export type Company = {
 /**
  * Represents pagination details.
  */
-interface Paginator {
+export interface Paginator {
     total: number;
     lastPage: number;
     currentPage: number;

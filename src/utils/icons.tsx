@@ -6,7 +6,7 @@ import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 import { MdMoreHoriz } from "react-icons/md";
 import { FiEye, FiEyeOff, FiUsers } from "react-icons/fi";
 import { IoAdd, IoTrendingDownOutline, IoTrendingUpOutline } from "react-icons/io5";
-import { IoMdUndo } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowDown, IoIosArrowForward, IoMdUndo } from "react-icons/io";
 import { IoCallOutline } from "react-icons/io5";
 import { MdAlternateEmail } from "react-icons/md";
 import { FaFilter } from "react-icons/fa";
@@ -33,4 +33,7 @@ export const icons: Record<string, JSX.Element> = {
     undo : <IoMdUndo />,
     create : <IoAdd />,
     filter : <FaFilter />,
+    arrowBack : <IoIosArrowBack />,
+    arrowForward : <IoIosArrowForward />,
+    arrowDown : <IoIosArrowDown />,
 }
