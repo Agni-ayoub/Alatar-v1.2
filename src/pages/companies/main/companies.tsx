@@ -15,7 +15,7 @@ import Pagination from "../../../components/pagination/main/pagination";
 const Companies : React.FC = ()=>{
     const [searchParams, setSearchParams] = useSearchParams();
     const [paginator, setPaginator] = useState<Paginator>({
-        currentPage : 1,
+        currentPage : Number(searchParams.get('page')) || 1,
         lastPage : 1,
         total : 1
     });
@@ -38,7 +38,15 @@ const Companies : React.FC = ()=>{
         });
     };
 
-    const onPageChange = (newPage : number) => setPaginator((prev : Paginator) => ({...prev, currentPage : newPage}));
+    const onPageChange = (newPage : number) => {
+        setSearchParams(prev => {
+            const newParams = new URLSearchParams(prev);
+            const page = JSON.stringify(newPage);
+            newParams.set('page', page);
+            return newParams;
+        });
+        setPaginator((prev : Paginator) => ({...prev, currentPage : newPage}));
+    };
 
     return(
         <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">

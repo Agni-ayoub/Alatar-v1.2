@@ -98,7 +98,7 @@ const AccessPage = () : JSX.Element => {
                             <Inputs className="h-10" required label="Password" id="access-password" placeholder="Enter your password" type="password" aria-required="true" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         {/* Login Button */}
-                        <Buttons isLoading={isLoading} type="submit" icon="login" className="bg-[var(--background-secondary)] max-w-[18rem] h-10" aria-label="Login" disabled={isLoading} />
+                        <Buttons placeHolder="Login" isLoading={isLoading} type="submit" icon="login" className="bg-[var(--background-secondary)] max-w-[18rem] h-10" aria-label="Login" disabled={isLoading} />
                     </form>
                 </div>
             </div>
