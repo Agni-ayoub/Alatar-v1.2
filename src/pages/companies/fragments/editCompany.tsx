@@ -95,6 +95,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
             inputProps: {
                 label: "Company Avatar",
                 name: "avatar",
+                id: "company-avatar-edit",
                 type: "file",
                 ErrorMessage: formErrors.avatar,
                 accept : "image/*",
@@ -108,6 +109,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
             inputProps: {
                 label: "Company Name",
                 name: "name",
+                id: "company-name-edit",
                 placeholder: "Enter company name",
                 type: "text",
                 value: formData.name || "",
@@ -120,6 +122,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
             inputProps: {
                 label: "Phone Number",
                 name: "phone",
+                id: "company-phone-edit",
                 placeholder: "Enter phone number",
                 type: "tel",
                 value: formData.phone || "",
@@ -131,6 +134,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
             inputProps: {
                 label: "Email Address",
                 name: "email",
+                id: "company-email-edit",
                 placeholder: "Enter email address",
                 type: "email",
                 value: formData.email || "",
@@ -142,6 +146,7 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
             inputProps: {
                 label: "Website URL",
                 name: "website",
+                id: "company-website-edit",
                 placeholder: "Enter website URL",
                 type: "url",
                 value: formData.website || "",

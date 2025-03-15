@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { twMerge } from "tailwind-merge";
-import Inputs from "../../inputs/inputs";
+import Inputs from "../../inputs/main/inputs";
 import Buttons from "../../buttons/buttons";
 import React from "react";
 import { FormProps } from "../main/formTypes";

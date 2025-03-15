@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useModal from "../../hooks/useModal";
 import { useSearchParams } from "react-router-dom";
-import Inputs from "../inputs/inputs";
+import Inputs from "../inputs/main/inputs";
 import Buttons from "../buttons/buttons";
 import { useDeleteMuMutation } from "../../features/api/deleteMethod";
 import { toast } from "react-toastify";

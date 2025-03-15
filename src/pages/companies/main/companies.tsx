@@ -1,4 +1,4 @@
-import Inputs from "../../../components/inputs/inputs";
+import Inputs from "../../../components/inputs/main/inputs";
 import DataCard from "../../../components/cards/dataCard/main/dataCard";
 import { useGetCompaniesQuery } from "../../../features/api/getMethodSlice";
 import React, { useEffect, useState } from "react";
@@ -11,20 +11,25 @@ import FilterButton from "../../../components/buttons/filterButton";
 import AddCompanyModal from "../fragments/addCompany";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../../../components/pagination/main/pagination";
+import { SingleValue } from "react-select";
+import { OptionType } from "../../../components/inputs/main/inputsTypes";
+import { searchCompanyOptions } from "../../../components/inputs/main/searchSelectOptions";
 
 const Companies : React.FC = ()=>{
     const [searchParams, setSearchParams] = useSearchParams();
     const searchFromParam = searchParams.get('search');
     const [searchValue, setSearchValue] = useState<string>(searchFromParam || "");
+    const [searchType, setSearchType] = useState<OptionType | null>(searchCompanyOptions[0]);
     const [paginator, setPaginator] = useState<Paginator>({
         currentPage : Number(searchParams.get('page')) || 1,
         lastPage : 1,
         total : 1
     });
-    const currentPage = paginator.currentPage;
+    const currentPage : number = paginator.currentPage; 
     const { data, isFetching, refetch } = useGetCompaniesQuery({
         page : currentPage,
-        search : searchValue
+        searchType : searchType?.value,
+        searchValue : searchValue
     }, {
         refetchOnMountOrArgChange : true
     });
@@ -76,6 +81,10 @@ const Companies : React.FC = ()=>{
             });
     }),[searchFromParam, searchValue, setSearchParams]);
 
+    const handleChange = (newValue: SingleValue<OptionType>) => {
+        setSearchType(newValue);
+    };
+
     return(
         <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">
             {/* Modals */}
@@ -87,7 +96,7 @@ const Companies : React.FC = ()=>{
             {/* Body */}
             <div className="flex items-center gap-4 w-full px-2 py-2">
                 <div className="w-full">
-                    <Inputs.search onChange={handleSearchInputChange} value={searchValue} />
+                    <Inputs.search selectValue={searchType} onSelectChange={handleChange} onChange={handleSearchInputChange} value={searchValue} placeholder={`Search by ${searchType?.label}...`} />
                 </div>
                 <div className="flex items-center gap-2">
                     <FilterButton />

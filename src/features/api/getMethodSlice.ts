@@ -19,11 +19,18 @@ const getMethodSlice = createApi({
     reducerPath: 'getMethod',
     baseQuery,
     endpoints: (builder) => ({
-        getCompanies: builder.query<CompaniesResponse, {page:number, search : string}>({
-            query: ( {page = 1, search = ""} ) => ({
-                url: endPoints.company,
-                params : { page, search }
-            }),
+        getCompanies: builder.query<CompaniesResponse, { page: number; searchType?: string; searchValue?: string }>({
+            query: ({ page = 1, searchType, searchValue }) => {
+                const searchParams = new URLSearchParams({ page: page.toString() });
+        
+                if (searchType && searchValue) {
+                    searchParams.append(searchType, searchValue);
+                }
+        
+                return {
+                    url: `${endPoints.company}?${searchParams.toString()}`,
+                };
+            },
         }),
         getCompanyById : builder.query<GetCompanyByIdResponse, string>({
             query: (id) => ({

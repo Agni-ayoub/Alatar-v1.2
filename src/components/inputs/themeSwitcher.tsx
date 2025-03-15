@@ -1,6 +1,7 @@
 import React, { JSX } from "react";
 import useTheme from "../../hooks/useTheme";
 
+
 /**
  * ThemeSwitcher component allows users to toggle between light and dark themes.
  *

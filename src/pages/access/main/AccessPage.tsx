@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useGetUserQuery, useLogInMutation } from "../../../features/api/apiSlice";
 import logo from "../../../assets/logo/logo.svg";
 import Buttons from "../../../components/buttons/buttons";
-import Inputs from "../../../components/inputs/inputs";
+import Inputs from "../../../components/inputs/main/inputs";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
