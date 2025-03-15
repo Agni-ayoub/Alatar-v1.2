@@ -14,12 +14,20 @@ import Pagination from "../../../components/pagination/main/pagination";
 
 const Companies : React.FC = ()=>{
     const [searchParams, setSearchParams] = useSearchParams();
+    const searchFromParam = searchParams.get('search');
+    const [searchValue, setSearchValue] = useState<string>(searchFromParam || "");
     const [paginator, setPaginator] = useState<Paginator>({
         currentPage : Number(searchParams.get('page')) || 1,
         lastPage : 1,
         total : 1
     });
-    const { data, isFetching, refetch } = useGetCompaniesQuery(paginator.currentPage);
+    const currentPage = paginator.currentPage;
+    const { data, isFetching, refetch } = useGetCompaniesQuery({
+        page : currentPage,
+        search : searchValue
+    }, {
+        refetchOnMountOrArgChange : true
+    });
     const [Companies, setCompanies] = useState<Company[]>([]);
 
     useEffect(()=>{
@@ -39,7 +47,7 @@ const Companies : React.FC = ()=>{
     };
 
     const onPageChange = (newPage : number) => {
-        setSearchParams(prev => {
+        setSearchParams((prev : URLSearchParams) => {
             const newParams = new URLSearchParams(prev);
             const page = JSON.stringify(newPage);
             newParams.set('page', page);
@@ -47,6 +55,26 @@ const Companies : React.FC = ()=>{
         });
         setPaginator((prev : Paginator) => ({...prev, currentPage : newPage}));
     };
+
+    const handleSearchInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setSearchValue(value);
+        setPaginator((prev : Paginator) => ({...prev, currentPage : 1}));
+    };
+
+    useEffect((() => {
+        if(!searchValue){
+            setSearchParams((prev : URLSearchParams) => {
+                const newParams = new URLSearchParams(prev);
+                newParams.delete('search');
+                return newParams;
+            });
+        }else setSearchParams((prev : URLSearchParams) => {
+                const newParams = new URLSearchParams(prev);
+                newParams.set('search', searchValue);
+                return newParams;
+            });
+    }),[searchFromParam, searchValue, setSearchParams]);
 
     return(
         <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">
@@ -59,7 +87,7 @@ const Companies : React.FC = ()=>{
             {/* Body */}
             <div className="flex items-center gap-4 w-full px-2 py-2">
                 <div className="w-full">
-                    <Inputs.search />
+                    <Inputs.search onChange={handleSearchInputChange} value={searchValue} />
                 </div>
                 <div className="flex items-center gap-2">
                     <FilterButton />

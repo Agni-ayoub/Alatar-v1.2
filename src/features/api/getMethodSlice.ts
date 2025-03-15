@@ -19,10 +19,10 @@ const getMethodSlice = createApi({
     reducerPath: 'getMethod',
     baseQuery,
     endpoints: (builder) => ({
-        getCompanies: builder.query<CompaniesResponse, number>({
-            query: ( page ) => ({
+        getCompanies: builder.query<CompaniesResponse, {page:number, search : string}>({
+            query: ( {page = 1, search = ""} ) => ({
                 url: endPoints.company,
-                params : { page }
+                params : { page, search }
             }),
         }),
         getCompanyById : builder.query<GetCompanyByIdResponse, string>({
