@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/api/auth";
 import apiReducer, { ApiSlice } from "../features/api/apiSlice"
 import notificationReducer from "../features/slices/notificationSlice";
+import loadingReducer from "../features/slices/loadingSlice";
 import getMethodSlice, { getMethodSliceReducer } from "../features/api/getMethodSlice";
 import editMethodSlice, { editMethodSliceReducer } from "../features/api/editMethodSlice";
 import deleteMethodSlice, { deleteMethodSliceReducer } from "../features/api/deleteMethod";
@@ -12,6 +13,7 @@ export const store = configureStore({
     auth: authReducer,
     api: apiReducer,
     notifications: notificationReducer,
+    loading: loadingReducer,
     getMethod : getMethodSliceReducer,
     editMethod : editMethodSliceReducer,
     deleteMethod : deleteMethodSliceReducer,

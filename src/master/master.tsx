@@ -16,12 +16,18 @@ type RootState = {
         user: User;
     }
 }
+type LoadingState = {
+    loading: {
+       isLoading : boolean;
+    }
+}
 
 const Master: React.FC<MasterProps> = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isLocked, setIsLocked] = useState<boolean>(false);
     const user : User = useSelector((state: RootState) => state.auth.user);
     const { imageElement } = usePreloadedImage({ src: user?.avatar, alt: "User's Avatar" });
+    const apiLoading = useSelector((state : LoadingState) => state.loading.isLoading);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -38,6 +44,12 @@ const Master: React.FC<MasterProps> = () => {
 
     return(
         <div className="h-screen min-h-screen overflow-hidden flex p-4">
+            <div className={classNames("bg-[var(--text-secondary)] animate-loading top-0 left-0 h-0.5 fixed z-[99999] transition-all duration-700",
+                {
+                    'w-full animate-loading' : apiLoading,
+                    'hidden' : !apiLoading
+                }
+            )}/>
             <div onClick={() => setIsLocked(!isLocked)} className={classNames(
                 {
                     'backdrop-blur-sm w-full h-full fixed z-20 inset-0 m-auto sm:hidden' : isLocked

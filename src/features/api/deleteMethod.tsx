@@ -4,6 +4,7 @@ import { RootState } from '../../app/store';
 import { DeleteMethodRequest, DeleteMethodResponse } from '../sliceTypes';
 import errorMessages from "./errorMessages.json";
 import { notificationSet } from '../slices/notificationSlice';
+import { loadingStart, loadingStop } from '../slices/loadingSlice';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: endPoints.baseUrl,
@@ -18,9 +19,10 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithInterceptor : BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
+    api.dispatch(loadingStart());
 
     const response = await baseQuery(args, api, extraOptions);
-    
+
     if (response?.error) {
         const errorCode = (response.error.data as { code?: keyof typeof errorMessages })?.code;
 
@@ -29,8 +31,9 @@ const baseQueryWithInterceptor : BaseQueryFn<string | FetchArgs, unknown, FetchB
         } else {
             api.dispatch(notificationSet({ type: "error", message: 'An unknown error occurred.' }));
         }
-    }
+    };
 
+    api.dispatch(loadingStop());
     return response;
 };
 

@@ -136,9 +136,10 @@ const AddCompanyModal: React.FC<AddCompanyProps> = ({ refetch }: AddCompanyProps
     useEffect(() => {
         if (!isOpen) {
             setFormErrors({});
+            setFormData(formDataInitialState)
             setFile("");
         }
-    }, [isOpen]);
+    }, [formDataInitialState, isOpen]);
 
     // Check if the undo button should be enabled
     const isUndoButton = !modifiedData?.isModified || isLoading;
@@ -165,7 +166,7 @@ const AddCompanyModal: React.FC<AddCompanyProps> = ({ refetch }: AddCompanyProps
         if (!modifiedData?.isModified) return;
 
         try {
-            const response = await action({ type: 'company', formData }).unwrap();
+            const response = await action({ type: 'company', formData : modifiedData.modifiedValues }).unwrap();
 
             if (response.status === "success") {
                 toast.success("Company has been created successfully.");
