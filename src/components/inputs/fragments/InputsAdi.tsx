@@ -41,12 +41,12 @@ const InputsAdi: React.FC<InputsPropsExtanded> = ({
     return (
         <>
             {type === "password" && (
-                <span 
+                <div 
                     onClick={() => switchEyes()} 
-                    className="absolute right-0 top-0 flex items-center justify-center bg-transparent w-8 h-full text-xs hover:text-[var(--text-secondary)] active:text-[var(--text-tertiary)] cursor-pointer"
+                    className="absolute right-2 bottom-3.5 flex items-center justify-center bg-transparent w-8 text-xs hover:text-[var(--text-secondary)] active:text-[var(--text-tertiary)] cursor-pointer"
                 >
                     {currentType === "password" ? <span>{icons["eye"]}</span> : <span>{icons["eyeOff"]}</span>} 
-                </span>
+                </div>
             )}
             {type === "search" && (
                 <span className="absolute right-0 top-0 flex items-center justify-center bg-transparent w-9 h-full text-xs hover:text-[var(--text-secondary)] active:text-[var(--text-tertiary)] cursor-pointer">

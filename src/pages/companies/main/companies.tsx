@@ -30,8 +30,6 @@ const Companies : React.FC = ()=>{
         page : currentPage,
         searchType : searchType?.value,
         searchValue : searchValue
-    }, {
-        refetchOnMountOrArgChange : true
     });
     const [Companies, setCompanies] = useState<Company[]>([]);
 

@@ -50,7 +50,7 @@ const Inputs = ({
     };
             
     return (
-        <div className={twMerge(classNames("flex flex-col gap-3", wrapperClassName))}>
+        <div className={twMerge(classNames("flex relative flex-col gap-3", wrapperClassName))}>
             {/* Label for the input field */}
             <InputsLabel 
                 withoutLabel={withoutLabel}
@@ -60,7 +60,7 @@ const Inputs = ({
             />
 
             {/* Input field container with additional styles */}
-            <div className={classNames("relative focus-within-animate-wobble", {
+            <label htmlFor={props.id} className={classNames("relative focus-within-animate-wobble", {
                     'animate-wobble' : withWobble
                 }, containerClassName
             )}>
@@ -68,8 +68,7 @@ const Inputs = ({
                 {type === 'file' && (
                     <img 
                         className="object-contain h-[85%] w-fit -z-1 absolute inset-0 m-auto rounded-md" 
-                        src={fileImageSrc || undefined} 
-                        alt="Preview"
+                        src={fileImageSrc || undefined}
                     />
                 )}
 
@@ -95,16 +94,16 @@ const Inputs = ({
                         {ErrorMessage}
                     </span>
                 )}
-                
-                {/* Additional elements (password toggle, search icon, select dropdown) */}
-                <InputsAdi 
-                    currentType={currentType}
-                    type={type}
-                    switchEyes={switchEyes}
-                    onSelectChange={onSelectChange}
-                    selectValue={selectValue}
-                />
-            </div>
+            </label>
+            
+            {/* Additional elements (password toggle, search icon, select dropdown) */}
+            <InputsAdi 
+                currentType={currentType}
+                type={type}
+                switchEyes={switchEyes}
+                onSelectChange={onSelectChange}
+                selectValue={selectValue}
+            />
             
             {/* Tooltip for additional information */}
             <Tooltip 
@@ -125,13 +124,13 @@ const Inputs = ({
  * @param {InputsProps} props - The input properties.
  * @returns {JSX.Element} A search input field with predefined styles.
  */
-Inputs.search = ({ ...props } : InputsProps) => {
+Inputs.search = ({ ...props } : InputsProps): JSX.Element => {
     return (
         <div>
             <Inputs 
                 type="search" 
                 className="h-9 shadow-[0_5px_12px_var(--shadow)] border-1 bg-[var(--sideNav-background)] border-[var(--text-secondary)] pr-[8rem]" 
-                placeholder="Search a vehicle..." 
+                placeholder="Search an Item..." 
                 withoutLabel 
                 {...props}
             />
