@@ -115,7 +115,6 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
                 value: formData.name || "",
                 onChange: handleFormInputChange,
                 ErrorMessage: formErrors.name,
-                required : true
             },
         },
         {

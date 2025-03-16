@@ -1,7 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import endPoints from "../endPoints.json"
 import { RootState } from '../../app/store';
 import { CreateMethodRequest, CreateMethodResponce } from '../sliceTypes';
+import { notificationSet } from '../slices/notificationSlice';
+import errorMessages from "./errorMessages.json";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: endPoints.baseUrl,
@@ -15,9 +17,26 @@ const baseQuery = fetchBaseQuery({
     }
 });
 
+const baseQueryWithInterceptor : BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
+
+    const response = await baseQuery(args, api, extraOptions);
+    
+    if (response?.error) {
+        const errorCode = (response.error.data as { code?: keyof typeof errorMessages })?.code;
+
+        if (errorCode && errorMessages[errorCode]) {
+            api.dispatch(notificationSet({ type: "error", message: errorMessages[errorCode] }));
+        } else {
+            api.dispatch(notificationSet({ type: "error", message: 'An unknown error occurred.' }));
+        }
+    }
+
+    return response;
+};
+
 const createMethodSlice = createApi({
     reducerPath: 'createMethod',
-    baseQuery,
+    baseQuery : baseQueryWithInterceptor,
     endpoints: (builder) => ({
         createMu: builder.mutation<CreateMethodResponce, CreateMethodRequest>({
             query: ({ type, formData })=> ({

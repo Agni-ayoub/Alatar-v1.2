@@ -94,8 +94,7 @@ const AddCompanyModal: React.FC<AddCompanyProps> = ({ refetch }: AddCompanyProps
                 type: "text",
                 value: formData.name || "",
                 onChange: handleFormInputChange,
-                ErrorMessage: formErrors.name,
-                required: true
+                ErrorMessage: formErrors.name
             },
         },
         {
