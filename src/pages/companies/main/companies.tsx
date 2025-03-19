@@ -178,7 +178,16 @@ const Companies: React.FC = (): JSX.Element => {
                 // Displaying fetched company data
                 <div className="grid px-2 sm:grid-cols-2 gap-2 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 overflow-auto mb-18" aria-live="polite">
                     {companies.map((company, idx) => (
-                        <DataCard key={idx} {...company} aria-label={`Company ${company.name}`} />
+                        <DataCard 
+                            key={idx}
+                            title={company.name}
+                            avatar={company.avatar}
+                            email={company.email}
+                            phone={company.phone}
+                            id={company.id}
+                            activity={company.status}
+                            aria-label={`Company ${company.name}`} 
+                        />
                     ))}
                 </div>
             )}

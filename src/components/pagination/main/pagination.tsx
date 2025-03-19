@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Paginator } from "../../../features/sliceTypes";
 import { icons } from "../../../utils/icons";
 import MySelect from "../../mySelect/mySelect";
@@ -26,10 +26,12 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ paginator, onPageChange, setFilters }) => {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [selected, setSelected] = useState<OptionType[]>([]);
     const { currentPage, lastPage, total } = paginator;
-    const value : OptionType[] = selected.length === 0 ? [sizeOptions[0]] : selected;
+    const value : OptionType[] = useMemo(() => (
+        selected.length === 0 ? [sizeOptions[0]] : selected
+    ),[selected]);
 
     /**
      * Syncs the selected filters (such as page size) with the URL parameters.
@@ -37,10 +39,19 @@ const Pagination: React.FC<PaginationProps> = ({ paginator, onPageChange, setFil
      */
     useEffect(() => {
         const selectedOptions = sizeOptions.filter(option =>
-            searchParams.get("size")?.split(",").includes(option.value)
+            searchParams.get("size")?.split(',').includes(option.value)
         );
         setSelected(selectedOptions);
     }, [searchParams]);
+
+    useEffect(()=>{
+        setSearchParams((prev : URLSearchParams) => {
+            const newParams = new URLSearchParams(prev);
+            newParams.set('size', value[0].value);
+
+            return newParams
+        })
+    },[setSearchParams, value])
 
     return (
         <div className="flex flex-col px-2 gap-1 sm:flex-row justify-between" aria-label="Pagination Navigation">
@@ -48,7 +59,7 @@ const Pagination: React.FC<PaginationProps> = ({ paginator, onPageChange, setFil
             <div className="flex items-center space-x-2 text-xs">      
                 <MySelect 
                     placeHolder="Select size"
-                    containerClassName="w-[8rem] min-w-0 flex-none"
+                    containerClassName="w-[7rem] min-w-0 flex-none"
                     options={sizeOptions}
                     isMulti={false}
                     value={value}

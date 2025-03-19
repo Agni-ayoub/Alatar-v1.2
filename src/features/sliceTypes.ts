@@ -46,7 +46,7 @@ export type Company = {
     name: string;
     phone: string;
     email: string;
-    status: string;
+    status: 'ACTIVE' | 'INACTIVE';
     avatar: string;
 };
 
