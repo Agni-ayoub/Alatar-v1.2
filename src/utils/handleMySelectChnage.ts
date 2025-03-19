@@ -12,11 +12,11 @@ export type ExpectedObj = Record<string, string[]>;
  * Props for handling the filter change function.
  */
 interface HandleFilterChangeProps {
-    /** The name of the select input (e.g., "status"). */
-    selectName: "status";
+    /** The name of the select input (e.g., "status", "size"). */
+    selectName: "status" | "size";
 
     /** Function to update the filters state. */
-    setFilters: React.Dispatch<SetStateAction<ExpectedObj>>;
+    setData: React.Dispatch<SetStateAction<ExpectedObj>>;
 }
 
 /**
@@ -26,7 +26,7 @@ interface HandleFilterChangeProps {
  * @param {HandleFilterChangeProps} props - The properties containing the select name and state setter.
  * @returns A function that processes the selected value, updates the filters state, and modifies the URL search params.
  */
-export const HandleMySelectChange = ({ selectName, setFilters }: HandleFilterChangeProps) => {
+export const HandleMySelectChange = ({ selectName, setData }: HandleFilterChangeProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     return (newValue: SingleValue<OptionType> | MultiValue<OptionType>) => {
@@ -40,7 +40,7 @@ export const HandleMySelectChange = ({ selectName, setFilters }: HandleFilterCha
             : [];
 
         // Update state
-        setFilters((prevState) => ({
+        setData((prevState) => ({
             ...prevState,
             [selectName]: values,
         }));

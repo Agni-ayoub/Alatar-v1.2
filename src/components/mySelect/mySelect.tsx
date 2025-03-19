@@ -5,6 +5,7 @@ import { MySelectStyles } from "../../utils/custumStyles";
 import { OptionType } from "../inputs/main/inputsTypes";
 import { icons } from "../../utils/icons";
 import classNames from "classnames";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Props for MySelect component.
@@ -22,6 +23,8 @@ interface MySelectProps {
   onChange?: (newValue: SingleValue<OptionType> | MultiValue<OptionType>, actionMeta: ActionMeta<OptionType>) => void;
   /** The currently selected value(s). */
   value: OptionType[];
+  /** The default selected value. */
+  defaultValue?: OptionType;
 }
 
 const withIcon = (props: OptionType) => {
@@ -46,13 +49,15 @@ const MySelect: React.FC<MySelectProps> = ({
   containerClassName,
   onChange,
   value,
+  defaultValue,
 }: MySelectProps): JSX.Element => {
   const animated = makeAnimated();
 
   return (
-    <div className={classNames("h-fit flex flex-col gap-2 min-w-[45%] flex-1", containerClassName)}>
+    <div className={twMerge(classNames("h-fit flex flex-col gap-2 min-w-[45%] flex-1", containerClassName))}>
       <Select<OptionType, boolean>
         isMulti={isMulti}
+        defaultValue={defaultValue}
         isClearable
         styles={MySelectStyles}
         options={options}

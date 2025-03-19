@@ -49,7 +49,7 @@ const Companies: React.FC = (): JSX.Element => {
     const [searchType, setSearchType] = useState<OptionType | null>(searchCompanyOptions[0]);
 
     /** State for applied filters */
-    const [filters, setFilters] = useState<ExpectedObj>({ status: [] });
+    const [filters, setFilters] = useState<ExpectedObj>({ status: [], size : [] });
 
     /** State for pagination information */
     const [paginator, setPaginator] = useState<Paginator>({
@@ -129,42 +129,56 @@ const Companies: React.FC = (): JSX.Element => {
                         onChange={(e) => handleSearchInputChange(e, setSearchValue, setPaginator)} 
                         value={searchValue} 
                         placeholder={`Search by ${searchType?.label}...`} 
+                        aria-label="Search companies"
                     />
                 </div>
                 <div className="flex items-center gap-2">
-                    <FilterButton isFilter={isFilter} onClick={() => handleShowFilter(setIsFilter)} />
-                    <CreateButton onClick={() => handleAddData(searchParams, setSearchParams)} />
+                    <FilterButton 
+                        isFilter={isFilter} 
+                        onClick={() => handleShowFilter(setIsFilter)} 
+                        aria-label="Toggle filter options"
+                    />
+                    <CreateButton 
+                        onClick={() => handleAddData(searchParams, setSearchParams)} 
+                        aria-label="Create a new company"
+                    />
                 </div>
             </div>
 
             {/* Filters section */}
-            <div className={classNames("transition-all rounded-md duration-200 flex flex-wrap gap-2", {
+            <div className={classNames("transition-all rounded-md duration-200 flex flex-wrap gap-2 px-2", {
                 "opacity-100 h-[2rem] mb-4": isFilter,
-                "opacity-0 h-0": !isFilter,
+                "opacity-0 h-0 pointer-events-none": !isFilter,
             })}>
                 <MySelect
                     containerClassName="max-w-1/2"
-                    onChange={HandleMySelectChange({ selectName: "status", setFilters })}
+                    onChange={HandleMySelectChange({ selectName: "status", setData : setFilters })}
                     isMulti={false}
                     options={statusOptions}
                     placeHolder="Filter by Status"
                     value={selected}
+                    aria-label="Filter by status"
                 />
             </div>
 
             {/* Pagination */}
-            <Pagination paginator={paginator} onPageChange={(newPage) => onPageChange(newPage, setSearchParams, setPaginator)} />
+            <Pagination 
+                setFilters={setFilters}
+                paginator={paginator} 
+                onPageChange={(newPage) => onPageChange(newPage, setSearchParams, setPaginator)} 
+                aria-label="Pagination controls"
+            />
 
             {/* Loading state */}
             {isFetching ? (
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full" aria-live="polite">
                     <AlatarLoader />
                 </div>
             ) : (
                 // Displaying fetched company data
-                <div className="grid px-2 sm:grid-cols-2 gap-2 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 overflow-auto mb-18">
+                <div className="grid px-2 sm:grid-cols-2 gap-2 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 overflow-auto mb-18" aria-live="polite">
                     {companies.map((company, idx) => (
-                        <DataCard key={idx} {...company} />
+                        <DataCard key={idx} {...company} aria-label={`Company ${company.name}`} />
                     ))}
                 </div>
             )}
