@@ -38,7 +38,7 @@ const DataCard: React.FC<DataCardProps> = ({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex h-7 w-full gap-1">
+            <div className="flex w-full gap-1">
                 <DataCardActionButtons 
                     editAction={actions.editAction}
                     moreAction={actions.moreAction}

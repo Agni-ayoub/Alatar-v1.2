@@ -11,6 +11,10 @@ import AccessPage from "./pages/access/main/AccessPage";
 import { Bounce, ToastContainer } from "react-toastify";
 import ProtectedRoute from "./utils/protectedRoute";
 import Companies from "./pages/companies/main/companies";
+import Company from "./pages/companies/main/company/main/company";
+import Users from "./pages/companies/main/company/pages/users/main/users";
+import Vehicles from "./pages/companies/main/company/pages/vehicles/main/vehicles";
+import Plan from "./pages/companies/main/company/pages/plan/main/plan";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +32,28 @@ const router = createBrowserRouter([
       {
         path: "companies",
         element: <ProtectedRoute><Companies /></ProtectedRoute>,
+      },
+      {
+        path: "companies/company/:id",
+        element: <ProtectedRoute><Company /></ProtectedRoute>,
+        children : [
+          {
+            index : true,
+            element : <ProtectedRoute><Users /></ProtectedRoute>
+          },
+          {
+            path : "users",
+            element : <ProtectedRoute><Users /></ProtectedRoute>
+          },
+          {
+            path : "vehicles",
+            element : <ProtectedRoute><Vehicles /></ProtectedRoute>
+          },
+          {
+            path : "plan",
+            element : <ProtectedRoute><Plan /></ProtectedRoute>
+          }
+        ]
       },
       {
         path: "plans",

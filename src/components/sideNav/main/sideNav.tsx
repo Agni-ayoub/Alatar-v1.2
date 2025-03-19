@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useMemo } from "react";
 import logo from "../../../assets/logo/favicon.svg";
 import SideNavHeader from "../fragments/sideNavHeader";
 import SideNavBody from "../fragments/sideNavBody";
@@ -7,6 +7,7 @@ import routes from "../../../master/routes.json";
 import SideNavBottom from "../fragments/sideNavBottom";
 import { JSX } from "react/jsx-runtime";
 import SideNavButton from "../fragments/sideNavButton";
+import useSpecialRoute from "../../../hooks/useSpecialRoute";
 
 type SideNavProps = React.HTMLAttributes<HTMLDivElement> & {
     isOpen: boolean;
@@ -37,6 +38,9 @@ const SideNav: React.FC<SideNavProps> = ({
     setIsLocked,
     ...props
 }: SideNavProps) : JSX.Element => {
+    const { specialRoutes, id } = useSpecialRoute();
+    const memoizedRoutes = useMemo(() => (id ? specialRoutes : routes), [id, specialRoutes]);
+
     return (
         <div
             role="navigation" // Marks this as a navigation component
@@ -74,7 +78,7 @@ const SideNav: React.FC<SideNavProps> = ({
             </div>
 
             {/* Sidebar Body (Navigation Items) */}
-            <SideNavBody routes={routes} isLocked={isLocked} isOpen={isOpen} />
+            <SideNavBody routes={memoizedRoutes} isLocked={isLocked} isOpen={isOpen} />
 
             {/* Sidebar Bottom (Logout Button) */}
             <SideNavBottom isLocked={isLocked} isOpen={isOpen} />

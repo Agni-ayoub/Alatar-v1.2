@@ -10,6 +10,7 @@ import { IoIosArrowBack, IoIosArrowDown, IoIosArrowForward, IoMdClose, IoMdUndo 
 import { IoCallOutline } from "react-icons/io5";
 import { MdAlternateEmail } from "react-icons/md";
 import { FaDotCircle, FaFilter } from "react-icons/fa";
+import { GiCartwheel } from "react-icons/gi";
 
 // Imports and provides icons needed.
 export const icons: Record<string, JSX.Element> = {
@@ -39,4 +40,5 @@ export const icons: Record<string, JSX.Element> = {
     active : <FaDotCircle className="text-[var(--positive)]" />,
     inactive : <FaDotCircle className="text-[var(--negative)]" />,
     close : <IoMdClose />,
+    vehicles : <GiCartwheel />,
 }

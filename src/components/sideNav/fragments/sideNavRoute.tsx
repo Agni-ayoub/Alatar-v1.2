@@ -3,6 +3,7 @@ import React, { JSX } from "react";
 import { icons } from "../../../utils/icons";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { Route } from "../main/sideNavTypes";
+import { useNavigate } from "react-router-dom";
 
 interface SideNavRouteProps {
     setShowRoom : React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,8 +27,17 @@ interface SideNavRouteProps {
  * @returns {JSX.Element} A sidebar navigation item.
  */
 const SideNavRoute = ({ setShowRoom, showRoom, isOpen, isLocked, route} : SideNavRouteProps) : JSX.Element => {
+    const navigate = useNavigate();
+    
+    const handleRightClick = (e : React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.preventDefault();
+        const parentRoute = route.name.toLocaleLowerCase()
+        navigate(parentRoute);
+    };
+
     return (
         <div 
+            onContextMenu={handleRightClick}
             onClick={() => setShowRoom((prev : boolean) => !prev)}
             className={classNames(
                 "flex w-full items-center h-10 transition-all duration-200 rounded-md group cursor-pointer",
