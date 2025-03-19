@@ -9,8 +9,8 @@ export const searchVehicleOptions = [
 ];
 
 export const searchCompanyOptions = [
-    { value: 'search', label: 'All Search' },
-    { value: 'name', label: 'Name' },
-    { value: 'phone', label: 'phone' },
-    { value: 'email', label: 'Email' },
+    { value: 'search', label: 'All Search', icon : "" },
+    { value: 'name', label: 'Name', icon : "" },
+    { value: 'phone', label: 'phone', icon : "" },
+    { value: 'email', label: 'Email', icon : "" },
 ];

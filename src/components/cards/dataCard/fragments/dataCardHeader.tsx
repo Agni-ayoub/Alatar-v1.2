@@ -5,7 +5,7 @@ import { DataCardProps } from '../main/DataCardType';
 import { Tooltip } from "react-tooltip";
 
 const DataCardHeader: React.FC<DataCardProps> = ({ avatar, activity, id, title }) => {
-    const { imageElement } = usePreloadedImage({ src: avatar || "", alt: "company" });
+    const { imageElement } = usePreloadedImage({ src: avatar || "" });
 
     return (
         <>

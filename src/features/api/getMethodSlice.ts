@@ -5,6 +5,7 @@ import { CompaniesResponse, GetCompanyByIdResponse } from '../sliceTypes';
 import { notificationSet } from '../slices/notificationSlice';
 import errorMessages from "./errorMessages.json";
 import { loadingStart, loadingStop } from '../slices/loadingSlice';
+import { ExpectedObj } from '../../utils/handleMySelectChnage';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: endPoints.baseUrl,
@@ -41,14 +42,25 @@ const getMethodSlice = createApi({
     reducerPath: 'getMethod',
     baseQuery : baseQueryWithInterceptor,
     endpoints: (builder) => ({
-        getCompanies: builder.query<CompaniesResponse, { page: number; searchType?: string; searchValue?: string }>({
-            query: ({ page = 1, searchType, searchValue }) => {
+        getCompanies: builder.query<CompaniesResponse, { page: number; searchType?: string; searchValue?: string, filters : ExpectedObj }>({
+            query: ({ page = 1, searchType, searchValue, filters = {} }) => {
                 const searchParams = new URLSearchParams({ page: page.toString() });
         
                 if (searchType && searchValue) {
                     searchParams.append(searchType, searchValue);
-                }
-        
+                };
+
+                if (filters) {
+                    Object.entries(filters).forEach(([key, value]) => {
+                        if (Array.isArray(value)) {
+                            const joinedValue = value.join(',');
+                            searchParams.append(key, joinedValue);
+                        } else if (value) {
+                            searchParams.append(key, value);
+                        }
+                    });
+                };
+                
                 return {
                     url: `${endPoints.company}?${searchParams.toString()}`,
                 };

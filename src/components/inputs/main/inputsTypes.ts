@@ -1,6 +1,6 @@
 import { ActionMeta, PropsValue, SingleValue } from "react-select";
 
-export type OptionType = { value: string; label: string };
+export type OptionType = { value: string; label: string, icon :string };
 
 export type InputsProps = React.InputHTMLAttributes<HTMLInputElement> & {   
     label?: string;

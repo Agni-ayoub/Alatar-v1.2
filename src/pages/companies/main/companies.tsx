@@ -14,12 +14,21 @@ import Pagination from "../../../components/pagination/main/pagination";
 import { SingleValue } from "react-select";
 import { OptionType } from "../../../components/inputs/main/inputsTypes";
 import { searchCompanyOptions } from "../../../components/inputs/main/searchSelectOptions";
+import classNames from "classnames";
+import MySelect from "../../../components/mySelect/mySelect";
+import { ExpectedObj, HandleMySelectChange } from "../../../utils/handleMySelectChnage";
+import { statusOptions } from "./filters";
 
 const Companies : React.FC = ()=>{
+    const [selected, setSelected] = useState<OptionType[]>([]);
+    const [isFilter, setIsfilter] = useState<boolean>(false);
     const [searchParams, setSearchParams] = useSearchParams();
     const searchFromParam = searchParams.get('search');
     const [searchValue, setSearchValue] = useState<string>(searchFromParam || "");
     const [searchType, setSearchType] = useState<OptionType | null>(searchCompanyOptions[0]);
+    const [filters, setFilters] = useState<ExpectedObj>( {
+        status: [],
+    });
     const [paginator, setPaginator] = useState<Paginator>({
         currentPage : Number(searchParams.get('page')) || 1,
         lastPage : 1,
@@ -29,7 +38,8 @@ const Companies : React.FC = ()=>{
     const { data, isFetching, refetch } = useGetCompaniesQuery({
         page : currentPage,
         searchType : searchType?.value,
-        searchValue : searchValue
+        searchValue : searchValue,
+        filters
     });
     const [Companies, setCompanies] = useState<Company[]>([]);
 
@@ -79,9 +89,21 @@ const Companies : React.FC = ()=>{
             });
     }),[searchFromParam, searchValue, setSearchParams]);
 
-    const handleChange = (newValue: SingleValue<OptionType>) => {
+    const handleSearchFilterChange = (newValue: SingleValue<OptionType>) => {
         setSearchType(newValue);
+    };      
+
+    const handleShowFilter = () => {
+        setIsfilter((prev : boolean) => !prev);
     };
+
+    useEffect(() => {
+        const selectedOptions = statusOptions.filter(option =>
+            searchParams.get("status")?.split(",").includes(option.value)
+        );
+    
+        setSelected(selectedOptions);
+    }, [searchParams]);
 
     return(
         <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">
@@ -94,14 +116,31 @@ const Companies : React.FC = ()=>{
             {/* Body */}
             <div className="flex items-center gap-4 w-full px-2 py-2">
                 <div className="w-full">
-                    <Inputs.search selectValue={searchType} onSelectChange={handleChange} onChange={handleSearchInputChange} value={searchValue} placeholder={`Search by ${searchType?.label}...`} />
+                    <Inputs.search selectValue={searchType} onSelectChange={handleSearchFilterChange} onChange={handleSearchInputChange} value={searchValue} placeholder={`Search by ${searchType?.label}...`} />
                 </div>
                 <div className="flex items-center gap-2">
-                    <FilterButton />
+                    <FilterButton isFilter={isFilter} onClick={() => handleShowFilter()} />
                     <CreateButton onClick={() => handleAddCompany()} />
                 </div>
             </div>
-            <div className="px-2">
+            <div className="flex flex-col px-2">
+
+                <div className={classNames('transition-all rounded-md duration-200 flex flex-wrap gap-2',
+                    {
+                        'opacity-100 h-[2rem] mb-4' : isFilter,
+                        'opacity-0 h-0' : !isFilter,
+                    }
+                )}>
+                    <MySelect
+                        containerClassName="max-w-1/2"
+                        onChange={HandleMySelectChange({selectName : 'status', setFilters})} 
+                        isMulti={false}
+                        options={statusOptions}
+                        placeHolder="Filter by Status"
+                        value={selected}
+                    />
+                </div>
+
                 <Pagination 
                     paginator={paginator}
                     onPageChange={onPageChange} 
