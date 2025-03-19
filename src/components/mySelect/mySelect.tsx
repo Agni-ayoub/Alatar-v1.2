@@ -31,7 +31,10 @@ const withIcon = (props: OptionType) => {
   const { icon, label } = props;
   return (
     <div className="flex items-center gap-2">
-      <div>{icons[icon]}</div>
+      {
+        icon && 
+          <div>{icons[icon]}</div>
+      }
       <span>{label}</span>
     </div>
   ) as unknown as string;
