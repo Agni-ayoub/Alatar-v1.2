@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import classNames from "classnames";
 import Inputs from "../../../components/inputs/main/inputs";
@@ -25,21 +25,43 @@ import {
     handleShowFilter
 } from "../../../utils/handlers";
 
-const Companies: React.FC = () => {
+/**
+ * Companies component - Displays a list of companies with search, filters, and pagination.
+ *
+ * @component
+ * @returns {JSX.Element} The Companies component.
+ */
+const Companies: React.FC = (): JSX.Element => {
+    /** State for selected filter options */
     const [selected, setSelected] = useState<OptionType[]>([]);
+    
+    /** State to track filter visibility */
     const [isFilter, setIsFilter] = useState<boolean>(false);
+
+    /** React Router hook for managing search parameters in URL */
     const [searchParams, setSearchParams] = useSearchParams();
     const searchFromParam = searchParams.get("search");
+
+    /** State for search input value */
     const [searchValue, setSearchValue] = useState<string>(searchFromParam || "");
+    
+    /** State for selected search type */
     const [searchType, setSearchType] = useState<OptionType | null>(searchCompanyOptions[0]);
+
+    /** State for applied filters */
     const [filters, setFilters] = useState<ExpectedObj>({ status: [] });
+
+    /** State for pagination information */
     const [paginator, setPaginator] = useState<Paginator>({
         currentPage: Number(searchParams.get("page")) || 1,
         lastPage: 1,
         total: 1
     });
+
+    /** State for storing fetched companies data */
     const [companies, setCompanies] = useState<Company[]>([]);
 
+    /** Fetch companies data based on current page, search filters, and query parameters */
     const { data, isFetching, refetch } = useGetCompaniesQuery({
         page: paginator.currentPage,
         searchType: searchType?.value,
@@ -47,6 +69,10 @@ const Companies: React.FC = () => {
         filters
     });
 
+    /**
+     * Updates state when new data is received from API.
+     * Runs whenever `data` changes.
+     */
     useEffect(() => {
         if (data?.status === "success") {
             setCompanies(data.companies);
@@ -54,6 +80,10 @@ const Companies: React.FC = () => {
         }
     }, [data]);
 
+    /**
+     * Syncs search input with URL parameters.
+     * Runs whenever `searchValue` or `searchParams` change.
+     */
     useEffect(() => {
         if (!searchValue) {
             setSearchParams((prev) => {
@@ -70,6 +100,10 @@ const Companies: React.FC = () => {
         }
     }, [searchFromParam, searchValue, setSearchParams]);
 
+    /**
+     * Syncs selected filters with URL parameters.
+     * Runs whenever `searchParams` change.
+     */
     useEffect(() => {
         const selectedOptions = statusOptions.filter(option =>
             searchParams.get("status")?.split(",").includes(option.value)
@@ -79,12 +113,14 @@ const Companies: React.FC = () => {
 
     return (
         <div className="flex h-full flex-col gap-2 bg-[var(--sideNav-background)]/50 rounded-xl w-full px-2 py-2">
+            {/* Modals for CRUD operations */}
             <div>
                 <EditCompany refetch={refetch} />
                 <DeleteModal refetch={refetch} type="Company" />
                 <AddCompanyModal refetch={refetch} />
             </div>
             
+            {/* Search and action buttons */}
             <div className="flex items-center gap-4 w-full px-2 py-2">
                 <div className="w-full">
                     <Inputs.search 
@@ -101,6 +137,7 @@ const Companies: React.FC = () => {
                 </div>
             </div>
 
+            {/* Filters section */}
             <div className={classNames("transition-all rounded-md duration-200 flex flex-wrap gap-2", {
                 "opacity-100 h-[2rem] mb-4": isFilter,
                 "opacity-0 h-0": !isFilter,
@@ -115,13 +152,16 @@ const Companies: React.FC = () => {
                 />
             </div>
 
+            {/* Pagination */}
             <Pagination paginator={paginator} onPageChange={(newPage) => onPageChange(newPage, setSearchParams, setPaginator)} />
 
+            {/* Loading state */}
             {isFetching ? (
                 <div className="relative w-full h-full">
                     <AlatarLoader />
                 </div>
             ) : (
+                // Displaying fetched company data
                 <div className="grid px-2 sm:grid-cols-2 gap-2 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 overflow-auto mb-18">
                     {companies.map((company, idx) => (
                         <DataCard key={idx} {...company} />
