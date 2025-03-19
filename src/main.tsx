@@ -3,7 +3,6 @@ import "./index.css";
 import Master from "./master/master";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./pages/dashboard/dashboard";
-import Companies from "./pages/companies/main/companies";
 import Plans from "./pages/plans/plans";
 import Billing from "./pages/billing/billing";
 import { Provider } from "react-redux";
@@ -11,6 +10,7 @@ import { store } from "./app/store";
 import AccessPage from "./pages/access/main/AccessPage";
 import { Bounce, ToastContainer } from "react-toastify";
 import ProtectedRoute from "./utils/protectedRoute";
+import Companies from "./pages/companies/main/companies";
 
 const router = createBrowserRouter([
   {
