@@ -14,3 +14,9 @@ export const searchCompanyOptions = [
     { value: 'phone', label: 'phone', icon : "" },
     { value: 'email', label: 'Email', icon : "" },
 ];
+export const searchUserOptions = [
+    { value: 'search', label: 'All Search', icon : "" },
+    { value: 'name', label: 'Name', icon : "" },
+    { value: 'phone', label: 'phone', icon : "" },
+    { value: 'email', label: 'Email', icon : "" },
+];

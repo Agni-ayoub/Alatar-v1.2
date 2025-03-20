@@ -1,7 +1,7 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import endPoints from "../endPoints.json"
 import { RootState } from '../../app/store';
-import { EditCompanyResponse, EditDataRequest } from '../sliceTypes';
+import { EditCompanyResponse, EditDataRequest, EditUserResponse } from '../sliceTypes';
 import errorMessages from "./errorMessages.json";
 import { notificationSet } from '../slices/notificationSlice';
 import { loadingStart, loadingStop } from '../slices/loadingSlice';
@@ -48,9 +48,16 @@ const editMethodSlice = createApi({
                 body : formData
             }),
         }),
+        editUser: builder.mutation<EditUserResponse, EditDataRequest>({
+            query: ({id, formData})=> ({
+                url: `${endPoints.company}/user/${id}`,
+                method: "PUT",
+                body : formData
+            }),
+        }),
     }),
 });
 
-export const { useEditCompanyMutation } = editMethodSlice;
+export const { useEditCompanyMutation, useEditUserMutation } = editMethodSlice;
 export const editMethodSliceReducer = editMethodSlice.reducer;
 export default editMethodSlice;

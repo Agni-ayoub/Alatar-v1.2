@@ -1,9 +1,12 @@
 /**
- * Represents the permissions available for different entities in the system.
- * Each entity has an array of `PermissionTypes` defining the allowed actions.
+ * Represents the types of permissions available for different entities in the system.
  */
 type PermissionTypes = "VIEW" | "CREATE" | "UPDATE" | "DELETE";
 
+/**
+ * Represents the permissions for each entity in the system.
+ * Each entity has an array of `PermissionTypes` defining the allowed actions.
+ */
 type Permissions = {
     company: PermissionTypes[];
     vehicle: PermissionTypes[];
@@ -32,10 +35,11 @@ export type User = {
     username: string;
     first_name: string | null;
     last_name: string | null;
-    phone: string | null;
+    phone: string | undefined;
     full_access: boolean;
     permissions: Permissions;
     avatar: string;
+    status: 'ACTIVE' | 'INACTIVE';
 };
 
 /**
@@ -51,7 +55,7 @@ export type Company = {
 };
 
 /**
- * Represents pagination details.
+ * Represents pagination details for API responses.
  */
 export interface Paginator {
     total: number;
@@ -94,12 +98,12 @@ export type LoginApiResponse = LoginResponse | ErrorResponse;
 /**
  * Represents an authentication token.
  */
-export type token = string | null;
+export type Token = string | null;
 
 /**
  * Represents the response when fetching the current user.
  */
-export type getUserResponse = {
+export type GetUserResponse = {
     status: string;
     user: User;
 };
@@ -174,15 +178,61 @@ export type DeleteMethodRequest = {
 /**
  * Represents the API response for a create request.
  */
-export type CreateMethodResponce = {
-    status : "success" | "error";
-    company?: object
+export type CreateMethodResponse = {
+    status: "success" | "error";
+    company?: object;
+};
+
+/**
+ * Represents the request payload for creating an entity (company, user, vehicle).
+ */
+export type CreateMethodRequest = {
+    type: "company" | "user" | "vehicle";
+    formData: object;
+};
+
+/**
+ * API response structure for fetching a list of users.
+ */
+export interface UsersResponse {
+    status: "success" | "error";
+    users: User[];
+    paginator: Paginator;
 }
 
 /**
- * Represents the API response for a create request.
+ * Represents an edited user entity.
  */
-export type CreateMethodRequest = {
-    type : "company" | "user" | "vehicle";
-    formData: object ;
-}
+type EditedUserResponse = {
+    id? : string;
+    username?: string;
+    first_name?: string;
+    last_name?: string;
+    phone?: string;
+    email?: string;
+    status?: "ACTIVE" | "INACTIVE" | "";
+    avatar?: string;
+    full_access?: boolean;
+    permissions?: Permissions;
+};
+
+/**
+ * Represents the form data structure for editing a user.
+ */
+export type EditUserFormData = EditedUserResponse;
+
+/**
+ * Represents the API response when editing a user.
+ */
+export type EditUserResponse = {
+    status: "success" | "error";
+    user: EditedUserResponse;
+};
+
+/**
+ * Represents the API response when retrieving a user by its ID.
+ */
+export type GetUserByIdResponse = {
+    status: "success" | "error";
+    user: EditedUserResponse;
+};

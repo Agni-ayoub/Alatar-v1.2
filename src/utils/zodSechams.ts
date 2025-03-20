@@ -22,3 +22,7 @@ export const companySchema = z.object({
     lat: z.string().optional(),
     status: z.string().optional(),
 });
+
+export const userSchema = z.object({
+    
+});
