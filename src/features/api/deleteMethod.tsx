@@ -1,7 +1,7 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import endPoints from "../endPoints.json"
 import { RootState } from '../../app/store';
-import { DeleteMethodRequest, DeleteMethodResponse } from '../sliceTypes';
+import { DeleteMethodResponse } from '../sliceTypes';
 import errorMessages from "./errorMessages.json";
 import { notificationSet } from '../slices/notificationSlice';
 import { loadingStart, loadingStop } from '../slices/loadingSlice';
@@ -41,15 +41,27 @@ const deleteMethodSlice = createApi({
     reducerPath: 'deleteMethod',
     baseQuery : baseQueryWithInterceptor,
     endpoints: (builder) => ({
-        deleteMu: builder.mutation<DeleteMethodResponse, DeleteMethodRequest>({
-            query: ({id, type})=> ({
-                url: `${endPoints[type]}/${id}`,
+        deleteCompany: builder.mutation<DeleteMethodResponse, string>({
+            query: (id)=> ({
+                url: `company/${id}`,
+                method: "DELETE",
+            }),
+        }),
+        deleteUser: builder.mutation<DeleteMethodResponse, string>({
+            query: (id)=> ({
+                url: `company/user/${id}`,
+                method: "DELETE",
+            }),
+        }),
+        deleteVehicle: builder.mutation<DeleteMethodResponse, string>({
+            query: (id)=> ({
+                url: `company/vehicle/${id}`,
                 method: "DELETE",
             }),
         }),
     }),
 });
 
-export const { useDeleteMuMutation } = deleteMethodSlice;
+export const { useDeleteCompanyMutation, useDeleteUserMutation } = deleteMethodSlice;
 export const deleteMethodSliceReducer = deleteMethodSlice.reducer;
 export default deleteMethodSlice;

@@ -168,14 +168,6 @@ export type DeleteMethodResponse = {
 };
 
 /**
- * Represents the request payload for a delete operation.
- */
-export type DeleteMethodRequest = {
-    id: string;
-    type: "company" | "user" | "vehicle";
-};
-
-/**
  * Represents the API response for a create request.
  */
 export type CreateMethodResponse = {

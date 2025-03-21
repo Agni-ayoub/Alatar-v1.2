@@ -3,8 +3,10 @@ import useModal from "../../hooks/useModal";
 import { useSearchParams } from "react-router-dom";
 import Inputs from "../inputs/main/inputs";
 import Buttons from "../buttons/buttons";
-import { useDeleteMuMutation } from "../../features/api/deleteMethod";
 import { toast } from "react-toastify";
+import { DeleteMethodResponse } from "../../features/sliceTypes";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
+import { SerializedError } from "@reduxjs/toolkit";
 
 /**
  * Props for DeleteModal Component
@@ -12,19 +14,19 @@ import { toast } from "react-toastify";
 interface DeleteModalProps {
     type: "Company" | "Vehicle" | "User";
     refetch: () => void;
+    action: (id: string) => Promise<{ data?: DeleteMethodResponse; error?: FetchBaseQueryError | SerializedError }>;
+    isLoading: boolean;
 }
-
 /**
  * DeleteModal Component
  * @param {DeleteModalProps} props - Component props
  */
-const DeleteModal: React.FC<DeleteModalProps> = ({ type, refetch } : DeleteModalProps) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({ type, refetch, action, isLoading } : DeleteModalProps) => {
     const [validation, setValidation] = useState<string>(""); // Stores user input for validation
     const [searchParams] = useSearchParams();
     const { ModalComponent, closeModal, isOpen } = useModal('delete');
     const id = searchParams.get("id"); // Retrieves the entity ID from the URL
-    const isValidationGranted = !(id === validation);
-    const [action, {isLoading}] = useDeleteMuMutation();
+    const isValidationGranted = validation.trim() !== id;
 
     /**
      * Handles validation input change
@@ -43,9 +45,9 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ type, refetch } : DeleteModal
         const modifiedId: string = id || "";
 
         try {
-            const response = await action({ id: modifiedId, type: 'company' }).unwrap();
+            const response = await action(modifiedId);
 
-            if (response.status === "success") {
+            if (response.data?.status === "success") {
                 refetch();
                 closeModal();
                 toast.success(`${type} deleted successfully.`);

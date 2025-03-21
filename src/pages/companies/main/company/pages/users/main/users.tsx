@@ -24,6 +24,7 @@ import {
 import { useGetUsersQuery } from "../../../../../../../features/api/getMethodSlice";
 import EditUser from "../fragments/fragments/editUser";
 import AddUserModal from "../fragments/fragments/addUser";
+import { useDeleteUserMutation } from "../../../../../../../features/api/deleteMethod";
 
 /**
  * Users Component - Displays a list of users with search, filter, and pagination features.
@@ -52,6 +53,8 @@ const Users: React.FC = (): JSX.Element => {
         { id, page: paginator.currentPage, searchType: searchType?.value, searchValue, filters },
         { skip: !id }
     );
+
+    const [deleteData, {isLoading : deleteDataLoding}] = useDeleteUserMutation();
 
     /**
      * Updates users and pagination when new data is fetched.
@@ -97,7 +100,7 @@ const Users: React.FC = (): JSX.Element => {
             {/* Modals for CRUD operations */}
             <div>
                 <EditUser refetch={refetch} />
-                <DeleteModal refetch={refetch} type="User" />
+                <DeleteModal refetch={refetch} type="User" action={deleteData} isLoading={deleteDataLoding} />
                 <AddUserModal refetch={refetch} />
             </div>
             

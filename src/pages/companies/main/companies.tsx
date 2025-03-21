@@ -24,6 +24,7 @@ import {
     handleSearchFilterChange,
     handleShowFilter
 } from "../../../utils/handlers";
+import { useDeleteCompanyMutation } from "../../../features/api/deleteMethod";
 
 /**
  * Companies component - Displays a list of companies with search, filters, and pagination.
@@ -68,6 +69,9 @@ const Companies: React.FC = (): JSX.Element => {
         searchValue: searchValue,
         filters
     });
+
+    /** Delete Company Mutaion */
+    const [deleteData, { isLoading : deleteDataLoding }] = useDeleteCompanyMutation();
 
     /**
      * Updates state when new data is received from API.
@@ -116,7 +120,7 @@ const Companies: React.FC = (): JSX.Element => {
             {/* Modals for CRUD operations */}
             <div>
                 <EditCompany refetch={refetch} />
-                <DeleteModal refetch={refetch} type="Company" />
+                <DeleteModal refetch={refetch} type="Company" action={deleteData} isLoading={deleteDataLoding} />
                 <AddCompanyModal refetch={refetch} />
             </div>
             
