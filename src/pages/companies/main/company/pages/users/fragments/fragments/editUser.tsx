@@ -61,6 +61,25 @@ const EditUser: React.FC<EditUserProps> = ({ refetch }: EditUserProps): JSX.Elem
     /** Get modified form data */
     const modifiedData = useModifiedFormData(formData, originalData);
 
+    /** Fetch & Reset user data on modal open */
+    useEffect(() => {
+        if (isOpen) {
+            setFormErrors({});
+            setFile(null);
+            setFormData(formDataInitialState);
+            setOriginalData(formDataInitialState);
+            refetchData();
+        }
+    }, [isOpen, refetchData, formDataInitialState]);
+
+    /** Update state when user data is fetched */
+    useEffect(() => {
+        if (data?.status === "success") {
+            setOriginalData(data.user);
+            setFormData(data.user);
+        }
+    }, [data, currentUserId]);
+
     /**
      * Handles input change in form fields.
      * @param {React.ChangeEvent<HTMLInputElement>} e - The input change event.
@@ -159,25 +178,6 @@ const EditUser: React.FC<EditUserProps> = ({ refetch }: EditUserProps): JSX.Elem
             },
         },
     ];
-
-    /** Fetch user data on modal open */
-    useEffect(() => {
-        if (isOpen) {
-            setFormErrors({});
-            setFile(null);
-            setFormData(formDataInitialState);
-            setOriginalData(formDataInitialState);
-            refetchData();
-        }
-    }, [isOpen, refetchData, formDataInitialState]);
-
-    /** Update state when user data is fetched */
-    useEffect(() => {
-        if (data?.status === "success") {
-            setOriginalData(data.user);
-            setFormData(data.user);
-        }
-    }, [data]);
 
     const isUndoButton = !modifiedData?.isModified || isFetching || isLoading;
 

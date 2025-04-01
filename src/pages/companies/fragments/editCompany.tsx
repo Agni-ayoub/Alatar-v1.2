@@ -154,6 +154,17 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
             },
         },
     ];
+    
+    /** Fetch & Reset company data on modal open */
+    useEffect(() => {
+        if (isOpen){
+            setFormErrors({});
+            setOriginalData(formDataInitialState);
+            setFormData(formDataInitialState);
+            setFile(null);
+            refetchData();
+        }
+    }, [formDataInitialState, isOpen, refetchData]);
 
     // Set form data when fetching completes
     useEffect(() => {
@@ -163,17 +174,6 @@ const EditCompany: React.FC<EditCompanyTypes> = ({ refetch }: EditCompanyTypes):
         }
     }, [data, currentCompanyId]);
     
-    // Reset form errors & base64 file when modal closes
-    useEffect(() => {
-        if (isOpen){
-            setFormErrors({});
-            setOriginalData(formDataInitialState);
-            setFormData(formDataInitialState);
-            setFile("");
-            refetchData();
-        }
-    }, [formDataInitialState, isOpen, refetchData]);
-
     // Check if undo button should be enabled
     const isUndoButton = !modifiedData?.isModified || isFetching || isLoading;
 
